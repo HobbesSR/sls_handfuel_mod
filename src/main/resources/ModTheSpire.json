@@ -1,0 +1,10 @@
+{
+  "modid": "cardenergy",
+  "name": "${artifactId}",
+  "author_list": ["Codex"],
+  "description": "Red test character that pays card costs by discarding red cards from hand, with energy gains converted into draw.",
+  "version": "${project.version}",
+  "sts_version": "${SlayTheSpire.version}",
+  "mts_version": "${ModTheSpire.version}",
+  "dependencies": ["basemod"]
+}
