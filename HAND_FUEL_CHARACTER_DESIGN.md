@@ -2,7 +2,7 @@
 
 ## Current Scope
 
-This repository is a standalone Slay the Spire mod that adds a red test character whose real resource is cards in hand rather than stored energy.
+This repository is a standalone Slay the Spire mod that adds an Indigo test character whose real resource is cards in hand rather than stored energy.
 
 The mod depends on:
 
@@ -12,6 +12,22 @@ The mod depends on:
 - StSLib at runtime
 
 The implementation is character-gated. Vanilla characters still use normal energy behavior.
+
+## Current Card Pool Strategy
+
+The Indigo set currently uses a two-layer content strategy:
+
+- the full non-basic Ironclad set is mirrored into Indigo as a temporary baseline pool
+- the custom Indigo starter/test cards exist separately to exercise the hand-fuel mechanics early
+
+This is intentional. The mirrored Ironclad cards are the scaffold the final Indigo set will be built from. They provide:
+
+- a complete reward pool
+- stable rarity distribution
+- normal upgrade and targeting behavior
+- known-good red implementations to edit into final Indigo cards over time
+
+The current starter-specific custom cards are not the long-term reward pool backbone.
 
 ## Resource Model
 
@@ -25,7 +41,7 @@ Fuel cards are:
 - the same color as the character
 - not the card currently being played
 
-For the current test character, that means only red cards in hand count as fuel.
+For the current character, that means only Indigo cards in hand count as fuel.
 
 Non-fuel cards include:
 
@@ -61,10 +77,11 @@ When a payable hand card is played:
 
 - the play is intercepted
 - only valid fuel cards are shown in a hand-selection screen
-- the chosen fuel cards are moved to the discard pile
+- the chosen fuel cards are discarded as payment
+- discard replacements such as `Consume` and `Rot` may replace that discard with exhaust behavior
 - the original card is replayed with vanilla energy spending suppressed
 
-This is currently intended as a functional test implementation, not finished UX.
+This is still a functional test implementation, not finished UX.
 
 ## Energy Replacement Behavior
 
@@ -82,7 +99,7 @@ The character currently has `EnergyManager(2)`, so start-of-turn recharge become
 
 Current character traits:
 
-- player color: red
+- player color: Indigo
 - starter relic: `Runic Pyramid`
 - visible energy orb: hidden
 - recharge baseline: 2
@@ -91,14 +108,26 @@ Current starter deck is intentionally test-heavy and stronger than a normal star
 
 It currently includes:
 
-- `Strike`
-- `Defend`
-- `Bash`
-- `Uppercut`
-- `Carnage`
-- `Seeing Red`
+- `4x Scrounge Strike`
+- `4x Scrounge Defend`
+- `Recovery`
+- `Rotting Blow`
+- `Rotting Shelter`
+- `Stockpile`
+- `2x Scrap Spray`
 
-`Seeing Red` is included specifically to verify that energy gain is converted into draw.
+Current starter rules intent:
+
+- `Scrounge Strike` is a normal single-target basic attack and does not have `Consume`
+- `Scrounge Defend` keeps `Consume`
+- `Consume` is currently intended only for cards that do not require target selection UI after the main card resolves
+- the starter offensive `Consume` demonstration card is `Scrap Spray`, an all-enemy attack
+
+Current reward-pool intent outside the starter deck:
+
+- normal rewards should primarily come from mirrored Ironclad cards in Indigo color
+- those mirrored cards are the cards meant to be edited into final Indigo cards over time
+- the custom starter-only mechanic cards are currently marked `BASIC` so they stay in the opening deck without defining the normal reward pool
 
 ## Important Patches
 
@@ -109,10 +138,18 @@ Current behavior is mainly implemented through:
 - `AbstractPlayer.gainEnergy(int)`
 - `EnergyManager.recharge()`
 - `EnergyPanel.render(...)`
+- `NeowEvent(boolean)`
+- `NeowReward.activate()`
+- `CardGroup.moveToDiscardPile(...)`
 
 Core helper:
 
 - `cardenergy.util.HandFuelResourceAdapter`
+
+Card helpers:
+
+- `cardenergy.cards.IndigoCardHelper`
+- `cardenergy.cards.RedMirrorCards`
 
 Selection action:
 
@@ -127,5 +164,7 @@ It is not balanced for production. The goals right now are:
 - prove the hand-fuel payment rule
 - prove the surcharge rule
 - prove X-cost behavior
+- prove delayed `Consume` behavior on non-targeted cards
 - prove energy-to-draw replacement
+- keep the Indigo reward pool complete while final cards are built by editing mirrored red cards
 - keep iteration fast on Windows with local Maven packaging

@@ -74,12 +74,19 @@ public class SelectFuelPaymentAction extends AbstractGameAction {
         for (AbstractCard hiddenCard : hiddenCards) {
             player.hand.removeCard(hiddenCard);
         }
+        for (AbstractCard fuelCard : player.hand.group) {
+            fuelCard.unhover();
+            fuelCard.isSelected = false;
+            fuelCard.stopGlowing();
+        }
+        player.hand.refreshHandLayout();
+        player.hand.glowCheck();
         player.hand.applyPowers();
 
         if (isXCost) {
-            AbstractDungeon.handCardSelectScreen.open(X_COST_PROMPT, fuelCards.size(), false, true);
+            AbstractDungeon.handCardSelectScreen.open(X_COST_PROMPT, fuelCards.size(), true, true);
         } else {
-            AbstractDungeon.handCardSelectScreen.open(NORMAL_PROMPT, requiredFuel, false);
+            AbstractDungeon.handCardSelectScreen.open(NORMAL_PROMPT, requiredFuel, false, false);
         }
         openedSelection = true;
     }
@@ -88,8 +95,10 @@ public class SelectFuelPaymentAction extends AbstractGameAction {
         ArrayList<AbstractCard> chosenFuel = new ArrayList<>(AbstractDungeon.handCardSelectScreen.selectedCards.group);
 
         for (AbstractCard selectedCard : chosenFuel) {
-            AbstractDungeon.handCardSelectScreen.selectedCards.moveToDiscardPile(selectedCard);
             selectedCard.triggerOnManualDiscard();
+            if (AbstractDungeon.handCardSelectScreen.selectedCards.group.contains(selectedCard)) {
+                AbstractDungeon.handCardSelectScreen.selectedCards.moveToDiscardPile(selectedCard);
+            }
             GameActionManager.incrementDiscard(false);
         }
         AbstractDungeon.handCardSelectScreen.selectedCards.group.clear();

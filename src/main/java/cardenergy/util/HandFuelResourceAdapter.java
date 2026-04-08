@@ -28,7 +28,7 @@ public class HandFuelResourceAdapter {
     }
 
     public static boolean isActive(AbstractPlayer player) {
-        return player != null && player.chosenClass == CardEnergyCharacterEnum.HAND_FUEL_RED;
+        return player != null && player.chosenClass == CardEnergyCharacterEnum.HAND_FUEL_INDIGO;
     }
 
     public static boolean isActivePlayer() {
@@ -166,5 +166,12 @@ public class HandFuelResourceAdapter {
             return "X+" + FUEL_SURCHARGE;
         }
         return Integer.toString(getRequiredFuel(card));
+    }
+
+    public static int getRenderedCost(AbstractCard card) {
+        if (card == null || card.freeToPlayOnce || card.costForTurn < 0) {
+            return card == null ? 0 : card.costForTurn;
+        }
+        return getRequiredFuel(card);
     }
 }

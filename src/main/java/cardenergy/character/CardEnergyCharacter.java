@@ -12,12 +12,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.red.Bash;
-import com.megacrit.cardcrawl.cards.red.Carnage;
-import com.megacrit.cardcrawl.cards.red.Defend_Red;
-import com.megacrit.cardcrawl.cards.red.SeeingRed;
-import com.megacrit.cardcrawl.cards.red.Strike_Red;
-import com.megacrit.cardcrawl.cards.red.Uppercut;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.EnergyManager;
@@ -39,7 +33,7 @@ public class CardEnergyCharacter extends CustomPlayer {
     public CardEnergyCharacter(String name) {
         super(
                 name,
-                CardEnergyCharacterEnum.HAND_FUEL_RED,
+                CardEnergyCharacterEnum.HAND_FUEL_INDIGO,
                 null,
                 null,
                 new SpineAnimation(
@@ -73,25 +67,26 @@ public class CardEnergyCharacter extends CustomPlayer {
     @Override
     public ArrayList<String> getStartingDeck() {
         ArrayList<String> deck = new ArrayList<>();
-        deck.add(Strike_Red.ID);
-        deck.add(Strike_Red.ID);
-        deck.add(Strike_Red.ID);
-        deck.add(Strike_Red.ID);
-        deck.add(Strike_Red.ID);
-        deck.add(Defend_Red.ID);
-        deck.add(Defend_Red.ID);
-        deck.add(Defend_Red.ID);
-        deck.add(Defend_Red.ID);
-        deck.add(Bash.ID);
-        deck.add(Uppercut.ID);
-        deck.add(Carnage.ID);
-        deck.add(SeeingRed.ID);
+        deck.add(CardEnergyMod.makeID("ScroungeStrike"));
+        deck.add(CardEnergyMod.makeID("ScroungeStrike"));
+        deck.add(CardEnergyMod.makeID("ScroungeStrike"));
+        deck.add(CardEnergyMod.makeID("ScroungeStrike"));
+        deck.add(CardEnergyMod.makeID("ScroungeDefend"));
+        deck.add(CardEnergyMod.makeID("ScroungeDefend"));
+        deck.add(CardEnergyMod.makeID("ScroungeDefend"));
+        deck.add(CardEnergyMod.makeID("ScroungeDefend"));
+        deck.add(CardEnergyMod.makeID("Recovery"));
+        deck.add(CardEnergyMod.makeID("RottingBlow"));
+        deck.add(CardEnergyMod.makeID("RottingShelter"));
+        deck.add(CardEnergyMod.makeID("Stockpile"));
+        deck.add(CardEnergyMod.makeID("ScrapSpray"));
+        deck.add(CardEnergyMod.makeID("ScrapSpray"));
         return deck;
     }
 
     @Override
     public AbstractCard getStartCardForEvent() {
-        return new Strike_Red();
+        return new cardenergy.cards.starter.ScroungeStrike();
     }
 
     @Override
@@ -101,7 +96,7 @@ public class CardEnergyCharacter extends CustomPlayer {
 
     @Override
     public Color getCardTrailColor() {
-        return Color.RED;
+        return IndigoColorScheme.INDIGO.cpy();
     }
 
     @Override
@@ -135,7 +130,7 @@ public class CardEnergyCharacter extends CustomPlayer {
 
     @Override
     public String getLocalizedCharacterName() {
-        return "The Hand-Fuel";
+        return "The Scrounger";
     }
 
     @Override
@@ -150,12 +145,12 @@ public class CardEnergyCharacter extends CustomPlayer {
 
     @Override
     public String getSpireHeartText() {
-        return "NL You tighten your grip on a fistful of burning cards.";
+        return "NL You tighten your grip on a fistful of scavenged tools.";
     }
 
     @Override
     public Color getSlashAttackColor() {
-        return Color.RED;
+        return IndigoColorScheme.INDIGO.cpy();
     }
 
     @Override
@@ -169,7 +164,7 @@ public class CardEnergyCharacter extends CustomPlayer {
 
     @Override
     public String getVampireText() {
-        return "NL You offer up burning scraps instead of blood.";
+        return "NL You offer up scraps instead of blood.";
     }
 
     @Override
@@ -183,8 +178,8 @@ public class CardEnergyCharacter extends CustomPlayer {
     @Override
     public CharSelectInfo getLoadout() {
         return new CharSelectInfo(
-                "The Hand-Fuel",
-                "A red test character that pays card costs by discarding red cards from hand.",
+                "The Scrounger",
+                "An indigo scavenger who spends cards in hand as fuel.",
                 80,
                 80,
                 0,
@@ -199,17 +194,17 @@ public class CardEnergyCharacter extends CustomPlayer {
 
     @Override
     public String getTitle(PlayerClass playerClass) {
-        return "the Hand-Fuel";
+        return "the Scrounger";
     }
 
     @Override
     public AbstractCard.CardColor getCardColor() {
-        return AbstractCard.CardColor.RED;
+        return CardEnergyCharacterEnum.INDIGO;
     }
 
     @Override
     public Color getCardRenderColor() {
-        return Color.RED;
+        return IndigoColorScheme.INDIGO.cpy();
     }
 
     private static Texture loadTextureFromJar(String path) {

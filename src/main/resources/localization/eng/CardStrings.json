@@ -1,0 +1,30 @@
+{
+  "cardenergy:ScroungeStrike": {
+    "NAME": "Scrounge Strike",
+    "DESCRIPTION": "Deal !D! damage."
+  },
+  "cardenergy:ScroungeDefend": {
+    "NAME": "Scrounge Defend",
+    "DESCRIPTION": "Gain !B! Block. NL NL consume"
+  },
+  "cardenergy:Recovery": {
+    "NAME": "Recovery",
+    "DESCRIPTION": "Gain !B! Block. Return up to 2 exhausted basic cards to your discard pile."
+  },
+  "cardenergy:RottingBlow": {
+    "NAME": "Rotting Blow",
+    "DESCRIPTION": "Deal !D! damage. NL NL rot"
+  },
+  "cardenergy:RottingShelter": {
+    "NAME": "Rotting Shelter",
+    "DESCRIPTION": "Gain !B! Block. Draw !M! card. NL NL rot"
+  },
+  "cardenergy:Stockpile": {
+    "NAME": "Stockpile",
+    "DESCRIPTION": "Gain !B! Block. Deal !D! damage. NL NL hoard 3"
+  },
+  "cardenergy:ScrapSpray": {
+    "NAME": "Scrap Spray",
+    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL NL consume"
+  }
+}
