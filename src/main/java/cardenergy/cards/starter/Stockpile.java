@@ -7,9 +7,9 @@ import com.megacrit.cardcrawl.cards.red.IronWave;
 
 public class Stockpile extends IronWave {
     public static final String ID = CardEnergyMod.makeID("Stockpile");
-    private static final int BASE_DAMAGE_VALUE = 6;
-    private static final int BASE_BLOCK_VALUE = 6;
-    private static final int HOARD_AMOUNT = 3;
+    private static final int BASE_DAMAGE_VALUE = 3;
+    private static final int BASE_BLOCK_VALUE = 4;
+    private static final int HOARD_AMOUNT = 4;
 
     public Stockpile() {
         super();

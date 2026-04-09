@@ -14,7 +14,7 @@ public class RottingBlow extends Strike_Red {
         IndigoCardHelper.applyIdentity(this, ID);
         cost = 1;
         costForTurn = 1;
-        baseDamage = 4;
+        baseDamage = 7;
         damage = baseDamage;
         rarity = CardRarity.BASIC;
         IndigoCardHelper.addKeyword(this, "Rot");

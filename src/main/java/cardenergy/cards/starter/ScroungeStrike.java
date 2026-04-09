@@ -13,6 +13,8 @@ public class ScroungeStrike extends Strike_Red {
         IndigoCardHelper.applyIdentity(this, ID);
         cost = 0;
         costForTurn = 0;
+        baseDamage = 4;
+        damage = baseDamage;
         upgradedCost = false;
         tags.add(CardTags.STARTER_STRIKE);
         tags.add(CardTags.STRIKE);

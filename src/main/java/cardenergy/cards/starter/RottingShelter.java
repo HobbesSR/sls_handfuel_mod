@@ -12,7 +12,7 @@ public class RottingShelter extends ShrugItOff {
     public RottingShelter() {
         super();
         IndigoCardHelper.applyIdentity(this, ID);
-        cost = 3;
+        cost = 2;
         costForTurn = 3;
         baseBlock = 12;
         block = baseBlock;

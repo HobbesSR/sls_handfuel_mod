@@ -15,7 +15,7 @@ public class Recovery extends ShrugItOff {
         IndigoCardHelper.applyIdentity(this, ID);
         cost = 1;
         costForTurn = 1;
-        baseBlock = 6;
+        baseBlock = 3;
         block = baseBlock;
         magicNumber = baseMagicNumber = 2;
         rarity = CardRarity.BASIC;

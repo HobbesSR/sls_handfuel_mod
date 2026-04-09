@@ -15,7 +15,7 @@ public class ScroungeDefend extends Defend_Red {
         cost = 0;
         costForTurn = 0;
         upgradedCost = false;
-        baseBlock = 6;
+        baseBlock = 5;
         block = baseBlock;
         IndigoCardHelper.addKeyword(this, "Consume");
         tags.add(CardTags.STARTER_DEFEND);

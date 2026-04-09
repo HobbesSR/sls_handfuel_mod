@@ -78,7 +78,7 @@ When a payable hand card is played:
 - the play is intercepted
 - only valid fuel cards are shown in a hand-selection screen
 - the chosen fuel cards are discarded as payment
-- discard replacements such as `Consume` and `Rot` may replace that discard with exhaust behavior
+- discard replacements such as `Consume` and `Rot` may replace that discard instead of letting the card reach the discard pile
 - the original card is replayed with vanilla energy spending suppressed
 
 This is still a functional test implementation, not finished UX.
@@ -123,6 +123,16 @@ Current starter rules intent:
 - `Consume` is currently intended only for cards that do not require target selection UI after the main card resolves
 - the starter offensive `Consume` demonstration card is `Scrap Spray`, an all-enemy attack
 
+Current tuned starter values:
+
+- `Scrounge Strike`: 0 cost, 4 damage
+- `Scrounge Defend`: 0 cost, 5 block, `Consume`
+- `Recovery`: 1 cost, 3 block, return up to 2 exhausted cards to discard
+- `Rotting Blow`: 1 cost, 7 damage, `Rot`
+- `Rotting Shelter`: 2 cost, 12 block, draw 1, `Rot`
+- `Stockpile`: 2 cost, 3 damage, 4 block, `Hoard 4`
+- `Scrap Spray`: 2 cost, 3 damage to ALL enemies, `Consume`
+
 Current reward-pool intent outside the starter deck:
 
 - normal rewards should primarily come from mirrored Ironclad cards in Indigo color
@@ -164,7 +174,7 @@ It is not balanced for production. The goals right now are:
 - prove the hand-fuel payment rule
 - prove the surcharge rule
 - prove X-cost behavior
-- prove delayed `Consume` behavior on non-targeted cards
+- prove discard-replacement `Consume` behavior on non-targeted cards
 - prove energy-to-draw replacement
 - keep the Indigo reward pool complete while final cards are built by editing mirrored red cards
 - keep iteration fast on Windows with local Maven packaging

@@ -80,13 +80,13 @@ public class CardEnergyMod implements EditCharactersSubscriber, EditCardsSubscri
     @Override
     public void receiveEditKeywords() {
         BaseMod.addKeyword(MOD_ID, "Consume", new String[] { "consume" },
-                "When this card is discarded from your hand, play it automatically after the current card resolves. Exhaust it.",
+                "When this card would be discarded from your hand, play it automatically and Exhaust it instead.",
                 makeKeywordColor());
         BaseMod.addKeyword(MOD_ID, "Hoard", new String[] { "hoard" },
                 "At the end of your turn, if this card is in your hand, it gains the listed damage and Block.",
                 makeKeywordColor());
         BaseMod.addKeyword(MOD_ID, "Rot", new String[] { "rot" },
-                "If this card is discarded or remains in your hand at end of turn, Exhaust it.",
+                "If this card would be discarded, or remains in your hand at end of turn, Exhaust it instead.",
                 makeKeywordColor());
     }
 

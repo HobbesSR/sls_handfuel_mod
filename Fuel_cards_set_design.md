@@ -2,7 +2,7 @@
 
 ## Current Implementation Note
 
-The current codebase is using a full mirrored Ironclad pool as Indigo's temporary baseline set.
+The current codebase uses a full mirrored Ironclad pool as Indigo's temporary baseline set.
 
 That is not the final content direction. It is the implementation scaffold.
 
@@ -49,7 +49,7 @@ The exact backend rules can remain as already implemented for now.
 
 Working rules text:
 
-`Consume` — When this card is discarded from your hand, play it automatically after the current card resolves. Exhaust it.
+`Consume` - When this card would be discarded from your hand, play it automatically and Exhaust it instead.
 
 Purpose:
 
@@ -68,7 +68,7 @@ Notes:
 
 Working rules text:
 
-`Hoard X` — At the end of your turn, if this card is in your hand, it gains +X damage and Block.
+`Hoard X` - At the end of your turn, if this card is in your hand, it gains +X damage and Block.
 
 Purpose:
 
@@ -86,7 +86,7 @@ Notes:
 
 Working rules text:
 
-`Rot` — If this card is discarded or remains in your hand at end of turn, Exhaust it.
+`Rot` - If this card would be discarded, or remains in your hand at end of turn, Exhaust it instead.
 
 Purpose:
 
@@ -158,14 +158,14 @@ Current implementation direction:
 
 Reason:
 
-- `Consume` currently resolves after the main card
+- `Consume` currently plays by replacing the discard event rather than by visiting the discard pile first
 - single-target consumed cards would need a post-resolution targeting interface
 - until that exists, `Consume` should stay on self-target, no-target, or all-enemy cards
 
 Working baseline numbers:
 
-- basic attack: 5 damage
-- basic block: 6 block
+- basic attack: 4 damage
+- basic block: 5 block
 
 ### Starter non-basic scaffold
 
@@ -179,11 +179,21 @@ There are currently 6 non-basic starter cards:
 
 Current roles:
 
-- `Recovery`: recover up to 2 exhausted basics to discard
+- `Recovery`: recover up to 2 exhausted cards to discard
 - `Rotting Blow`: simple above-rate rot attack
-- `Rotting Shelter`: expensive temporary defense with draw
+- `Rotting Shelter`: temporary defense with draw
 - `Stockpile`: simple starter Hoard card
 - `Scrap Spray`: all-enemy `Consume` attack that safely demonstrates delayed consume resolution
+
+Current tuned starter values:
+
+- `Scrounge Strike`: 0 cost, 4 damage
+- `Scrounge Defend`: 0 cost, 5 block, `Consume`
+- `Recovery`: 1 cost, 3 block, return up to 2 exhausted cards to discard
+- `Rotting Blow`: 1 cost, 7 damage, `Rot`
+- `Rotting Shelter`: 2 cost, 12 block, draw 1, `Rot`
+- `Stockpile`: 2 cost, 3 damage, 4 block, `Hoard 4`
+- `Scrap Spray`: 2 cost, deal 3 to ALL enemies, `Consume`
 
 ## 6. Rarity and Pool Philosophy
 
@@ -219,13 +229,13 @@ That will keep the class coherent and prevent one lane from becoming overbuilt w
 ## 8. Short Glossary
 
 Consume:
-Discarded from hand, then auto-play after the current card resolves, then exhaust.
+If it would be discarded from hand, it plays instead and is then exhausted.
 
 Hoard:
 Improves while held in hand.
 
 Rot:
-Exhausts if discarded or left in hand at end of turn.
+If it would be discarded, or remains in hand at end of turn, it exhausts instead.
 
 Junk:
 Shared family or tag that matters together, especially in Hoard shells.
