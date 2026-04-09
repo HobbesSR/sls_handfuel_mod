@@ -23,7 +23,7 @@ public class ScrapSpray extends Cleave {
     @Override
     public void triggerOnManualDiscard() {
         if (consume) {
-            IndigoCardHelper.triggerConsume(this);
+            IndigoCardHelper.queueConsumeOnDiscard(this);
         }
     }
 

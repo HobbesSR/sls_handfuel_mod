@@ -1,6 +1,7 @@
 package cardenergy;
 
 import basemod.BaseMod;
+import basemod.helpers.KeywordColorInfo;
 import basemod.interfaces.EditCardsSubscriber;
 import basemod.interfaces.EditCharactersSubscriber;
 import basemod.interfaces.EditKeywordsSubscriber;
@@ -17,6 +18,7 @@ import cardenergy.cards.starter.ScroungeDefend;
 import cardenergy.cards.starter.ScroungeStrike;
 import cardenergy.cards.starter.Stockpile;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import org.apache.logging.log4j.LogManager;
@@ -78,10 +80,20 @@ public class CardEnergyMod implements EditCharactersSubscriber, EditCardsSubscri
     @Override
     public void receiveEditKeywords() {
         BaseMod.addKeyword(MOD_ID, "Consume", new String[] { "consume" },
-                "When this card is discarded from your hand, play it automatically after the current card resolves. Exhaust it.");
+                "When this card is discarded from your hand, play it automatically after the current card resolves. Exhaust it.",
+                makeKeywordColor());
         BaseMod.addKeyword(MOD_ID, "Hoard", new String[] { "hoard" },
-                "At the end of your turn, if this card is in your hand, it gains the listed damage and Block.");
+                "At the end of your turn, if this card is in your hand, it gains the listed damage and Block.",
+                makeKeywordColor());
         BaseMod.addKeyword(MOD_ID, "Rot", new String[] { "rot" },
-                "If this card is discarded or remains in your hand at end of turn, Exhaust it.");
+                "If this card is discarded or remains in your hand at end of turn, Exhaust it.",
+                makeKeywordColor());
+    }
+
+    private KeywordColorInfo makeKeywordColor() {
+        KeywordColorInfo info = new KeywordColorInfo();
+        info.color = Settings.GOLD_COLOR.cpy();
+        info.disableTooltipHeaderColor = false;
+        return info;
     }
 }

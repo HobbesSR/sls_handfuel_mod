@@ -4,6 +4,7 @@ import cardenergy.character.CardEnergyCharacterEnum;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.actions.utility.NewQueueCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -11,11 +12,16 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import java.util.Collections;
 import java.util.IdentityHashMap;
-import java.util.Set;
+import java.util.Map;
 
 public final class IndigoCardHelper {
-    private static final Set<AbstractCard> skipDiscardCards =
-            Collections.newSetFromMap(new IdentityHashMap<AbstractCard, Boolean>());
+    private enum PendingDiscardReplacement {
+        CONSUME,
+        EXHAUST
+    }
+
+    private static final Map<AbstractCard, PendingDiscardReplacement> pendingDiscardReplacements =
+            Collections.synchronizedMap(new IdentityHashMap<AbstractCard, PendingDiscardReplacement>());
 
     private IndigoCardHelper() {
     }
@@ -41,12 +47,36 @@ public final class IndigoCardHelper {
         card.initializeDescription();
     }
 
-    public static void triggerConsume(AbstractCard card) {
+    public static void queueConsumeOnDiscard(AbstractCard card) {
+        if (card != null) {
+            queueConsumePlay(card);
+            pendingDiscardReplacements.put(card, PendingDiscardReplacement.CONSUME);
+        }
+    }
+
+    public static void queueExhaustOnDiscard(AbstractCard card) {
+        if (card != null) {
+            pendingDiscardReplacements.put(card, PendingDiscardReplacement.EXHAUST);
+        }
+    }
+
+    public static boolean replacePendingDiscard(CardGroup source, AbstractCard card) {
+        PendingDiscardReplacement replacement = pendingDiscardReplacements.remove(card);
+        if (replacement == null || source == null || card == null) {
+            return false;
+        }
+
+        source.removeCard(card);
+        CardGroup tempSource = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+        tempSource.addToTop(card);
+        AbstractDungeon.actionManager.addToBottom(new ExhaustSpecificCardAction(card, tempSource));
+        return true;
+    }
+
+    private static void queueConsumePlay(AbstractCard card) {
         AbstractCard copy = card.makeStatEquivalentCopy();
         copy.freeToPlayOnce = true;
         copy.purgeOnUse = true;
-        markSkipDiscard(card);
-        exhaustFromCurrentPile(card);
 
         if (copy.target == AbstractCard.CardTarget.ENEMY || copy.target == AbstractCard.CardTarget.SELF_AND_ENEMY) {
             AbstractMonster target = AbstractDungeon.getRandomMonster();
@@ -54,11 +84,6 @@ public final class IndigoCardHelper {
         } else {
             AbstractDungeon.actionManager.addToBottom(new NewQueueCardAction(copy, false, true, true));
         }
-    }
-
-    public static void replaceDiscardWithExhaust(AbstractCard card) {
-        markSkipDiscard(card);
-        exhaustFromCurrentPile(card);
     }
 
     public static void exhaustFromCurrentPile(AbstractCard card) {
@@ -75,15 +100,5 @@ public final class IndigoCardHelper {
                     new ExhaustSpecificCardAction(card, AbstractDungeon.handCardSelectScreen.selectedCards)
             );
         }
-    }
-
-    public static void markSkipDiscard(AbstractCard card) {
-        if (card != null) {
-            skipDiscardCards.add(card);
-        }
-    }
-
-    public static boolean shouldSkipDiscard(AbstractCard card) {
-        return card != null && skipDiscardCards.remove(card);
     }
 }

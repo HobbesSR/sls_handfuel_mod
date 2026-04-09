@@ -30,7 +30,7 @@ public class RottingShelter extends ShrugItOff {
     @Override
     public void triggerOnManualDiscard() {
         if (rot) {
-            IndigoCardHelper.replaceDiscardWithExhaust(this);
+            IndigoCardHelper.queueExhaustOnDiscard(this);
         }
     }
 

@@ -15,6 +15,8 @@ public class ScroungeDefend extends Defend_Red {
         cost = 0;
         costForTurn = 0;
         upgradedCost = false;
+        baseBlock = 6;
+        block = baseBlock;
         IndigoCardHelper.addKeyword(this, "Consume");
         tags.add(CardTags.STARTER_DEFEND);
     }
@@ -22,7 +24,7 @@ public class ScroungeDefend extends Defend_Red {
     @Override
     public void triggerOnManualDiscard() {
         if (consume) {
-            IndigoCardHelper.triggerConsume(this);
+            IndigoCardHelper.queueConsumeOnDiscard(this);
         }
     }
 

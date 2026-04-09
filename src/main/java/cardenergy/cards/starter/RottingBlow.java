@@ -14,7 +14,7 @@ public class RottingBlow extends Strike_Red {
         IndigoCardHelper.applyIdentity(this, ID);
         cost = 1;
         costForTurn = 1;
-        baseDamage = 8;
+        baseDamage = 4;
         damage = baseDamage;
         rarity = CardRarity.BASIC;
         IndigoCardHelper.addKeyword(this, "Rot");
@@ -23,7 +23,7 @@ public class RottingBlow extends Strike_Red {
     @Override
     public void triggerOnManualDiscard() {
         if (rot) {
-            IndigoCardHelper.replaceDiscardWithExhaust(this);
+            IndigoCardHelper.queueExhaustOnDiscard(this);
         }
     }
 

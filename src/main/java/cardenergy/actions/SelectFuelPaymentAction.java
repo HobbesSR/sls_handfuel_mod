@@ -122,7 +122,13 @@ public class SelectFuelPaymentAction extends AbstractGameAction {
         } else {
             card.energyOnUse = energyOnUse;
         }
-        HandFuelResourceAdapter.markCardForReplay(card);
-        player.useCard(card, monster, card.energyOnUse);
+        AbstractDungeon.actionManager.addToBottom(new AbstractGameAction() {
+            @Override
+            public void update() {
+                HandFuelResourceAdapter.markCardForReplay(card);
+                player.useCard(card, monster, card.energyOnUse);
+                isDone = true;
+            }
+        });
     }
 }

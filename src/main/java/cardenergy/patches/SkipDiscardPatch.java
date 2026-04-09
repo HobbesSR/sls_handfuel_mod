@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.cards.CardGroup;
 public class SkipDiscardPatch {
     @SpirePrefixPatch
     public static SpireReturn<Void> Prefix(CardGroup __instance, AbstractCard c) {
-        if (IndigoCardHelper.shouldSkipDiscard(c)) {
+        if (IndigoCardHelper.replacePendingDiscard(__instance, c)) {
             return SpireReturn.Return(null);
         }
         return SpireReturn.Continue();

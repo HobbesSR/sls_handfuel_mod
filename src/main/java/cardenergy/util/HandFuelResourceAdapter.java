@@ -167,11 +167,4 @@ public class HandFuelResourceAdapter {
         }
         return Integer.toString(getRequiredFuel(card));
     }
-
-    public static int getRenderedCost(AbstractCard card) {
-        if (card == null || card.freeToPlayOnce || card.costForTurn < 0) {
-            return card == null ? 0 : card.costForTurn;
-        }
-        return getRequiredFuel(card);
-    }
 }
