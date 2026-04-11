@@ -21,7 +21,7 @@ public class SelectFuelPaymentAction extends AbstractGameAction {
     }
 
     private static final String PROMPT_TEMPLATE =
-            "Choose %d fuel card%s to discard. Confirm with no selection to cancel.";
+            "to discard for %d energy. Confirm with no selection to cancel.";
 
     private final AbstractPlayer player;
     private final AbstractCard card;
