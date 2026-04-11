@@ -6,19 +6,23 @@ This document lists the documents, assets, code scaffolding, and content resourc
 
 It is a planning and tracking document, not an implementation log.
 
+It should not overrule the implementation brief or mechanics doc. It exists to track work and missing support material.
+
 ## Source Documents
 
-Keep these as the main planning inputs:
+Use documents in this order:
 
-- [HAND_FUEL_CHARACTER_DESIGN.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\HAND_FUEL_CHARACTER_DESIGN.md)
-- [Fuel_cards_set_design.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\Fuel_cards_set_design.md)
-- [INDIGO_SET_IMPLEMENTATION_PLAN.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\INDIGO_SET_IMPLEMENTATION_PLAN.md)
+- [10_SCAVENGER_IMPLEMENTATION_BRIEF.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\10_SCAVENGER_IMPLEMENTATION_BRIEF.md)
+- [20_SCAVENGER_MECHANICS.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\20_SCAVENGER_MECHANICS.md)
+- [30_SCAVENGER_SET_DESIGN.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\30_SCAVENGER_SET_DESIGN.md)
+- [40_SCAVENGER_IMPLEMENTATION_PLAN.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\40_SCAVENGER_IMPLEMENTATION_PLAN.md)
 
 Notes:
 
-- `Fuel_cards_set_design.md` contains strong design material, but it should be normalized later because it currently has encoding artifacts
-- `HAND_FUEL_CHARACTER_DESIGN.md` is the mechanic-state doc
-- `INDIGO_SET_IMPLEMENTATION_PLAN.md` is the staged roadmap
+- `10_SCAVENGER_IMPLEMENTATION_BRIEF.md` is the current starter/common implementation brief
+- `20_SCAVENGER_MECHANICS.md` is the mechanic-state doc
+- `30_SCAVENGER_SET_DESIGN.md` is the broader set-design doc
+- `40_SCAVENGER_IMPLEMENTATION_PLAN.md` is the staged roadmap
 
 ## Planning Documents To Create
 

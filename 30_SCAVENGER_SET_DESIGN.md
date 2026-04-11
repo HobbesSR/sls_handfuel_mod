@@ -1,5 +1,26 @@
 # Scavenger Working Card Set Design Document
 
+## Current Implementation Brief
+
+Use [10_SCAVENGER_IMPLEMENTATION_BRIEF.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\10_SCAVENGER_IMPLEMENTATION_BRIEF.md) as the current implementation brief.
+
+Where this document conflicts with that brief on starter composition, common-pool targets, or immediate card implementation priorities, the brief wins.
+
+## Document Role
+
+This document should answer:
+
+- what the class is trying to be
+- what structural jobs the early pool must cover
+- how `Consume`, `Rot`, `Hoard`, and `Junk` are meant to function in the set
+
+It should not be the authoritative source for the exact current starter list or the exact current starter/common implementation queue. That belongs in the implementation brief.
+
+When this document and the mechanics doc differ, assume:
+
+- this file is expressing durable design intent
+- the mechanics doc is reporting the current code state
+
 ## Current Implementation Note
 
 The current codebase uses a full mirrored Ironclad pool as Indigo's temporary baseline set.
@@ -17,6 +38,8 @@ So the working plan is:
 - do not preserve old one-off prototype cards as long-term content
 - do not leave the pool undersized while commons are still being designed
 - replace mirrored red cards gradually with real Indigo cards as they are ready
+
+This note is descriptive of the current repository scaffold, not a recommendation to keep that scaffold forever.
 
 ## 1. Core Identity
 
@@ -37,11 +60,16 @@ This is a better thematic fit than the earlier electrical or singularity framing
 The class still uses the hand as the real resource:
 
 - cards are paid for by discarding eligible cards from hand
-- there is a surcharge on plays
+- non-X plays pay an extra 1 Energy
 - large draw and retention-like smoothing are part of the class identity
 - the deck is meant to feel like it is carrying and consuming inventory
 
-The exact backend rules can remain as already implemented for now.
+Working rule:
+
+- available Energy equals the number of discardable character-color cards currently in hand
+- paying Energy means discarding that many such cards
+- non-X cards cost 1 additional Energy
+- for X-cost cards, `X = ceil(Energy paid / 2)`
 
 ## 3. Keywords and Family Language
 
@@ -143,7 +171,43 @@ This means the class should not feel like three separate archetypes stapled toge
 - Hoard especially rewards Junk density
 - the best Hoard decks are moonshot decks enabled by the right uncommons and rares
 
-## 5. Starter Deck Scaffold
+## 5. Structural Template
+
+The useful comparison to the vanilla characters is not "which exact cards match" but "which early-game structural jobs must exist."
+
+Across Ironclad, Silent, Defect, and Watcher, the early pool consistently covers:
+
+- a filler attack
+- a filler block
+- a signature tutorial card that teaches the class loop
+- a signature payoff card that shows why that loop matters
+- a smoother that fixes sequencing or consistency
+- a hybrid card that partially covers two jobs at once
+
+That is the template worth reusing.
+
+For Scavenger, the matching early roles should be:
+
+- basic attack
+- basic defense
+- starter card that teaches fuel spending
+- starter card that teaches discard as upside rather than pure tax
+- common attack that rewards holding cards
+- common defense or utility card that rewards discarding, consuming, or exhausting
+- common smoother that fixes awkward hands
+- hybrid card that solves the turn while also advancing the engine
+
+The class thesis should be:
+
+- your hand is both your wallet and your junk pile
+
+That means the early set should include some deliberately plain cards. The trap is making every common shout the mechanic. Slay the Spire starter and common pools usually leave enough oatmeal in the bowl for the spicy cards to matter.
+
+## 6. Starter Deck Scaffold
+
+This section is design context for the old scaffold and the role map it exposed.
+
+For the current starter implementation target, use [10_SCAVENGER_IMPLEMENTATION_BRIEF.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\10_SCAVENGER_IMPLEMENTATION_BRIEF.md).
 
 Starter size is currently justified at 14 cards, because the class effectively draws 7 per turn at baseline and would otherwise become too compressed too quickly.
 
@@ -169,7 +233,7 @@ Working baseline numbers:
 
 ### Starter non-basic scaffold
 
-There are currently 6 non-basic starter cards:
+The older scaffold used 6 non-basic starter cards:
 
 - `Recovery`
 - `Rotting Blow`
@@ -177,7 +241,7 @@ There are currently 6 non-basic starter cards:
 - `Stockpile`
 - `2x Scrap Spray`
 
-Current roles:
+Those cards demonstrated these roles:
 
 - `Recovery`: recover up to 2 exhausted cards to discard
 - `Rotting Blow`: simple above-rate rot attack
@@ -185,17 +249,23 @@ Current roles:
 - `Stockpile`: simple starter Hoard card
 - `Scrap Spray`: all-enemy `Consume` attack that safely demonstrates delayed consume resolution
 
-Current tuned starter values:
+Mapped against the structural template, that scaffold covered:
 
-- `Scrounge Strike`: 0 cost, 4 damage
-- `Scrounge Defend`: 0 cost, 5 block
-- `Recovery`: 1 cost, 3 block, return up to 2 exhausted cards to discard
-- `Rotting Blow`: 1 cost, 10 damage, `Rot`
-- `Rotting Shelter`: 2 cost, 12 block, draw 1, `Rot`
-- `Stockpile`: 2 cost, 3 damage, 4 block, `Hoard 3`
-- `Scrap Spray`: 2 cost, deal 3 to ALL enemies, `Consume`
+- `Scrounge Strike`: filler attack
+- `Scrounge Defend`: filler block
+- `Scrap Spray`: starter mechanic tutorial for `Consume` / fuel discard upside
+- `Recovery`: smoother that turns prior exhaust into future consistency
+- `Rotting Blow` / `Rotting Shelter`: early discard/exhaust-payoff tension cards
+- `Stockpile`: early hold-value card showing the Hoard vein
 
-## 6. Rarity and Pool Philosophy
+The useful retained lesson is not the exact old starter composition. The useful lesson is that future commons must cleanly extend these jobs:
+
+- simple fuel-spend cards
+- simple discard-as-upside cards
+- simple Hoard cards
+- a few hybrids that advance two of those jobs at once
+
+## 7. Rarity and Pool Philosophy
 
 Recommended long-term pool shape:
 
@@ -214,7 +284,7 @@ Current implementation scaffold:
 - the mirrored Ironclad set temporarily supplies these rarity bands
 - custom Indigo cards should gradually replace those mirrored cards as real design work is completed
 
-## 7. Recommended Build Order
+## 8. Recommended Build Order
 
 Build the set by rarity across both lanes, not one lane at a time.
 
@@ -226,7 +296,7 @@ Order:
 
 That will keep the class coherent and prevent one lane from becoming overbuilt while another is still theoretical.
 
-## 8. Short Glossary
+## 9. Short Glossary
 
 Consume:
 If it would be discarded from hand, it plays instead and is then exhausted.

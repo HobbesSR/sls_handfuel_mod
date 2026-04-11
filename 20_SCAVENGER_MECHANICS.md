@@ -1,5 +1,27 @@
 # Hand-Fuel Character
 
+## Current Implementation Brief
+
+Use [10_SCAVENGER_IMPLEMENTATION_BRIEF.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\10_SCAVENGER_IMPLEMENTATION_BRIEF.md) as the current implementation brief for starter/common card work.
+
+This document remains the mechanic-state document.
+
+## Document Role
+
+This document should answer:
+
+- how the hand-fuel system currently works in code
+- what the current cost and energy model is
+- what helper classes and patches currently own the mechanic
+- what the current starter/reward-pool scaffold is from a runtime perspective
+
+It should not be the source of truth for the evolving common-set card list. That belongs in the implementation brief and broader set-design docs.
+
+When this document conflicts with the implementation brief, interpret it as:
+
+- this file describes the current repository state
+- the brief describes the intended next content state
+
 ## Current Scope
 
 This repository is a standalone Slay the Spire mod that adds an Indigo test character whose real resource is cards in hand rather than stored energy.
@@ -43,6 +65,11 @@ Fuel cards are:
 
 For the current character, that means only Indigo cards in hand count as fuel.
 
+In practice, this is the character's available Energy:
+
+- available Energy equals the number of discardable same-color cards currently in hand
+- Energy is paid by discarding those cards
+
 Non-fuel cards include:
 
 - the card being played
@@ -52,22 +79,23 @@ Non-fuel cards include:
 
 ## Current Cost Rules
 
-All non-free hand-played cards pay an extra 1 fuel surcharge.
-
 Current payment behavior:
 
 - `freeToPlayOnce` cards are free
 - `0`-cost cards are not free; they cost 1 fuel
 - normal cards cost `costForTurn + 1` fuel
-- X-cost cards require at least 1 fuel to play
-- for X-cost cards, 1 selected fuel is treated as tax and the remaining selected fuel becomes `energyOnUse`
+- X-cost cards do not pay the extra +1 surcharge
+- for X-cost cards, `X = ceil(fuel paid / 2)`
 
 Examples:
 
 - a `0`-cost card costs 1 fuel
 - a `1`-cost card costs 2 fuel
 - a `2`-cost card costs 3 fuel
-- selecting 4 fuel cards for an X-cost card produces `X = 3`
+- paying 1 fuel for an X-cost card produces `X = 1`
+- paying 2 fuel for an X-cost card produces `X = 1`
+- paying 3 fuel for an X-cost card produces `X = 2`
+- paying 4 fuel for an X-cost card produces `X = 2`
 
 ## Current UI / UX
 
@@ -111,9 +139,47 @@ Current character traits:
 - visible energy orb: hidden
 - recharge baseline: 2
 
-Current starter deck is intentionally test-heavy and stronger than a normal starter deck so the mechanic is easy to exercise.
+## Structural Template
 
-It currently includes:
+This section is kept only as a compressed design-reference bridge so the runtime doc remains navigable. The authoritative structural card-design writeup lives in [30_SCAVENGER_SET_DESIGN.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\30_SCAVENGER_SET_DESIGN.md).
+
+The useful design lens is not "which vanilla cards are we copying," but "which structural jobs does the early Scavenger pool need covered."
+
+Every Slay the Spire character needs early coverage for:
+
+- basic frontload damage
+- basic block
+- a starter card that teaches the class mechanic
+- a few simple extensions of that mechanic at low rarity
+- at least one consistency smoother through draw, hand fixing, recursion, or flexible utility
+
+Across the vanilla cast, the recurring role template is:
+
+- filler attack
+- filler block
+- signature tutorial card
+- signature payoff card
+- smoother
+- hybrid card that covers two jobs at once
+
+For Scavenger, the intended early analogs are:
+
+- a basic attack
+- a basic defense
+- a starter card that teaches fuel spending
+- a starter card that teaches discard as upside rather than pure cost
+- a low-rarity card that rewards holding cards
+- a low-rarity card that rewards discarding, consuming, or exhausting
+- a consistency card that fixes awkward hands
+- a hybrid card that both solves the current turn and advances the engine
+
+The class thesis should read as:
+
+- your hand is both your wallet and your junk pile
+
+That means not every common should scream the mechanic. Some commons should stay plain on purpose so the more volatile mechanic cards have contrast and the class remains readable.
+
+Current runtime starter deck scaffold includes:
 
 - `4x Scrounge Strike`
 - `4x Scrounge Defend`
@@ -123,14 +189,14 @@ It currently includes:
 - `Stockpile`
 - `2x Scrap Spray`
 
-Current starter rules intent:
+Current runtime starter rules intent:
 
 - `Scrounge Strike` is a normal single-target basic attack and does not have `Consume`
 - `Scrounge Defend` is a plain basic block card and does not have `Consume`
 - `Consume` can appear on targeted cards; autoplayed consumed cards use the game's normal autoplay targeting behavior
 - the starter offensive `Consume` demonstration card is `Scrap Spray`, an all-enemy attack
 
-Current tuned starter values:
+Current runtime starter values:
 
 - `Scrounge Strike`: 0 cost, 4 damage
 - `Scrounge Defend`: 0 cost, 5 block
@@ -140,7 +206,7 @@ Current tuned starter values:
 - `Stockpile`: 2 cost, 3 damage, 4 block, `Hoard 3`
 - `Scrap Spray`: 2 cost, 3 damage to ALL enemies, `Consume`
 
-Current reward-pool intent outside the starter deck:
+Current reward-pool/runtime intent outside the starter deck:
 
 - normal rewards should primarily come from mirrored Ironclad cards in Indigo color
 - those mirrored cards are the cards meant to be edited into final Indigo cards over time

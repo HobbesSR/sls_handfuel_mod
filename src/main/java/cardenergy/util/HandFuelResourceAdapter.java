@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HandFuelResourceAdapter {
-    public static final int FUEL_SURCHARGE = 1;
+    public static final int NON_X_SURCHARGE = 1;
 
     private HandFuelResourceAdapter() {
     }
@@ -154,13 +154,13 @@ public class HandFuelResourceAdapter {
             return 0;
         }
         if (card.costForTurn == -1) {
-            return FUEL_SURCHARGE;
+            return 0;
         }
-        return Math.max(0, card.costForTurn) + FUEL_SURCHARGE;
+        return Math.max(0, card.costForTurn) + NON_X_SURCHARGE;
     }
 
     public static int getXValueFromSelectedFuel(int selectedFuelCount) {
-        return Math.max(0, selectedFuelCount - FUEL_SURCHARGE);
+        return (selectedFuelCount + 1) / 2;
     }
 
     public static HandFuelPaymentPlan buildXPaymentPlan(AbstractPlayer player, AbstractCard card) {
@@ -204,7 +204,7 @@ public class HandFuelResourceAdapter {
             return "";
         }
         if (card.costForTurn == -1) {
-            return "X+" + FUEL_SURCHARGE;
+            return "X";
         }
         return Integer.toString(getRequiredFuel(card));
     }

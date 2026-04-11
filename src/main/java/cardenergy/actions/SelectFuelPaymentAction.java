@@ -112,9 +112,6 @@ public class SelectFuelPaymentAction extends AbstractGameAction {
 
     private void autoPayForX() {
         HandFuelPaymentPlan paymentPlan = HandFuelResourceAdapter.buildXPaymentPlan(player, card);
-        if (paymentPlan.getFuelCards().isEmpty()) {
-            return;
-        }
         HandFuelPaymentHelper.executePaymentPlan(player, card, monster, paymentPlan);
     }
 
