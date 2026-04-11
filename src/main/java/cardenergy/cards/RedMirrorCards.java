@@ -10,8 +10,6 @@ public final class RedMirrorCards {
     }
 
     public static void registerAll() {
-        BaseMod.addCard(new AngerCopy());
-        BaseMod.addCard(new ArmamentsCopy());
         BaseMod.addCard(new BarricadeCopy());
         BaseMod.addCard(new BashCopy());
         BaseMod.addCard(new BattleTranceCopy());
@@ -19,13 +17,9 @@ public final class RedMirrorCards {
         BaseMod.addCard(new BloodForBloodCopy());
         BaseMod.addCard(new BloodlettingCopy());
         BaseMod.addCard(new BludgeonCopy());
-        BaseMod.addCard(new BodySlamCopy());
         BaseMod.addCard(new BrutalityCopy());
         BaseMod.addCard(new BurningPactCopy());
         BaseMod.addCard(new CarnageCopy());
-        BaseMod.addCard(new ClashCopy());
-        BaseMod.addCard(new CleaveCopy());
-        BaseMod.addCard(new ClotheslineCopy());
         BaseMod.addCard(new CombustCopy());
         BaseMod.addCard(new CorruptionCopy());
         BaseMod.addCard(new DarkEmbraceCopy());
@@ -42,27 +36,18 @@ public final class RedMirrorCards {
         BaseMod.addCard(new FiendFireCopy());
         BaseMod.addCard(new FireBreathingCopy());
         BaseMod.addCard(new FlameBarrierCopy());
-        BaseMod.addCard(new FlexCopy());
-        BaseMod.addCard(new GhostlyArmorCopy());
-        BaseMod.addCard(new HavocCopy());
-        BaseMod.addCard(new HeadbuttCopy());
-        BaseMod.addCard(new HeavyBladeCopy());
         BaseMod.addCard(new HemokinesisCopy());
         BaseMod.addCard(new ImmolateCopy());
         BaseMod.addCard(new ImperviousCopy());
         BaseMod.addCard(new InfernalBladeCopy());
         BaseMod.addCard(new InflameCopy());
         BaseMod.addCard(new IntimidateCopy());
-        BaseMod.addCard(new IronWaveCopy());
         BaseMod.addCard(new JuggernautCopy());
         BaseMod.addCard(new LimitBreakCopy());
         BaseMod.addCard(new MetallicizeCopy());
         BaseMod.addCard(new OfferingCopy());
-        BaseMod.addCard(new PerfectedStrikeCopy());
-        BaseMod.addCard(new PommelStrikeCopy());
         BaseMod.addCard(new PowerThroughCopy());
         BaseMod.addCard(new PummelCopy());
-        BaseMod.addCard(new RageCopy());
         BaseMod.addCard(new RampageCopy());
         BaseMod.addCard(new ReaperCopy());
         BaseMod.addCard(new RecklessChargeCopy());
@@ -73,16 +58,9 @@ public final class RedMirrorCards {
         BaseMod.addCard(new SentinelCopy());
         BaseMod.addCard(new SeverSoulCopy());
         BaseMod.addCard(new ShockwaveCopy());
-        BaseMod.addCard(new ShrugItOffCopy());
         BaseMod.addCard(new SpotWeaknessCopy());
-        BaseMod.addCard(new SwordBoomerangCopy());
-        BaseMod.addCard(new ThunderClapCopy());
-        BaseMod.addCard(new TrueGritCopy());
-        BaseMod.addCard(new TwinStrikeCopy());
         BaseMod.addCard(new UppercutCopy());
-        BaseMod.addCard(new WarcryCopy());
         BaseMod.addCard(new WhirlwindCopy());
-        BaseMod.addCard(new WildStrikeCopy());
     }
 
     public static final class AngerCopy extends Anger {

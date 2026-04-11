@@ -1,17 +1,18 @@
-package cardenergy.cards.starter;
+package cardenergy.cards.common;
 
 import cardenergy.CardEnergyMod;
 import cardenergy.cards.IndigoCardHelper;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.cards.red.IronWave;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class Stockpile extends IronWave {
     public static final String ID = CardEnergyMod.makeID("Stockpile");
-    private static final int BASE_DAMAGE_VALUE = 3;
-    private static final int BASE_BLOCK_VALUE = 4;
-    private static final int HOARD_AMOUNT = 4;
+    private static final int BASE_DAMAGE_VALUE = 4;
+    private static final int BASE_BLOCK_VALUE = 5;
+    private static final int HOARD_AMOUNT = 3;
 
     public Stockpile() {
         super();
@@ -22,14 +23,13 @@ public class Stockpile extends IronWave {
         baseBlock = BASE_BLOCK_VALUE;
         damage = baseDamage;
         block = baseBlock;
-        rarity = CardRarity.BASIC;
+        rarity = CardRarity.COMMON;
         IndigoCardHelper.addKeyword(this, "Hoard");
     }
 
     @Override
     public void triggerOnEndOfPlayerTurn() {
-        if (com.megacrit.cardcrawl.dungeons.AbstractDungeon.player != null
-                && com.megacrit.cardcrawl.dungeons.AbstractDungeon.player.hand.group.contains(this)) {
+        if (AbstractDungeon.player != null && AbstractDungeon.player.hand.group.contains(this)) {
             baseDamage += HOARD_AMOUNT;
             baseBlock += HOARD_AMOUNT;
             applyPowers();
@@ -37,35 +37,29 @@ public class Stockpile extends IronWave {
     }
 
     @Override
-    public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
-        super.use(abstractPlayer, abstractMonster);
+    public void use(AbstractPlayer p, AbstractMonster m) {
+        super.use(p, m);
         resetHoard();
     }
 
     @Override
     public void upgrade() {
         if (!upgraded) {
-            super.upgrade();
+            upgradeName();
+            upgradeDamage(1);
+            upgradeBlock(1);
             resetHoard();
+            initializeDescription();
         }
     }
 
-    private int getBaseDamageValue() {
-        return upgraded ? BASE_DAMAGE_VALUE + 1 : BASE_DAMAGE_VALUE;
-    }
-
-    private int getBaseBlockValue() {
-        return upgraded ? BASE_BLOCK_VALUE + 1 : BASE_BLOCK_VALUE;
-    }
-
     private void resetHoard() {
-        baseDamage = getBaseDamageValue();
-        baseBlock = getBaseBlockValue();
+        baseDamage = upgraded ? BASE_DAMAGE_VALUE + 1 : BASE_DAMAGE_VALUE;
+        baseBlock = upgraded ? BASE_BLOCK_VALUE + 1 : BASE_BLOCK_VALUE;
         damage = baseDamage;
         block = baseBlock;
         isDamageModified = false;
         isBlockModified = false;
-        initializeDescription();
     }
 
     @Override

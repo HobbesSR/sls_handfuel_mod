@@ -7,13 +7,21 @@
     "NAME": "Scrounge Defend",
     "DESCRIPTION": "Gain !B! Block."
   },
-  "cardenergy:Recovery": {
-    "NAME": "Recovery",
-    "DESCRIPTION": "Gain !B! Block. Return up to 2 exhausted cards to your discard pile."
-  },
   "cardenergy:RottingBlow": {
     "NAME": "Rotting Blow",
     "DESCRIPTION": "cardenergy:Rot. NL Deal !D! damage."
+  },
+  "cardenergy:Brace": {
+    "NAME": "Brace",
+    "DESCRIPTION": "Gain !B! Block. Apply !M! Weak."
+  },
+  "cardenergy:ScrapBurst": {
+    "NAME": "Scrap Burst",
+    "DESCRIPTION": "cardenergy:Consume. NL Deal !D! damage to ALL enemies."
+  },
+  "cardenergy:Recovery": {
+    "NAME": "Recovery",
+    "DESCRIPTION": "Gain !B! Block. Return up to !M! exhausted cards to your discard pile."
   },
   "cardenergy:RottingShelter": {
     "NAME": "Rotting Shelter",
@@ -21,10 +29,78 @@
   },
   "cardenergy:Stockpile": {
     "NAME": "Stockpile",
-    "DESCRIPTION": "Gain !B! Block. Deal !D! damage. NL NL cardenergy:Hoard 3."
+    "DESCRIPTION": "Deal !D! damage. Gain !B! Block. NL NL cardenergy:Hoard 3."
   },
   "cardenergy:ScrapSpray": {
     "NAME": "Scrap Spray",
-    "DESCRIPTION": "cardenergy:Consume. NL Deal !D! damage to ALL enemies."
+    "DESCRIPTION": "Deal !D! damage to ALL enemies."
+  },
+  "cardenergy:RottingSlash": {
+    "NAME": "Rotting Slash",
+    "DESCRIPTION": "cardenergy:Rot. NL Deal !D! damage."
+  },
+  "cardenergy:SalvageSwing": {
+    "NAME": "Salvage Swing",
+    "DESCRIPTION": "Deal !D! damage. If a card was Exhausted this turn, gain !M! Block."
+  },
+  "cardenergy:PileDriver": {
+    "NAME": "Pile Driver",
+    "DESCRIPTION": "Deal !D! damage."
+  },
+  "cardenergy:BraceForImpact": {
+    "NAME": "Brace for Impact",
+    "DESCRIPTION": "Gain !B! Block."
+  },
+  "cardenergy:GuardTheHeap": {
+    "NAME": "Guard the Heap",
+    "DESCRIPTION": "Gain !B! Block. If you were attacked last turn, gain !M! additional Block."
+  },
+  "cardenergy:Hunker": {
+    "NAME": "Hunker",
+    "DESCRIPTION": "Gain !B! Block."
+  },
+  "cardenergy:DugIn": {
+    "NAME": "Dug In",
+    "DESCRIPTION": "Gain !B! Block. Apply !M! Weak."
+  },
+  "cardenergy:ScrapKnife": {
+    "NAME": "Scrap Knife",
+    "DESCRIPTION": "cardenergy:Consume. NL Deal !D! damage."
+  },
+  "cardenergy:BurnThrough": {
+    "NAME": "Burn Through",
+    "DESCRIPTION": "cardenergy:Consume. NL Gain !B! Block."
+  },
+  "cardenergy:LooseParts": {
+    "NAME": "Loose Parts",
+    "DESCRIPTION": "cardenergy:Consume. NL Draw 1 card."
+  },
+  "cardenergy:AshenCount": {
+    "NAME": "Ashen Count",
+    "DESCRIPTION": "Deal !D! damage. If a card was Exhausted this turn, deal !M! additional damage."
+  },
+  "cardenergy:Patchwork": {
+    "NAME": "Patchwork",
+    "DESCRIPTION": "Gain !B! Block. Return 1 exhausted card to your discard pile. Draw !M! card."
+  },
+  "cardenergy:BarbedGuard": {
+    "NAME": "Barbed Guard",
+    "DESCRIPTION": "Gain !B! Block. If an enemy attacks you this turn, deal 4 damage to it."
+  },
+  "cardenergy:TurnAside": {
+    "NAME": "Turn Aside",
+    "DESCRIPTION": "Gain !B! Block. If all damage is blocked this turn, draw !M! card next turn."
+  },
+  "cardenergy:HiddenCache": {
+    "NAME": "Hidden Cache",
+    "DESCRIPTION": "Gain !B! Block. NL NL cardenergy:Hoard 2."
+  },
+  "cardenergy:ScavengeTheWreck": {
+    "NAME": "Scavenge the Wreck",
+    "DESCRIPTION": "Exhaust 1 card in your hand. Draw !M! cards."
+  },
+  "cardenergy:PackedSwing": {
+    "NAME": "Packed Swing",
+    "DESCRIPTION": "Deal !D! damage. Gain !B! Block."
   }
 }

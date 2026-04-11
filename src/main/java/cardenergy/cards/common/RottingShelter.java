@@ -1,9 +1,14 @@
-package cardenergy.cards.starter;
+package cardenergy.cards.common;
 
 import cardenergy.CardEnergyMod;
 import cardenergy.cards.IndigoCardHelper;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.red.ShrugItOff;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class RottingShelter extends ShrugItOff {
     public static final String ID = CardEnergyMod.makeID("RottingShelter");
@@ -16,14 +21,14 @@ public class RottingShelter extends ShrugItOff {
         baseBlock = 12;
         block = baseBlock;
         magicNumber = baseMagicNumber = 1;
-        rarity = CardRarity.BASIC;
+        rarity = CardRarity.COMMON;
         IndigoCardHelper.addKeyword(this, "Rot");
     }
 
     @Override
-    public void use(com.megacrit.cardcrawl.characters.AbstractPlayer p, com.megacrit.cardcrawl.monsters.AbstractMonster m) {
-        addToBot(new com.megacrit.cardcrawl.actions.common.GainBlockAction(p, p, block));
-        addToBot(new com.megacrit.cardcrawl.actions.common.DrawCardAction(p, magicNumber));
+    public void use(AbstractPlayer p, AbstractMonster m) {
+        addToBot(new GainBlockAction(p, p, block));
+        addToBot(new DrawCardAction(p, magicNumber));
     }
 
     @Override
@@ -33,9 +38,17 @@ public class RottingShelter extends ShrugItOff {
 
     @Override
     public void triggerOnEndOfPlayerTurn() {
-        if (com.megacrit.cardcrawl.dungeons.AbstractDungeon.player != null
-                && com.megacrit.cardcrawl.dungeons.AbstractDungeon.player.hand.group.contains(this)) {
+        if (AbstractDungeon.player != null && AbstractDungeon.player.hand.group.contains(this)) {
             IndigoCardHelper.exhaustFromCurrentPile(this);
+        }
+    }
+
+    @Override
+    public void upgrade() {
+        if (!upgraded) {
+            upgradeName();
+            upgradeBlock(4);
+            initializeDescription();
         }
     }
 

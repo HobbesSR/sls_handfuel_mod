@@ -1,4 +1,4 @@
-package cardenergy.cards.starter;
+package cardenergy.cards.common;
 
 import cardenergy.CardEnergyMod;
 import cardenergy.cards.IndigoCardHelper;
@@ -11,17 +11,20 @@ public class ScrapSpray extends Cleave {
     public ScrapSpray() {
         super();
         IndigoCardHelper.applyIdentity(this, ID);
-        cost = 2;
-        costForTurn = 2;
-        baseDamage = 3;
+        cost = 1;
+        costForTurn = 1;
+        baseDamage = 7;
         damage = baseDamage;
-        rarity = CardRarity.BASIC;
-        IndigoCardHelper.addKeyword(this, "Consume");
+        rarity = CardRarity.COMMON;
     }
 
     @Override
-    public void triggerOnManualDiscard() {
-        IndigoCardHelper.queueConsumeOnDiscard(this);
+    public void upgrade() {
+        if (!upgraded) {
+            upgradeName();
+            upgradeDamage(3);
+            initializeDescription();
+        }
     }
 
     @Override

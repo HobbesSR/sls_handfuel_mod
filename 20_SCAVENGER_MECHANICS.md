@@ -39,8 +39,8 @@ The implementation is character-gated. Vanilla characters still use normal energ
 
 The Indigo set currently uses a two-layer content strategy:
 
-- the full non-basic Ironclad set is mirrored into Indigo as a temporary baseline pool
-- the custom Indigo starter cards exist separately to exercise the hand-fuel mechanics early
+- most of the non-basic Ironclad set is still mirrored into Indigo as a temporary scaffold
+- a first Scavenger-specific starter deck and first pass of Scavenger-specific commons now replace part of that mirror set
 
 This is intentional. The mirrored Ironclad cards are the scaffold the final Indigo set will be built from. They provide:
 
@@ -179,38 +179,34 @@ The class thesis should read as:
 
 That means not every common should scream the mechanic. Some commons should stay plain on purpose so the more volatile mechanic cards have contrast and the class remains readable.
 
-Current runtime starter deck scaffold includes:
+Current runtime starter deck includes:
 
-- `4x Scrounge Strike`
-- `4x Scrounge Defend`
-- `Recovery`
+- `5x Scrounge Strike`
+- `6x Scrounge Defend`
 - `Rotting Blow`
-- `Rotting Shelter`
-- `Stockpile`
-- `2x Scrap Spray`
+- `Brace`
+- `Scrap Burst`
 
 Current runtime starter rules intent:
 
 - `Scrounge Strike` is a normal single-target basic attack and does not have `Consume`
 - `Scrounge Defend` is a plain basic block card and does not have `Consume`
 - `Consume` can appear on targeted cards; autoplayed consumed cards use the game's normal autoplay targeting behavior
-- the starter offensive `Consume` demonstration card is `Scrap Spray`, an all-enemy attack
+- the starter offensive `Consume` demonstration card is `Scrap Burst`, an all-enemy attack
 
 Current runtime starter values:
 
 - `Scrounge Strike`: 0 cost, 4 damage
 - `Scrounge Defend`: 0 cost, 5 block
-- `Recovery`: 1 cost, 3 block, return up to 2 exhausted cards to discard
 - `Rotting Blow`: 1 cost, 10 damage, `Rot`
-- `Rotting Shelter`: 2 cost, 12 block, draw 1, `Rot`
-- `Stockpile`: 2 cost, 3 damage, 4 block, `Hoard 3`
-- `Scrap Spray`: 2 cost, 3 damage to ALL enemies, `Consume`
+- `Brace`: 2 cost, 11 block, apply 1 Weak
+- `Scrap Burst`: 1 cost, 5 damage to ALL enemies, `Consume`
 
 Current reward-pool/runtime intent outside the starter deck:
 
-- normal rewards should primarily come from mirrored Ironclad cards in Indigo color
-- those mirrored cards are the cards meant to be edited into final Indigo cards over time
-- the custom starter-only mechanic cards are currently marked `BASIC` so they stay in the opening deck without defining the normal reward pool
+- normal rewards still come mostly from mirrored Ironclad cards in Indigo color
+- the first Scavenger-specific common pass now replaces a chunk of the mirrored Ironclad commons
+- those mirrored cards are still meant to be edited into final Indigo cards over time
 
 ## Important Patches
 

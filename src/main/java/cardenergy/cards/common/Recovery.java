@@ -1,10 +1,13 @@
-package cardenergy.cards.starter;
+package cardenergy.cards.common;
 
-import cardenergy.actions.SelectExhaustToDiscardAction;
 import cardenergy.CardEnergyMod;
+import cardenergy.actions.SelectExhaustToDiscardAction;
 import cardenergy.cards.IndigoCardHelper;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.red.ShrugItOff;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class Recovery extends ShrugItOff {
     public static final String ID = CardEnergyMod.makeID("Recovery");
@@ -13,18 +16,27 @@ public class Recovery extends ShrugItOff {
     public Recovery() {
         super();
         IndigoCardHelper.applyIdentity(this, ID);
-        cost = 1;
-        costForTurn = 1;
+        cost = 0;
+        costForTurn = 0;
         baseBlock = 3;
         block = baseBlock;
         magicNumber = baseMagicNumber = 2;
-        rarity = CardRarity.BASIC;
+        rarity = CardRarity.COMMON;
     }
 
     @Override
-    public void use(com.megacrit.cardcrawl.characters.AbstractPlayer p, com.megacrit.cardcrawl.monsters.AbstractMonster m) {
-        addToBot(new com.megacrit.cardcrawl.actions.common.GainBlockAction(p, p, block));
+    public void use(AbstractPlayer p, AbstractMonster m) {
+        addToBot(new GainBlockAction(p, p, block));
         addToBot(new SelectExhaustToDiscardAction(p, magicNumber, SELECT_TEXT));
+    }
+
+    @Override
+    public void upgrade() {
+        if (!upgraded) {
+            upgradeName();
+            upgradeBlock(2);
+            initializeDescription();
+        }
     }
 
     @Override

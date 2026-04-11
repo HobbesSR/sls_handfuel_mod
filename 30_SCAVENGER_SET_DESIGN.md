@@ -23,14 +23,14 @@ When this document and the mechanics doc differ, assume:
 
 ## Current Implementation Note
 
-The current codebase uses a full mirrored Ironclad pool as Indigo's temporary baseline set.
+The current codebase still uses a broad mirrored Ironclad pool as Indigo's temporary baseline set, but the first pass of Scavenger-specific starter and common cards now replaces part of that mirror scaffold.
 
 That is not the final content direction. It is the implementation scaffold.
 
 Current practical rule:
 
-- mirrored red cards provide the complete Indigo reward pool
-- custom Indigo starter cards exist to exercise the hand-fuel mechanics immediately
+- mirrored red cards still provide most of the Indigo reward pool
+- custom Indigo starter cards and first-pass custom commons now exercise the class grammar directly
 - final Indigo cards should be created by editing those mirrored red-derived cards into their new names, text, and mechanics over time
 
 So the working plan is:

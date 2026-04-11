@@ -2,7 +2,7 @@
 
 This document is the current implementation brief for Scavenger card work.
 
-It describes the intended next implementation target, not the claim that every card or starter change below already exists in the repository.
+It is the authority for the current starter/common direction and the baseline to continue implementing against when the repository is still catching up in later passes.
 
 It supersedes the older starter-heavy scaffold language in the other design notes where they conflict, while preserving the same class identity:
 
@@ -49,9 +49,9 @@ The structure is:
 
 Read the sections below as:
 
-- target starter/common implementation direction
-- priority content brief for the next agent/work pass
-- replacement plan for the older starter scaffold
+- the current starter/common direction
+- the priority content brief for continued implementation passes
+- the replacement plan for the older starter scaffold where any legacy code still remains
 
 Use [20_SCAVENGER_MECHANICS.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\20_SCAVENGER_MECHANICS.md) for what is actually true in the current codebase right now.
 
