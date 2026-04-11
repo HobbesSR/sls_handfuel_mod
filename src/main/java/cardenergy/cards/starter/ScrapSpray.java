@@ -7,7 +7,6 @@ import com.megacrit.cardcrawl.cards.red.Cleave;
 
 public class ScrapSpray extends Cleave {
     public static final String ID = CardEnergyMod.makeID("ScrapSpray");
-    private final boolean consume = true;
 
     public ScrapSpray() {
         super();
@@ -22,9 +21,7 @@ public class ScrapSpray extends Cleave {
 
     @Override
     public void triggerOnManualDiscard() {
-        if (consume) {
-            IndigoCardHelper.queueConsumeOnDiscard(this);
-        }
+        IndigoCardHelper.queueConsumeOnDiscard(this);
     }
 
     @Override

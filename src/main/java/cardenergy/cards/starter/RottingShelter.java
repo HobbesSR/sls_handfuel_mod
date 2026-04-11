@@ -7,13 +7,12 @@ import com.megacrit.cardcrawl.cards.red.ShrugItOff;
 
 public class RottingShelter extends ShrugItOff {
     public static final String ID = CardEnergyMod.makeID("RottingShelter");
-    private final boolean rot = true;
 
     public RottingShelter() {
         super();
         IndigoCardHelper.applyIdentity(this, ID);
         cost = 2;
-        costForTurn = 3;
+        costForTurn = 2;
         baseBlock = 12;
         block = baseBlock;
         magicNumber = baseMagicNumber = 1;
@@ -29,14 +28,12 @@ public class RottingShelter extends ShrugItOff {
 
     @Override
     public void triggerOnManualDiscard() {
-        if (rot) {
-            IndigoCardHelper.queueExhaustOnDiscard(this);
-        }
+        IndigoCardHelper.queueExhaustOnDiscard(this);
     }
 
     @Override
     public void triggerOnEndOfPlayerTurn() {
-        if (rot && com.megacrit.cardcrawl.dungeons.AbstractDungeon.player != null
+        if (com.megacrit.cardcrawl.dungeons.AbstractDungeon.player != null
                 && com.megacrit.cardcrawl.dungeons.AbstractDungeon.player.hand.group.contains(this)) {
             IndigoCardHelper.exhaustFromCurrentPile(this);
         }

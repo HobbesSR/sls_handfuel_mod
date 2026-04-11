@@ -16,6 +16,9 @@ public class GetCostPatch {
         if (!HandFuelResourceAdapter.isActivePlayer()) {
             return SpireReturn.Continue();
         }
+        if (!HandFuelResourceAdapter.usesFuelPaymentModel(__instance)) {
+            return SpireReturn.Continue();
+        }
         return SpireReturn.Return(HandFuelResourceAdapter.getDisplayedCost(__instance));
     }
 }

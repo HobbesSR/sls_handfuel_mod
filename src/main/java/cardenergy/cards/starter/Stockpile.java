@@ -3,7 +3,9 @@ package cardenergy.cards.starter;
 import cardenergy.CardEnergyMod;
 import cardenergy.cards.IndigoCardHelper;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.cards.red.IronWave;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class Stockpile extends IronWave {
     public static final String ID = CardEnergyMod.makeID("Stockpile");
@@ -35,27 +37,30 @@ public class Stockpile extends IronWave {
     }
 
     @Override
-    public void onMoveToDiscard() {
+    public void use(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster) {
+        super.use(abstractPlayer, abstractMonster);
         resetHoard();
     }
 
     @Override
-    public void triggerOnExhaust() {
-        resetHoard();
-    }
-
-    @Override
-    public void resetAttributes() {
-        super.resetAttributes();
-        if (com.megacrit.cardcrawl.dungeons.AbstractDungeon.player == null
-                || !com.megacrit.cardcrawl.dungeons.AbstractDungeon.player.hand.group.contains(this)) {
+    public void upgrade() {
+        if (!upgraded) {
+            super.upgrade();
             resetHoard();
         }
     }
 
+    private int getBaseDamageValue() {
+        return upgraded ? BASE_DAMAGE_VALUE + 1 : BASE_DAMAGE_VALUE;
+    }
+
+    private int getBaseBlockValue() {
+        return upgraded ? BASE_BLOCK_VALUE + 1 : BASE_BLOCK_VALUE;
+    }
+
     private void resetHoard() {
-        baseDamage = BASE_DAMAGE_VALUE;
-        baseBlock = BASE_BLOCK_VALUE;
+        baseDamage = getBaseDamageValue();
+        baseBlock = getBaseBlockValue();
         damage = baseDamage;
         block = baseBlock;
         isDamageModified = false;

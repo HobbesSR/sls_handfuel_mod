@@ -1,8 +1,8 @@
 {
   "modid": "cardenergy",
   "name": "${artifactId}",
-  "author_list": ["Codex"],
-  "description": "Red test character that pays card costs by discarding red cards from hand, with energy gains converted into draw.",
+  "author_list": ["Corey", "Codex"],
+  "description": "An indigo hand-fuel character who pays energy demands by discarding same-color cards from hand.",
   "version": "${project.version}",
   "sts_version": "${SlayTheSpire.version}",
   "mts_version": "${ModTheSpire.version}",

@@ -5,7 +5,7 @@
   },
   "cardenergy:ScroungeDefend": {
     "NAME": "Scrounge Defend",
-    "DESCRIPTION": "cardenergy:Consume. NL Gain !B! Block."
+    "DESCRIPTION": "Gain !B! Block."
   },
   "cardenergy:Recovery": {
     "NAME": "Recovery",

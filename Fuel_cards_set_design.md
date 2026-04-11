@@ -9,7 +9,7 @@ That is not the final content direction. It is the implementation scaffold.
 Current practical rule:
 
 - mirrored red cards provide the complete Indigo reward pool
-- custom Indigo starter/test cards exist to exercise the hand-fuel mechanics immediately
+- custom Indigo starter cards exist to exercise the hand-fuel mechanics immediately
 - final Indigo cards should be created by editing those mirrored red-derived cards into their new names, text, and mechanics over time
 
 So the working plan is:
@@ -62,7 +62,7 @@ Notes:
 - this is a behavior keyword, not a tracked synergy axis
 - other cards should generally not look for "Consume triggered"
 - the public bridge state is still cards exhausted this turn
-- for now, `Consume` should stay on self-target, no-target, or all-enemy cards unless a proper delayed targeting interface is added
+- targeted `Consume` cards are allowed; when autoplayed they follow the game's normal autoplay targeting behavior
 
 ### Hoard
 
@@ -81,6 +81,7 @@ Notes:
 
 - Hoard should be present at common, but concentrated more heavily at uncommon and rare
 - most Hoard cards should be intrinsically useful even without full build-around support
+- current direction: Hoard charge should reset when the card is played, not merely when it is discarded
 
 ### Rot
 
@@ -154,13 +155,12 @@ Starter size is currently justified at 14 cards, because the class effectively d
 Current implementation direction:
 
 - the 4 basic attacks are plain single-target attacks
-- the 4 basic block skills have `Consume`
+- the 4 basic block skills are plain block cards
 
 Reason:
 
-- `Consume` currently plays by replacing the discard event rather than by visiting the discard pile first
-- single-target consumed cards would need a post-resolution targeting interface
-- until that exists, `Consume` should stay on self-target, no-target, or all-enemy cards
+- starter defends having `Consume` made the opening deck too forgiving
+- targeted `Consume` cards are still viable because autoplayed cards already fall back to normal random targeting behavior when player choice is unavailable
 
 Working baseline numbers:
 
@@ -188,11 +188,11 @@ Current roles:
 Current tuned starter values:
 
 - `Scrounge Strike`: 0 cost, 4 damage
-- `Scrounge Defend`: 0 cost, 5 block, `Consume`
+- `Scrounge Defend`: 0 cost, 5 block
 - `Recovery`: 1 cost, 3 block, return up to 2 exhausted cards to discard
-- `Rotting Blow`: 1 cost, 7 damage, `Rot`
+- `Rotting Blow`: 1 cost, 10 damage, `Rot`
 - `Rotting Shelter`: 2 cost, 12 block, draw 1, `Rot`
-- `Stockpile`: 2 cost, 3 damage, 4 block, `Hoard 4`
+- `Stockpile`: 2 cost, 3 damage, 4 block, `Hoard 3`
 - `Scrap Spray`: 2 cost, deal 3 to ALL enemies, `Consume`
 
 ## 6. Rarity and Pool Philosophy

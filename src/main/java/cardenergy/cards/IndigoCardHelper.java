@@ -1,6 +1,7 @@
 package cardenergy.cards;
 
 import cardenergy.character.CardEnergyCharacterEnum;
+import cardenergy.patches.PendingDiscardReplacementFieldPatch;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.actions.utility.NewQueueCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -10,18 +11,10 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import java.util.Collections;
-import java.util.IdentityHashMap;
-import java.util.Map;
-
 public final class IndigoCardHelper {
-    private enum PendingDiscardReplacement {
-        CONSUME,
-        EXHAUST
-    }
-
-    private static final Map<AbstractCard, PendingDiscardReplacement> pendingDiscardReplacements =
-            Collections.synchronizedMap(new IdentityHashMap<AbstractCard, PendingDiscardReplacement>());
+    private static final int NO_DISCARD_REPLACEMENT = 0;
+    private static final int CONSUME_DISCARD_REPLACEMENT = 1;
+    private static final int EXHAUST_DISCARD_REPLACEMENT = 2;
 
     private IndigoCardHelper() {
     }
@@ -50,21 +43,31 @@ public final class IndigoCardHelper {
     public static void queueConsumeOnDiscard(AbstractCard card) {
         if (card != null) {
             queueConsumePlay(card);
-            pendingDiscardReplacements.put(card, PendingDiscardReplacement.CONSUME);
+            PendingDiscardReplacementFieldPatch.pendingDiscardReplacement.set(card, CONSUME_DISCARD_REPLACEMENT);
         }
     }
 
     public static void queueExhaustOnDiscard(AbstractCard card) {
         if (card != null) {
-            pendingDiscardReplacements.put(card, PendingDiscardReplacement.EXHAUST);
+            PendingDiscardReplacementFieldPatch.pendingDiscardReplacement.set(card, EXHAUST_DISCARD_REPLACEMENT);
+        }
+    }
+
+    public static void clearPendingDiscardReplacement(AbstractCard card) {
+        if (card != null) {
+            PendingDiscardReplacementFieldPatch.pendingDiscardReplacement.set(card, NO_DISCARD_REPLACEMENT);
         }
     }
 
     public static boolean replacePendingDiscard(CardGroup source, AbstractCard card) {
-        PendingDiscardReplacement replacement = pendingDiscardReplacements.remove(card);
-        if (replacement == null || source == null || card == null) {
+        if (source == null || card == null) {
             return false;
         }
+        int replacement = PendingDiscardReplacementFieldPatch.pendingDiscardReplacement.get(card);
+        if (replacement == NO_DISCARD_REPLACEMENT) {
+            return false;
+        }
+        clearPendingDiscardReplacement(card);
 
         source.removeCard(card);
         CardGroup tempSource = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);

@@ -1,8 +1,10 @@
 package cardenergy.util;
 
 import cardenergy.CardEnergyMod;
+import cardenergy.actions.SelectEnergyLossPaymentAction;
 import cardenergy.actions.SelectFuelPaymentAction;
 import cardenergy.character.CardEnergyCharacterEnum;
+import cardenergy.patches.PrepaidReplayFieldPatch;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -12,17 +14,10 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.IdentityHashMap;
 import java.util.List;
-import java.util.Set;
 
 public class HandFuelResourceAdapter {
     public static final int FUEL_SURCHARGE = 1;
-    private static final Set<AbstractCard> replayingCards =
-            Collections.newSetFromMap(new IdentityHashMap<AbstractCard, Boolean>());
-    private static final Set<AbstractCard> suppressEnergySpendCards =
-            Collections.newSetFromMap(new IdentityHashMap<AbstractCard, Boolean>());
 
     private HandFuelResourceAdapter() {
     }
@@ -40,6 +35,10 @@ public class HandFuelResourceAdapter {
                 && card != null
                 && card != cardBeingPlayed
                 && card.color == player.getCardColor();
+    }
+
+    public static boolean usesFuelPaymentModel(AbstractCard card) {
+        return card != null && card.cost != -2 && card.costForTurn != -2;
     }
 
     public static List<AbstractCard> getFuelCardsInHand(AbstractPlayer player, AbstractCard cardBeingPlayed) {
@@ -64,6 +63,9 @@ public class HandFuelResourceAdapter {
         if (!isActive(player) || card == null) {
             return false;
         }
+        if (!usesFuelPaymentModel(card)) {
+            return false;
+        }
         if (player.hand == null || !player.hand.group.contains(card)) {
             return card.freeToPlayOnce || card.costForTurn == 0;
         }
@@ -77,8 +79,10 @@ public class HandFuelResourceAdapter {
         if (!isActive(player) || card == null) {
             return false;
         }
-        if (isReplayingCard(card)) {
-            replayingCards.remove(card);
+        if (!usesFuelPaymentModel(card)) {
+            return false;
+        }
+        if (isPrepaidReplay(card)) {
             return false;
         }
         if (player.hand == null || !player.hand.group.contains(card)) {
@@ -99,23 +103,30 @@ public class HandFuelResourceAdapter {
         return isActivePlayer() && canPay(AbstractDungeon.player, card);
     }
 
-    public static void markCardForReplay(AbstractCard card) {
-        replayingCards.add(card);
-        suppressEnergySpendCards.add(card);
+    public static void markCardAsPrepaidReplay(AbstractCard card) {
+        if (card != null) {
+            PrepaidReplayFieldPatch.prepaidReplay.set(card, true);
+        }
     }
 
-    public static boolean isReplayingCard(AbstractCard card) {
-        return replayingCards.contains(card);
+    public static void clearPrepaidReplay(AbstractCard card) {
+        if (card != null) {
+            PrepaidReplayFieldPatch.prepaidReplay.set(card, false);
+        }
+    }
+
+    public static boolean isPrepaidReplay(AbstractCard card) {
+        return card != null && PrepaidReplayFieldPatch.prepaidReplay.get(card);
     }
 
     public static boolean shouldSuppressEnergySpend(AbstractPlayer player, AbstractCard card) {
         if (!isActive(player) || card == null) {
             return false;
         }
-        if (!suppressEnergySpendCards.contains(card)) {
+        if (!PrepaidReplayFieldPatch.prepaidReplay.get(card)) {
             return false;
         }
-        suppressEnergySpendCards.remove(card);
+        clearPrepaidReplay(card);
         return true;
     }
 
@@ -152,8 +163,38 @@ public class HandFuelResourceAdapter {
         return Math.max(0, selectedFuelCount - FUEL_SURCHARGE);
     }
 
+    public static HandFuelPaymentPlan buildXPaymentPlan(AbstractPlayer player, AbstractCard card) {
+        List<AbstractCard> fuelCards = getFuelCardsInHand(player, card);
+        return HandFuelPaymentPlan.forXCost(fuelCards, getXValueFromSelectedFuel(fuelCards.size()));
+    }
+
+    public static List<AbstractCard> getEnergyLossDiscardCardsInHand(AbstractPlayer player) {
+        return getFuelCardsInHand(player, null);
+    }
+
+    public static void replaceEnergyLossWithDiscard(AbstractPlayer player, int amount) {
+        if (!isActive(player) || amount <= 0) {
+            return;
+        }
+        List<AbstractCard> cards = getEnergyLossDiscardCardsInHand(player);
+        if (cards.isEmpty()) {
+            return;
+        }
+        int discardAmount = Math.min(amount, cards.size());
+        if (cards.size() <= discardAmount) {
+            HandFuelPaymentHelper.spendFuelCards(player, cards);
+            CardEnergyMod.logger.info("Converted loseEnergy({}) into discarding all {} available fuel cards", amount, cards.size());
+            return;
+        }
+        AbstractDungeon.actionManager.addToTop(new SelectEnergyLossPaymentAction(player, discardAmount));
+        CardEnergyMod.logger.info("Converted loseEnergy({}) into selecting {} fuel cards to discard", amount, discardAmount);
+    }
+
     public static String getDisplayedCost(AbstractCard card) {
         if (card == null) {
+            return null;
+        }
+        if (!usesFuelPaymentModel(card)) {
             return null;
         }
         if (card.freeToPlayOnce) {

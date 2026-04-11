@@ -18,7 +18,7 @@ The implementation is character-gated. Vanilla characters still use normal energ
 The Indigo set currently uses a two-layer content strategy:
 
 - the full non-basic Ironclad set is mirrored into Indigo as a temporary baseline pool
-- the custom Indigo starter/test cards exist separately to exercise the hand-fuel mechanics early
+- the custom Indigo starter cards exist separately to exercise the hand-fuel mechanics early
 
 This is intentional. The mirrored Ironclad cards are the scaffold the final Indigo set will be built from. They provide:
 
@@ -95,6 +95,13 @@ For this character:
 
 The character currently has `EnergyManager(2)`, so start-of-turn recharge becomes drawing 2 cards.
 
+Current energy-demand resolution shape:
+
+- fixed-cost cards build a payment plan from chosen Indigo fuel cards
+- X-cost cards build a payment plan automatically from the full eligible Indigo fuel set in hand
+- prepaid replay state is stored on the card itself
+- pending discard replacement state for `Consume` / `Rot` is also stored on the card itself
+
 ## Character Setup
 
 Current character traits:
@@ -119,18 +126,18 @@ It currently includes:
 Current starter rules intent:
 
 - `Scrounge Strike` is a normal single-target basic attack and does not have `Consume`
-- `Scrounge Defend` keeps `Consume`
-- `Consume` is currently intended only for cards that do not require target selection UI after the main card resolves
+- `Scrounge Defend` is a plain basic block card and does not have `Consume`
+- `Consume` can appear on targeted cards; autoplayed consumed cards use the game's normal autoplay targeting behavior
 - the starter offensive `Consume` demonstration card is `Scrap Spray`, an all-enemy attack
 
 Current tuned starter values:
 
 - `Scrounge Strike`: 0 cost, 4 damage
-- `Scrounge Defend`: 0 cost, 5 block, `Consume`
+- `Scrounge Defend`: 0 cost, 5 block
 - `Recovery`: 1 cost, 3 block, return up to 2 exhausted cards to discard
-- `Rotting Blow`: 1 cost, 7 damage, `Rot`
+- `Rotting Blow`: 1 cost, 10 damage, `Rot`
 - `Rotting Shelter`: 2 cost, 12 block, draw 1, `Rot`
-- `Stockpile`: 2 cost, 3 damage, 4 block, `Hoard 4`
+- `Stockpile`: 2 cost, 3 damage, 4 block, `Hoard 3`
 - `Scrap Spray`: 2 cost, 3 damage to ALL enemies, `Consume`
 
 Current reward-pool intent outside the starter deck:
@@ -165,6 +172,12 @@ Selection action:
 
 - `cardenergy.actions.SelectFuelPaymentAction`
 
+Selection / payment helpers:
+
+- `cardenergy.util.HandFuelSelectionHelper`
+- `cardenergy.util.HandFuelPaymentHelper`
+- `cardenergy.util.HandFuelPaymentPlan`
+
 ## Known Intent
 
 This mod is currently a demonstration scaffold for the hand-fuel mechanic.
@@ -174,7 +187,7 @@ It is not balanced for production. The goals right now are:
 - prove the hand-fuel payment rule
 - prove the surcharge rule
 - prove X-cost behavior
-- prove discard-replacement `Consume` behavior on non-targeted cards
+- prove discard-replacement `Consume` behavior
 - prove energy-to-draw replacement
 - keep the Indigo reward pool complete while final cards are built by editing mirrored red cards
 - keep iteration fast on Windows with local Maven packaging

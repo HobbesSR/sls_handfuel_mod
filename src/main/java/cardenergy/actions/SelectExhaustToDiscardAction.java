@@ -10,11 +10,16 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import java.util.ArrayList;
 
 public class SelectExhaustToDiscardAction extends AbstractGameAction {
+    private enum Phase {
+        OPENING_SELECTION,
+        WAITING_FOR_SELECTION
+    }
+
     private final AbstractPlayer player;
     private final int amount;
     private final String prompt;
     private final CardGroup selectionGroup = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-    private boolean openedSelection;
+    private Phase phase = Phase.OPENING_SELECTION;
 
     public SelectExhaustToDiscardAction(AbstractPlayer player, int amount, String prompt) {
         this.player = player;
@@ -26,7 +31,7 @@ public class SelectExhaustToDiscardAction extends AbstractGameAction {
 
     @Override
     public void update() {
-        if (!openedSelection) {
+        if (phase == Phase.OPENING_SELECTION) {
             openSelection();
             return;
         }
@@ -50,7 +55,7 @@ public class SelectExhaustToDiscardAction extends AbstractGameAction {
         }
 
         AbstractDungeon.gridSelectScreen.open(selectionGroup, amount, true, prompt);
-        openedSelection = true;
+        phase = Phase.WAITING_FOR_SELECTION;
     }
 
     private void completeSelection() {

@@ -1,8 +1,10 @@
 package cardenergy.actions;
 
 import cardenergy.util.HandFuelResourceAdapter;
+import cardenergy.util.HandFuelPaymentHelper;
+import cardenergy.util.HandFuelPaymentPlan;
+import cardenergy.util.HandFuelSelectionHelper;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
@@ -13,8 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SelectFuelPaymentAction extends AbstractGameAction {
-    private static final String NORMAL_PROMPT = "Choose fuel cards to discard, including the 1 fuel tax.";
-    private static final String X_COST_PROMPT = "Choose fuel cards for X, including the 1 fuel tax.";
+    private enum Phase {
+        OPENING_SELECTION,
+        WAITING_FOR_SELECTION
+    }
+
+    private static final String PROMPT_TEMPLATE =
+            "Choose %d fuel card%s to discard. Confirm with no selection to cancel.";
 
     private final AbstractPlayer player;
     private final AbstractCard card;
@@ -23,7 +30,7 @@ public class SelectFuelPaymentAction extends AbstractGameAction {
     private final boolean isXCost;
     private final int requiredFuel;
     private final ArrayList<AbstractCard> originalHandOrder = new ArrayList<>();
-    private boolean openedSelection;
+    private Phase phase = Phase.OPENING_SELECTION;
 
     public SelectFuelPaymentAction(AbstractPlayer player, AbstractCard card, AbstractMonster monster, int energyOnUse) {
         this.player = player;
@@ -38,7 +45,13 @@ public class SelectFuelPaymentAction extends AbstractGameAction {
 
     @Override
     public void update() {
-        if (!openedSelection) {
+        if (isXCost) {
+            autoPayForX();
+            isDone = true;
+            return;
+        }
+
+        if (phase == Phase.OPENING_SELECTION) {
             openSelection();
             return;
         }
@@ -52,83 +65,60 @@ public class SelectFuelPaymentAction extends AbstractGameAction {
             return;
         }
 
-        completeSelection();
-        isDone = true;
+        isDone = completeSelection();
     }
 
     private void openSelection() {
         List<AbstractCard> fuelCards = HandFuelResourceAdapter.getFuelCardsInHand(player, card);
         if (fuelCards.isEmpty()) {
-            replayPaidCard(0);
             isDone = true;
             return;
         }
-
-        originalHandOrder.addAll(player.hand.group);
-        ArrayList<AbstractCard> hiddenCards = new ArrayList<>();
-        for (AbstractCard handCard : originalHandOrder) {
-            if (!fuelCards.contains(handCard)) {
-                hiddenCards.add(handCard);
-            }
-        }
-        for (AbstractCard hiddenCard : hiddenCards) {
-            player.hand.removeCard(hiddenCard);
-        }
-        for (AbstractCard fuelCard : player.hand.group) {
-            fuelCard.unhover();
-            fuelCard.isSelected = false;
-            fuelCard.stopGlowing();
-        }
-        player.hand.refreshHandLayout();
-        player.hand.glowCheck();
-        player.hand.applyPowers();
-
-        if (isXCost) {
-            AbstractDungeon.handCardSelectScreen.open(X_COST_PROMPT, fuelCards.size(), true, true);
-        } else {
-            AbstractDungeon.handCardSelectScreen.open(NORMAL_PROMPT, requiredFuel, false, false);
-        }
-        openedSelection = true;
+        HandFuelSelectionHelper.openHandSelectionForCards(
+                player,
+                fuelCards,
+                originalHandOrder,
+                getPromptText(),
+                requiredFuel,
+                true,
+                true
+        );
+        phase = Phase.WAITING_FOR_SELECTION;
     }
 
-    private void completeSelection() {
+    private boolean completeSelection() {
         ArrayList<AbstractCard> chosenFuel = new ArrayList<>(AbstractDungeon.handCardSelectScreen.selectedCards.group);
+        HandFuelSelectionHelper.clearHandSelectionState();
+        HandFuelSelectionHelper.restoreHandOrder(player, originalHandOrder);
 
-        for (AbstractCard selectedCard : chosenFuel) {
-            selectedCard.triggerOnManualDiscard();
-            if (AbstractDungeon.handCardSelectScreen.selectedCards.group.contains(selectedCard)) {
-                AbstractDungeon.handCardSelectScreen.selectedCards.moveToDiscardPile(selectedCard);
-            }
-            GameActionManager.incrementDiscard(false);
+        if (chosenFuel.isEmpty()) {
+            return true;
         }
-        AbstractDungeon.handCardSelectScreen.selectedCards.group.clear();
-        AbstractDungeon.handCardSelectScreen.wereCardsRetrieved = true;
 
-        player.hand.group.clear();
-        for (AbstractCard handCard : originalHandOrder) {
-            if (!chosenFuel.contains(handCard)) {
-                player.hand.addToBottom(handCard);
-            }
+        if (!isXCost && chosenFuel.size() != requiredFuel) {
+            AbstractDungeon.handCardSelectScreen.wereCardsRetrieved = false;
+            phase = Phase.OPENING_SELECTION;
+            return false;
         }
-        player.hand.refreshHandLayout();
-        player.hand.applyPowers();
 
-        replayPaidCard(chosenFuel.size());
+        HandFuelPaymentHelper.executePaymentPlan(
+                player,
+                card,
+                monster,
+                HandFuelPaymentPlan.forFixedCost(chosenFuel, energyOnUse)
+        );
+        return true;
     }
 
-    private void replayPaidCard(int selectedFuelCount) {
-        if (isXCost) {
-            card.energyOnUse = HandFuelResourceAdapter.getXValueFromSelectedFuel(selectedFuelCount);
-        } else {
-            card.energyOnUse = energyOnUse;
+    private void autoPayForX() {
+        HandFuelPaymentPlan paymentPlan = HandFuelResourceAdapter.buildXPaymentPlan(player, card);
+        if (paymentPlan.getFuelCards().isEmpty()) {
+            return;
         }
-        AbstractDungeon.actionManager.addToBottom(new AbstractGameAction() {
-            @Override
-            public void update() {
-                HandFuelResourceAdapter.markCardForReplay(card);
-                player.useCard(card, monster, card.energyOnUse);
-                isDone = true;
-            }
-        });
+        HandFuelPaymentHelper.executePaymentPlan(player, card, monster, paymentPlan);
+    }
+
+    private String getPromptText() {
+        return String.format(PROMPT_TEMPLATE, requiredFuel, requiredFuel == 1 ? "" : "s");
     }
 }
