@@ -12,9 +12,12 @@ Read the project documents in this order:
    Staged roadmap for implementation work.
 5. [50_SCAVENGER_RESOURCE_CHECKLIST.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\50_SCAVENGER_RESOURCE_CHECKLIST.md)
    Planning and tracking checklist.
+6. [workshop/README.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\workshop\README.md)
+   Workshop staging and upload notes.
 
 Rules of thumb:
 
 - If documents conflict on immediate starter/common card work, the implementation brief wins.
 - Use the mechanics doc for current runtime behavior, not future card intent.
 - Use the set-design doc for structural templates and role coverage, not exact starter contents.
+- Use the Workshop readme only for packaging and upload flow, not gameplay or card-design truth.

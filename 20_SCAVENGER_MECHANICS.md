@@ -208,6 +208,31 @@ Current reward-pool/runtime intent outside the starter deck:
 - the first Scavenger-specific common pass now replaces a chunk of the mirrored Ironclad commons
 - those mirrored cards are still meant to be edited into final Indigo cards over time
 
+## Current Art Pipeline
+
+Custom Scavenger card art now uses a two-step pipeline:
+
+- raw cropped portrait art lives in:
+  - [raw](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\src\main\resources\img\cardenergy\cards\raw)
+- card-type masks live in:
+  - [masks](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\src\main\resources\img\cardenergy\cards\masks)
+
+Current runtime behavior:
+
+- `ATTACK` cards use `attack_mask_rgba.png`
+- `SKILL` cards use `skill_mask_rgba.png`
+- `POWER` cards use `power_mask_rgba.png`
+- the helper applies the mask at runtime and derives both:
+  - the portrait-size art
+  - the small in-card art
+
+Current support files:
+
+- [IndigoCardHelper.java](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\src\main\java\cardenergy\cards\IndigoCardHelper.java)
+- [prepare_card_art.ps1](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\tools\prepare_card_art.ps1)
+
+This means art assignment is no longer baked permanently by card type at export time. Art can be moved between attacks, skills, and powers while leaving crop/scale as preprocessing and mask application as presentation logic.
+
 ## Important Patches
 
 Current behavior is mainly implemented through:
@@ -239,6 +264,28 @@ Selection / payment helpers:
 - `cardenergy.util.HandFuelSelectionHelper`
 - `cardenergy.util.HandFuelPaymentHelper`
 - `cardenergy.util.HandFuelPaymentPlan`
+
+Asset / presentation helpers:
+
+- `cardenergy.cards.IndigoCardHelper`
+- `tools/prepare_card_art.ps1`
+
+## Workshop Packaging
+
+The repository now also contains a minimal Workshop upload scaffold:
+
+- [workshop](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\workshop)
+
+Current purpose:
+
+- stage the built jar and preview image
+- store the Workshop descriptor for the current item
+- support updates through SteamCMD
+
+Current item metadata:
+
+- Workshop item id: `3704910650`
+- visibility: friends-only
 
 ## Known Intent
 

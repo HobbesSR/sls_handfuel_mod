@@ -1,0 +1,11 @@
+"workshopitem"
+{
+	"appid"		"646570"
+	"publishedfileid"		"3704910650"
+	"contentfolder"		"C:\\Users\\Corey\\Documents\\Projects\\sls_handfuel_mod\\workshop\\content"
+	"previewfile"		"C:\\Users\\Corey\\Documents\\Projects\\sls_handfuel_mod\\workshop\\preview\\preview.jpg"
+	"visibility"		"1"
+	"title"		"Scavenger"
+	"description"		"A work-in-progress Scavenger character for Slay the Spire. This character pays energy demands by discarding same-color cards from hand."
+	"changenote"		"Initial friends-only workshop upload."
+}

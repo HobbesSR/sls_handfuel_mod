@@ -1,8 +1,8 @@
 {
   "modid": "cardenergy",
-  "name": "${artifactId}",
+  "name": "Scavenger",
   "author_list": ["Corey", "Codex"],
-  "description": "An indigo hand-fuel character who pays energy demands by discarding same-color cards from hand.",
+  "description": "A work-in-progress Scavenger character for Slay the Spire. This character pays energy demands by discarding same-color cards from hand.",
   "version": "${project.version}",
   "sts_version": "${SlayTheSpire.version}",
   "mts_version": "${ModTheSpire.version}",

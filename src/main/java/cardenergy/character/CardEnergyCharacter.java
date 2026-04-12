@@ -78,7 +78,6 @@ public class CardEnergyCharacter extends CustomPlayer {
         deck.add(CardEnergyMod.makeID("ScroungeDefend"));
         deck.add(CardEnergyMod.makeID("ScroungeDefend"));
         deck.add(CardEnergyMod.makeID("ScroungeDefend"));
-        deck.add(CardEnergyMod.makeID("ScroungeDefend"));
         deck.add(CardEnergyMod.makeID("RottingBlow"));
         deck.add(CardEnergyMod.makeID("Brace"));
         deck.add(CardEnergyMod.makeID("ScrapBurst"));
