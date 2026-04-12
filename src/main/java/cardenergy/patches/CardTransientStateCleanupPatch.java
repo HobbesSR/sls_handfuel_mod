@@ -1,6 +1,6 @@
 package cardenergy.patches;
 
-import cardenergy.cards.IndigoCardHelper;
+import cardenergy.util.CardKeywordHelper;
 import cardenergy.util.HandFuelResourceAdapter;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
@@ -12,7 +12,7 @@ public class CardTransientStateCleanupPatch {
 
     private static void clearTransientState(AbstractCard card) {
         HandFuelResourceAdapter.clearPrepaidReplay(card);
-        IndigoCardHelper.clearPendingDiscardReplacement(card);
+        CardKeywordHelper.clearPendingDiscardReplacement(card);
     }
 
     @SpirePatch(

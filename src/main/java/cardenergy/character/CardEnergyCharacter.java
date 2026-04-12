@@ -33,7 +33,7 @@ public class CardEnergyCharacter extends CustomPlayer {
     public CardEnergyCharacter(String name) {
         super(
                 name,
-                CardEnergyCharacterEnum.HAND_FUEL_INDIGO,
+                CardEnergyCharacterEnum.HAND_FUEL_TERRACOTTA,
                 null,
                 null,
                 new SpineAnimation(
@@ -77,7 +77,7 @@ public class CardEnergyCharacter extends CustomPlayer {
         deck.add(CardEnergyMod.makeID("ScroungeDefend"));
         deck.add(CardEnergyMod.makeID("ScroungeDefend"));
         deck.add(CardEnergyMod.makeID("ScroungeDefend"));
-        deck.add(CardEnergyMod.makeID("ScroungeDefend"));
+        deck.add(CardEnergyMod.makeID("Stockpile"));
         deck.add(CardEnergyMod.makeID("RottingBlow"));
         deck.add(CardEnergyMod.makeID("Brace"));
         deck.add(CardEnergyMod.makeID("ScrapBurst"));
@@ -96,7 +96,7 @@ public class CardEnergyCharacter extends CustomPlayer {
 
     @Override
     public Color getCardTrailColor() {
-        return IndigoColorScheme.INDIGO.cpy();
+        return TerracottaColorScheme.TERRACOTTA.cpy();
     }
 
     @Override
@@ -150,7 +150,7 @@ public class CardEnergyCharacter extends CustomPlayer {
 
     @Override
     public Color getSlashAttackColor() {
-        return IndigoColorScheme.INDIGO.cpy();
+        return TerracottaColorScheme.TERRACOTTA.cpy();
     }
 
     @Override
@@ -179,7 +179,7 @@ public class CardEnergyCharacter extends CustomPlayer {
     public CharSelectInfo getLoadout() {
         return new CharSelectInfo(
                 "The Scrounger",
-                "An indigo scavenger who spends cards in hand as fuel.",
+                "A terracotta scavenger who spends cards in hand as fuel.",
                 80,
                 80,
                 0,
@@ -199,12 +199,12 @@ public class CardEnergyCharacter extends CustomPlayer {
 
     @Override
     public AbstractCard.CardColor getCardColor() {
-        return CardEnergyCharacterEnum.INDIGO;
+        return CardEnergyCharacterEnum.TERRACOTTA;
     }
 
     @Override
     public Color getCardRenderColor() {
-        return IndigoColorScheme.INDIGO.cpy();
+        return TerracottaColorScheme.TERRACOTTA.cpy();
     }
 
     private static Texture loadTextureFromJar(String path) {

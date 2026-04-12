@@ -18,7 +18,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 public class NeowRewardActivatePatch {
     @SpirePrefixPatch
     public static SpireReturn<Void> Prefix(NeowReward __instance) {
-        if (AbstractDungeon.player == null || AbstractDungeon.player.chosenClass != CardEnergyCharacterEnum.HAND_FUEL_INDIGO) {
+        if (AbstractDungeon.player == null || AbstractDungeon.player.chosenClass != CardEnergyCharacterEnum.HAND_FUEL_TERRACOTTA) {
             return SpireReturn.Continue();
         }
         if (__instance.drawback != NeowReward.NeowRewardDrawback.NONE) {
@@ -66,3 +66,4 @@ public class NeowRewardActivatePatch {
         }
     }
 }
+

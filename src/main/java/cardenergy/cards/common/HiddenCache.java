@@ -1,10 +1,10 @@
 package cardenergy.cards.common;
 
 import cardenergy.CardEnergyMod;
-import cardenergy.cards.IndigoCardHelper;
+import cardenergy.cards.TerracottaCardHelper;
+import cardenergy.util.CardKeywordHelper;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.red.Defend_Red;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
 public class HiddenCache extends Defend_Red {
     public static final String ID = CardEnergyMod.makeID("HiddenCache");
@@ -13,27 +13,14 @@ public class HiddenCache extends Defend_Red {
 
     public HiddenCache() {
         super();
-        IndigoCardHelper.applyIdentity(this, ID);
+        TerracottaCardHelper.applyIdentity(this, ID);
         cost = 1;
         costForTurn = 1;
         baseBlock = BASE_BLOCK_VALUE;
         block = baseBlock;
+        magicNumber = baseMagicNumber = HOARD_AMOUNT;
         rarity = CardRarity.COMMON;
-        IndigoCardHelper.addKeyword(this, "Hoard");
-    }
-
-    @Override
-    public void triggerOnEndOfPlayerTurn() {
-        if (AbstractDungeon.player != null && AbstractDungeon.player.hand.group.contains(this)) {
-            baseBlock += HOARD_AMOUNT;
-            applyPowers();
-        }
-    }
-
-    @Override
-    public void use(com.megacrit.cardcrawl.characters.AbstractPlayer p, com.megacrit.cardcrawl.monsters.AbstractMonster m) {
-        super.use(p, m);
-        resetHoard();
+        CardKeywordHelper.grantHoardToBlock(this, HOARD_AMOUNT);
     }
 
     @Override
@@ -41,15 +28,9 @@ public class HiddenCache extends Defend_Red {
         if (!upgraded) {
             upgradeName();
             upgradeBlock(2);
-            resetHoard();
+            CardKeywordHelper.upgradeHoardToBlock(this, 1);
             initializeDescription();
         }
-    }
-
-    private void resetHoard() {
-        baseBlock = upgraded ? BASE_BLOCK_VALUE + 2 : BASE_BLOCK_VALUE;
-        block = baseBlock;
-        isBlockModified = false;
     }
 
     @Override
@@ -57,3 +38,4 @@ public class HiddenCache extends Defend_Red {
         return new HiddenCache();
     }
 }
+

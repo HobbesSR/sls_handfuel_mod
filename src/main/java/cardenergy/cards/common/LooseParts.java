@@ -1,7 +1,8 @@
 package cardenergy.cards.common;
 
 import cardenergy.CardEnergyMod;
-import cardenergy.cards.IndigoCardHelper;
+import cardenergy.cards.TerracottaCardHelper;
+import cardenergy.util.CardKeywordHelper;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.red.Defend_Red;
@@ -13,23 +14,18 @@ public class LooseParts extends Defend_Red {
 
     public LooseParts() {
         super();
-        IndigoCardHelper.applyIdentity(this, ID);
+        TerracottaCardHelper.applyIdentity(this, ID);
         cost = 0;
         costForTurn = 0;
         baseBlock = 0;
         block = baseBlock;
         rarity = CardRarity.COMMON;
-        IndigoCardHelper.addKeyword(this, "Consume");
+        CardKeywordHelper.grantConsume(this);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new DrawCardAction(p, 1));
-    }
-
-    @Override
-    public void triggerOnManualDiscard() {
-        IndigoCardHelper.queueConsumeOnDiscard(this);
     }
 
     @Override
@@ -46,3 +42,4 @@ public class LooseParts extends Defend_Red {
         return new LooseParts();
     }
 }
+

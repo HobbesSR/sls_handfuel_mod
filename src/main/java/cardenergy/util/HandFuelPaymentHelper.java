@@ -38,6 +38,11 @@ public final class HandFuelPaymentHelper {
         AbstractDungeon.actionManager.addToBottom(new AbstractGameAction() {
             @Override
             public void update() {
+                if (monster != null) {
+                    card.calculateCardDamage(monster);
+                } else {
+                    card.applyPowers();
+                }
                 HandFuelResourceAdapter.markCardAsPrepaidReplay(card);
                 player.useCard(card, monster, card.energyOnUse);
                 HandFuelResourceAdapter.clearPrepaidReplay(card);

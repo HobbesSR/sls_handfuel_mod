@@ -1,7 +1,8 @@
 package cardenergy.cards.common;
 
 import cardenergy.CardEnergyMod;
-import cardenergy.cards.IndigoCardHelper;
+import cardenergy.cards.TerracottaCardHelper;
+import cardenergy.util.CardKeywordHelper;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -15,32 +16,20 @@ public class RottingShelter extends ShrugItOff {
 
     public RottingShelter() {
         super();
-        IndigoCardHelper.applyIdentity(this, ID);
+        TerracottaCardHelper.applyIdentity(this, ID);
         cost = 2;
         costForTurn = 2;
         baseBlock = 12;
         block = baseBlock;
         magicNumber = baseMagicNumber = 1;
         rarity = CardRarity.COMMON;
-        IndigoCardHelper.addKeyword(this, "Rot");
+        CardKeywordHelper.grantRot(this);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new GainBlockAction(p, p, block));
         addToBot(new DrawCardAction(p, magicNumber));
-    }
-
-    @Override
-    public void triggerOnManualDiscard() {
-        IndigoCardHelper.queueExhaustOnDiscard(this);
-    }
-
-    @Override
-    public void triggerOnEndOfPlayerTurn() {
-        if (AbstractDungeon.player != null && AbstractDungeon.player.hand.group.contains(this)) {
-            IndigoCardHelper.exhaustFromCurrentPile(this);
-        }
     }
 
     @Override
@@ -57,3 +46,4 @@ public class RottingShelter extends ShrugItOff {
         return new RottingShelter();
     }
 }
+

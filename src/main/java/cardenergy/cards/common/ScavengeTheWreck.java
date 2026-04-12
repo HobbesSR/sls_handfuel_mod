@@ -1,7 +1,7 @@
 package cardenergy.cards.common;
 
 import cardenergy.CardEnergyMod;
-import cardenergy.cards.IndigoCardHelper;
+import cardenergy.cards.TerracottaCardHelper;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
@@ -18,7 +18,7 @@ public class ScavengeTheWreck extends Defend_Red {
 
     public ScavengeTheWreck() {
         super();
-        IndigoCardHelper.applyIdentity(this, ID);
+        TerracottaCardHelper.applyIdentity(this, ID);
         cost = 1;
         costForTurn = 1;
         baseBlock = 0;
@@ -76,3 +76,4 @@ public class ScavengeTheWreck extends Defend_Red {
         return new ScavengeTheWreck();
     }
 }
+

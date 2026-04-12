@@ -2,7 +2,7 @@ package cardenergy.cards.common;
 
 import cardenergy.CardEnergyMod;
 import cardenergy.actions.SelectExhaustToDiscardAction;
-import cardenergy.cards.IndigoCardHelper;
+import cardenergy.cards.TerracottaCardHelper;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.red.ShrugItOff;
@@ -15,7 +15,7 @@ public class Recovery extends ShrugItOff {
 
     public Recovery() {
         super();
-        IndigoCardHelper.applyIdentity(this, ID);
+        TerracottaCardHelper.applyIdentity(this, ID);
         cost = 0;
         costForTurn = 0;
         baseBlock = 3;
@@ -44,3 +44,4 @@ public class Recovery extends ShrugItOff {
         return new Recovery();
     }
 }
+

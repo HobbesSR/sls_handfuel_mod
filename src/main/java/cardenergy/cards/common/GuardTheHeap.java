@@ -1,7 +1,7 @@
 package cardenergy.cards.common;
 
 import cardenergy.CardEnergyMod;
-import cardenergy.cards.IndigoCardHelper;
+import cardenergy.cards.TerracottaCardHelper;
 import cardenergy.combat.ScavengerCombatState;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -14,7 +14,7 @@ public class GuardTheHeap extends Defend_Red {
 
     public GuardTheHeap() {
         super();
-        IndigoCardHelper.applyIdentity(this, ID);
+        TerracottaCardHelper.applyIdentity(this, ID);
         cost = 1;
         costForTurn = 1;
         baseBlock = 7;
@@ -46,3 +46,4 @@ public class GuardTheHeap extends Defend_Red {
         return new GuardTheHeap();
     }
 }
+

@@ -1,7 +1,7 @@
 package cardenergy.cards.common;
 
 import cardenergy.CardEnergyMod;
-import cardenergy.cards.IndigoCardHelper;
+import cardenergy.cards.TerracottaCardHelper;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.red.IronWave;
 
@@ -10,7 +10,7 @@ public class PackedSwing extends IronWave {
 
     public PackedSwing() {
         super();
-        IndigoCardHelper.applyIdentity(this, ID);
+        TerracottaCardHelper.applyIdentity(this, ID);
         cost = 1;
         costForTurn = 1;
         baseDamage = 6;
@@ -35,3 +35,4 @@ public class PackedSwing extends IronWave {
         return new PackedSwing();
     }
 }
+

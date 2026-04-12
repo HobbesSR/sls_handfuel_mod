@@ -1,35 +1,23 @@
 package cardenergy.cards.common;
 
 import cardenergy.CardEnergyMod;
-import cardenergy.cards.IndigoCardHelper;
+import cardenergy.cards.TerracottaCardHelper;
+import cardenergy.util.CardKeywordHelper;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.red.Strike_Red;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
 public class RottingSlash extends Strike_Red {
     public static final String ID = CardEnergyMod.makeID("RottingSlash");
 
     public RottingSlash() {
         super();
-        IndigoCardHelper.applyIdentity(this, ID);
+        TerracottaCardHelper.applyIdentity(this, ID);
         cost = 1;
         costForTurn = 1;
         baseDamage = 8;
         damage = baseDamage;
         rarity = CardRarity.COMMON;
-        IndigoCardHelper.addKeyword(this, "Rot");
-    }
-
-    @Override
-    public void triggerOnManualDiscard() {
-        IndigoCardHelper.queueExhaustOnDiscard(this);
-    }
-
-    @Override
-    public void triggerOnEndOfPlayerTurn() {
-        if (AbstractDungeon.player != null && AbstractDungeon.player.hand.group.contains(this)) {
-            IndigoCardHelper.exhaustFromCurrentPile(this);
-        }
+        CardKeywordHelper.grantRot(this);
     }
 
     @Override
@@ -46,3 +34,4 @@ public class RottingSlash extends Strike_Red {
         return new RottingSlash();
     }
 }
+

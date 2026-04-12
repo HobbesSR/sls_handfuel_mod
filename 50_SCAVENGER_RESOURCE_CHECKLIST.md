@@ -1,8 +1,8 @@
-# Indigo Resource Checklist
+# Terracotta Resource Checklist
 
 ## Purpose
 
-This document lists the documents, assets, code scaffolding, and content resources needed to move from the current hand-fuel prototype to a real Indigo card set.
+This document lists the documents, assets, code scaffolding, and content resources needed to move from the current hand-fuel prototype to a real Terracotta card set.
 
 It is a planning and tracking document, not an implementation log.
 
@@ -28,11 +28,11 @@ Notes:
 
 These should exist before or during early content implementation:
 
-- `INDIGO_RED_SET_AUDIT.md`
-- `INDIGO_STARTER_PACKAGE.md`
-- `INDIGO_KEYWORD_RULES.md`
-- `INDIGO_COMMON_SET_BOARD.md`
-- `INDIGO_PLAYTEST_LOG.md`
+- `TERRACOTTA_RED_SET_AUDIT.md`
+- `TERRACOTTA_STARTER_PACKAGE.md`
+- `TERRACOTTA_KEYWORD_RULES.md`
+- `TERRACOTTA_COMMON_SET_BOARD.md`
+- `TERRACOTTA_PLAYTEST_LOG.md`
 
 ## Card Content Inventory
 
@@ -40,26 +40,26 @@ These should exist before or during early content implementation:
 
 Need:
 
-- Indigo card base class or conventions
-- copied Indigo versions of the red card set
-- Indigo starter basics
-- Indigo starter non-basics
+- Terracotta card base class or conventions
+- copied Terracotta versions of the red card set
+- Terracotta starter basics
+- Terracotta starter non-basics
 - common-set tracking list
 
 Checklist:
 
 - define card package layout
 - define naming convention for copied red cards
-- define naming convention for Indigo-native cards
+- define naming convention for Terracotta-native cards
 - mark placeholder copies versus intended final cards
 
 ### Card Color Infrastructure
 
 Need:
 
-- Indigo card color enum entries
-- Indigo library color handling
-- Indigo card backgrounds / frames / orb compatibility
+- Terracotta card color enum entries
+- Terracotta library color handling
+- Terracotta card backgrounds / frames / orb compatibility
 - card registration pathways
 
 Checklist:
@@ -115,7 +115,7 @@ Need review or replacement for:
 - shoulders
 - corpse image
 - card color VFX identity
-- any Indigo-specific card assets
+- any Terracotta-specific card assets
 
 Current state:
 
@@ -124,7 +124,7 @@ Current state:
 Checklist:
 
 - decide whether existing prototype visuals are temporary only
-- define minimum art needed before Indigo cards are comfortable to test
+- define minimum art needed before Terracotta cards are comfortable to test
 - list which visuals can remain borrowed during early content iteration
 
 ## Localization Resources
@@ -140,8 +140,8 @@ Need:
 Checklist:
 
 - create localization folder structure
-- separate prototype strings from real Indigo content strings
-- decide whether copied red cards reuse original names temporarily or get Indigo-specific names immediately
+- separate prototype strings from real Terracotta content strings
+- decide whether copied red cards reuse original names temporarily or get Terracotta-specific names immediately
 
 ## Red Set Copy Audit Inputs
 
@@ -175,7 +175,7 @@ Checklist:
 - define starter card names
 - define provisional numbers
 - define role of each starter card
-- define whether starter cards are copied placeholders or Indigo-native from day one
+- define whether starter cards are copied placeholders or Terracotta-native from day one
 
 ## Common Set Planning Inputs
 
@@ -191,7 +191,7 @@ Checklist:
 - define common count target
 - define first-pass common slot roles
 - decide which copied red commons stay as scaffolding
-- identify the first Indigo-native commons required for identity
+- identify the first Terracotta-native commons required for identity
 
 ## Implementation Support Files
 
@@ -209,6 +209,7 @@ Checklist:
 - avoid implementing support code before its card usage is defined
 - prefer one source-of-truth helper per keyword or tracked state
 - keep starter support minimal until the first real content pass is stable
+- prefer generic card-behavior support for `Consume`, `Rot`, and `Hoard` over character-specific helper ownership
 
 ## Testing Resources
 
@@ -228,7 +229,7 @@ Minimum test scenarios:
 
 Checklist:
 
-- create `INDIGO_PLAYTEST_LOG.md`
+- create `TERRACOTTA_PLAYTEST_LOG.md`
 - define one run-entry template
 - record problem cards and category of failure
 
@@ -236,21 +237,21 @@ Checklist:
 
 Create next:
 
-1. `INDIGO_RED_SET_AUDIT.md`
-2. `INDIGO_STARTER_PACKAGE.md`
-3. `INDIGO_KEYWORD_RULES.md`
+1. `TERRACOTTA_RED_SET_AUDIT.md`
+2. `TERRACOTTA_STARTER_PACKAGE.md`
+3. `TERRACOTTA_KEYWORD_RULES.md`
 
 Create after starter work begins:
 
-4. `INDIGO_COMMON_SET_BOARD.md`
-5. `INDIGO_PLAYTEST_LOG.md`
+4. `TERRACOTTA_COMMON_SET_BOARD.md`
+5. `TERRACOTTA_PLAYTEST_LOG.md`
 
 ## Immediate Resource Risks
 
 Known planning risks:
 
 - copied red cards may distort the class identity if left in place too long
-- Indigo color/UI work may expand faster than starter gameplay work
+- Terracotta color/UI work may expand faster than starter gameplay work
 - keyword implementation may get ahead of actual card usage
 - the source design document currently mixes durable ideas with temporary naming/frame choices
 
@@ -258,7 +259,7 @@ Known planning risks:
 
 Use the current prototype as the mechanic bed.
 
-Use the Indigo plan to add content in this order:
+Use the Terracotta plan to add content in this order:
 
 1. color and content scaffolding
 2. red set audit
@@ -268,3 +269,4 @@ Use the Indigo plan to add content in this order:
 6. early playtesting
 
 That keeps implementation grounded in real playable checkpoints instead of abstract card-pool ambition.
+

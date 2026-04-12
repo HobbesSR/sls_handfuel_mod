@@ -24,7 +24,7 @@ When this document conflicts with the implementation brief, interpret it as:
 
 ## Current Scope
 
-This repository is a standalone Slay the Spire mod that adds an Indigo test character whose real resource is cards in hand rather than stored energy.
+This repository is a standalone Slay the Spire mod that adds a Terracotta test character whose real resource is cards in hand rather than stored energy.
 
 The mod depends on:
 
@@ -37,17 +37,17 @@ The implementation is character-gated. Vanilla characters still use normal energ
 
 ## Current Card Pool Strategy
 
-The Indigo set currently uses a two-layer content strategy:
+The Terracotta set currently uses a two-layer content strategy:
 
-- most of the non-basic Ironclad set is still mirrored into Indigo as a temporary scaffold
+- most of the non-basic Ironclad set is still mirrored into Terracotta as a temporary scaffold
 - a first Scavenger-specific starter deck and first pass of Scavenger-specific commons now replace part of that mirror set
 
-This is intentional. The mirrored Ironclad cards are the scaffold the final Indigo set will be built from. They provide:
+This is intentional. The mirrored Ironclad cards are the scaffold the final Terracotta set will be built from. They provide:
 
 - a complete reward pool
 - stable rarity distribution
 - normal upgrade and targeting behavior
-- known-good red implementations to edit into final Indigo cards over time
+- known-good red implementations to edit into final Terracotta cards over time
 
 The current starter-specific custom cards are not the long-term reward pool backbone.
 
@@ -63,7 +63,7 @@ Fuel cards are:
 - the same color as the character
 - not the card currently being played
 
-For the current character, that means only Indigo cards in hand count as fuel.
+For the current character, that means only Terracotta cards in hand count as fuel.
 
 In practice, this is the character's available Energy:
 
@@ -125,16 +125,42 @@ The character currently has `EnergyManager(2)`, so start-of-turn recharge become
 
 Current energy-demand resolution shape:
 
-- fixed-cost cards build a payment plan from chosen Indigo fuel cards
-- X-cost cards build a payment plan automatically from the full eligible Indigo fuel set in hand
+- fixed-cost cards build a payment plan from chosen Terracotta fuel cards
+- X-cost cards build a payment plan automatically from the full eligible Terracotta fuel set in hand
 - prepaid replay state is stored on the card itself
 - pending discard replacement state for `Consume` / `Rot` is also stored on the card itself
+
+## Current Keyword Model
+
+`Consume`, `Rot`, and `Hoard` are now implemented as generic card behaviors rather than Terracotta-only card helpers.
+
+Current runtime direction:
+
+- keyword state is stored on the card through patch fields
+- discard and retained-card lifecycle hooks read that state at runtime
+- cards can be authored with these keywords directly
+- future effects can also grant these keywords dynamically to cards that did not start with them
+
+Current behavior precedence:
+
+- `Consume` owns the play-on-manual-discard behavior
+- `Rot` owns the exhaust-on-manual-discard behavior when `Consume` is absent
+- `Rot` also owns the exhaust-at-end-of-turn behavior
+- `Hoard` implies staying in hand through intrinsic retain behavior
+
+Current Hoard implementation notes:
+
+- `magicNumber` is the authored `Hoard X` value on current Hoard cards
+- Hoard accumulation happens on the retained-card path
+- accumulated Hoard bonus is stored separately from the card's authored base stats
+- that stored bonus is injected into the card's effective damage and block calculation before vanilla scaling
+- Hoard still resets on actual play, not merely on discard
 
 ## Character Setup
 
 Current character traits:
 
-- player color: Indigo
+- player color: Terracotta
 - starter relic: `Runic Pyramid`
 - visible energy orb: hidden
 - recharge baseline: 2
@@ -204,9 +230,9 @@ Current runtime starter values:
 
 Current reward-pool/runtime intent outside the starter deck:
 
-- normal rewards still come mostly from mirrored Ironclad cards in Indigo color
+- normal rewards still come mostly from mirrored Ironclad cards in Terracotta color
 - the first Scavenger-specific common pass now replaces a chunk of the mirrored Ironclad commons
-- those mirrored cards are still meant to be edited into final Indigo cards over time
+- those mirrored cards are still meant to be edited into final Terracotta cards over time
 
 ## Current Art Pipeline
 
@@ -228,7 +254,7 @@ Current runtime behavior:
 
 Current support files:
 
-- [IndigoCardHelper.java](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\src\main\java\cardenergy\cards\IndigoCardHelper.java)
+- [TerracottaCardHelper.java](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\src\main\java\cardenergy\cards\TerracottaCardHelper.java)
 - [prepare_card_art.ps1](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\tools\prepare_card_art.ps1)
 
 This means art assignment is no longer baked permanently by card type at export time. Art can be moved between attacks, skills, and powers while leaving crop/scale as preprocessing and mask application as presentation logic.
@@ -238,6 +264,12 @@ This means art assignment is no longer baked permanently by card type at export 
 Current behavior is mainly implemented through:
 
 - `AbstractCard.hasEnoughEnergy()`
+- `AbstractCard.triggerOnManualDiscard()`
+- `AbstractCard.triggerOnEndOfPlayerTurn()`
+- `AbstractCard.onRetained()`
+- `AbstractCard.applyPowers()`
+- `AbstractCard.applyPowersToBlock()`
+- `AbstractCard.calculateCardDamage(...)`
 - `AbstractPlayer.useCard(...)`
 - `AbstractPlayer.gainEnergy(int)`
 - `EnergyManager.recharge()`
@@ -245,14 +277,19 @@ Current behavior is mainly implemented through:
 - `NeowEvent(boolean)`
 - `NeowReward.activate()`
 - `CardGroup.moveToDiscardPile(...)`
+- `RestoreRetainedCardsAction.update()`
 
-Core helper:
+Core fuel helper:
 
 - `cardenergy.util.HandFuelResourceAdapter`
 
-Card helpers:
+Keyword / behavior helper:
 
-- `cardenergy.cards.IndigoCardHelper`
+- `cardenergy.util.CardKeywordHelper`
+
+Terracotta-specific card helpers:
+
+- `cardenergy.cards.TerracottaCardHelper`
 - `cardenergy.cards.RedMirrorCards`
 
 Selection action:
@@ -267,8 +304,15 @@ Selection / payment helpers:
 
 Asset / presentation helpers:
 
-- `cardenergy.cards.IndigoCardHelper`
+- `cardenergy.cards.TerracottaCardHelper`
 - `tools/prepare_card_art.ps1`
+
+Keyword support patches:
+
+- `cardenergy.patches.CustomKeywordFieldPatch`
+- `cardenergy.patches.CustomKeywordLifecyclePatch`
+- `cardenergy.patches.HoardStatPatch`
+- `cardenergy.patches.UseCardPatch`
 
 ## Workshop Packaging
 
@@ -298,5 +342,6 @@ It is not balanced for production. The goals right now are:
 - prove X-cost behavior
 - prove discard-replacement `Consume` behavior
 - prove energy-to-draw replacement
-- keep the Indigo reward pool complete while final cards are built by editing mirrored red cards
+- keep the Terracotta reward pool complete while final cards are built by editing mirrored red cards
 - keep iteration fast on Windows with local Maven packaging
+

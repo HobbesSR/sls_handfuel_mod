@@ -1,4 +1,4 @@
-# Indigo Set Implementation Plan
+# Terracotta Set Implementation Plan
 
 ## Purpose
 
@@ -27,15 +27,15 @@ Important note:
 
 Current working direction:
 
-1. Create a new player color for this character: `INDIGO`
-2. Make a full Indigo copy of the red card set as the initial content baseline
+1. Create a new player color for this character: `TERRACOTTA`
+2. Make a full Terracotta copy of the red card set as the initial content baseline
 3. Add the starter deck, starter relics, keywords, tooltips, and support plumbing required for the character to function as a real content-bearing class
 4. Focus first on the opening game experience and starter hand patterns
 5. Build and iterate the common set before moving on to uncommon and rare content
 
 This is intentionally pragmatic.
 
-The first goal is not originality across the full card pool. The first goal is getting a playable Indigo class shell that uses the hand-fuel mechanic and can be evaluated in early acts.
+The first goal is not originality across the full card pool. The first goal is getting a playable Terracotta class shell that uses the hand-fuel mechanic and can be evaluated in early acts.
 
 ## Guiding Principles
 
@@ -55,12 +55,12 @@ Deliverables:
 
 - this roadmap
 - a resource and content checklist
-- a cleaned set-bible draft later, after Indigo structure is in place
+- a cleaned set-bible draft later, after Terracotta structure is in place
 
 Open questions to settle early:
 
 - does the class keep the working fantasy and vocabulary from `30_SCAVENGER_SET_DESIGN.md` such as `Consume`, `Hoard`, `Rot`, and `Junk`
-- is `Indigo` only the gameplay color, or also the public visual/faction identity
+- is `Terracotta` only the gameplay color, or also the public visual/faction identity
 - how much of the copied red set is temporary scaffolding versus intended long-term base content
 
 ## Phase 1: Content Scaffolding Baseline
@@ -71,28 +71,28 @@ Goal:
 
 Implementation targets:
 
-- create `INDIGO` card color and any matching library enums
-- create card backgrounds, frames, orb usage rules, and library registration paths for Indigo cards
-- establish package and naming conventions for Indigo cards copied from red
+- create `TERRACOTTA` card color and any matching library enums
+- create card backgrounds, frames, orb usage rules, and library registration paths for Terracotta cards
+- establish package and naming conventions for Terracotta cards copied from red
 - define starter card file layout and copied-card file layout
 - define localization file layout for cards, keywords, and character strings
 
 Deliverables:
 
-- Indigo color scaffolding
+- Terracotta color scaffolding
 - content folder structure for cards and localization
 - naming convention doc or section in the resource checklist
 
 Success criteria:
 
-- the game can recognize Indigo cards as the class's own color
-- copied red cards can exist as Indigo-owned content without ambiguity
+- the game can recognize Terracotta cards as the class's own color
+- copied red cards can exist as Terracotta-owned content without ambiguity
 
 ## Phase 2: Full Red Set Copy Baseline
 
 Goal:
 
-- produce a complete Indigo starter pool quickly by copying the red set
+- produce a complete Terracotta starter pool quickly by copying the red set
 
 Why this comes early:
 
@@ -102,7 +102,7 @@ Why this comes early:
 
 Implementation targets:
 
-- duplicate the red card set into Indigo equivalents
+- duplicate the red card set into Terracotta equivalents
 - retain card behavior initially unless a card is directly incompatible with the hand-fuel model
 - track which copied cards are:
   - acceptable as-is
@@ -111,7 +111,7 @@ Implementation targets:
 
 Recommended support document:
 
-- `INDIGO_RED_SET_AUDIT.md`
+- `TERRACOTTA_RED_SET_AUDIT.md`
 
 That audit should classify each copied red card by:
 
@@ -122,7 +122,7 @@ That audit should classify each copied red card by:
 
 Success criteria:
 
-- Indigo has a full baseline set that can be loaded and played
+- Terracotta has a full baseline set that can be loaded and played
 - obvious anti-synergy outliers are known, even if not yet fixed
 
 ## Phase 3: Starter Package
@@ -156,7 +156,7 @@ Design targets:
 
 Deliverables:
 
-- `INDIGO_STARTER_PACKAGE.md`
+- `TERRACOTTA_STARTER_PACKAGE.md`
 
 That document should lock:
 
@@ -198,9 +198,13 @@ Important constraint:
 - do not build every synergy engine immediately
 - only implement the support needed by the starter package and first-pass commons
 
+Current implementation lesson:
+
+- if `Consume`, `Rot`, and `Hoard` are intended to be portable mechanics, their runtime support should live as generic card-behavior infrastructure rather than Terracotta-only helper code
+
 Deliverables:
 
-- `INDIGO_KEYWORD_RULES.md`
+- `TERRACOTTA_KEYWORD_RULES.md`
 
 That document should define:
 
@@ -233,7 +237,7 @@ Implementation targets:
 
 - first-pass common slate
 - copied red commons retained where appropriate
-- Indigo-native commons added where necessary
+- Terracotta-native commons added where necessary
 - replacement of copied commons that clearly fail the hand-fuel model
 
 Recommended structure:
@@ -242,11 +246,11 @@ Recommended structure:
 - then mark each slot as:
   - copied red placeholder
   - adjusted red derivative
-  - new Indigo-native design
+  - new Terracotta-native design
 
 Deliverables:
 
-- `INDIGO_COMMON_SET_BOARD.md`
+- `TERRACOTTA_COMMON_SET_BOARD.md`
 
 That document should include:
 
@@ -281,12 +285,12 @@ Questions to answer:
 - does paying with hand cards feel like tension or just tax
 - are starter cards individually understandable
 - do copied red cards create obviously wrong incentives
-- does Indigo feel coherent before uncommon support exists
+- does Terracotta feel coherent before uncommon support exists
 - which common roles are still missing
 
 Recommended test document:
 
-- `INDIGO_PLAYTEST_LOG.md`
+- `TERRACOTTA_PLAYTEST_LOG.md`
 
 Use flat entries per run:
 
@@ -346,26 +350,26 @@ Core planning docs for the next stretch:
 
 - `40_SCAVENGER_IMPLEMENTATION_PLAN.md`
 - `50_SCAVENGER_RESOURCE_CHECKLIST.md`
-- `INDIGO_RED_SET_AUDIT.md`
-- `INDIGO_STARTER_PACKAGE.md`
-- `INDIGO_KEYWORD_RULES.md`
-- `INDIGO_COMMON_SET_BOARD.md`
-- `INDIGO_PLAYTEST_LOG.md`
+- `TERRACOTTA_RED_SET_AUDIT.md`
+- `TERRACOTTA_STARTER_PACKAGE.md`
+- `TERRACOTTA_KEYWORD_RULES.md`
+- `TERRACOTTA_COMMON_SET_BOARD.md`
+- `TERRACOTTA_PLAYTEST_LOG.md`
 
 Suggested order to author them:
 
 1. `50_SCAVENGER_RESOURCE_CHECKLIST.md`
-2. `INDIGO_RED_SET_AUDIT.md`
-3. `INDIGO_STARTER_PACKAGE.md`
-4. `INDIGO_KEYWORD_RULES.md`
-5. `INDIGO_COMMON_SET_BOARD.md`
-6. `INDIGO_PLAYTEST_LOG.md`
+2. `TERRACOTTA_RED_SET_AUDIT.md`
+3. `TERRACOTTA_STARTER_PACKAGE.md`
+4. `TERRACOTTA_KEYWORD_RULES.md`
+5. `TERRACOTTA_COMMON_SET_BOARD.md`
+6. `TERRACOTTA_PLAYTEST_LOG.md`
 
 ## Immediate Next Steps
 
 The next actual work should be:
 
-1. Lock Indigo as the content color direction
+1. Lock Terracotta as the content color direction
 2. Create the resource checklist and content inventory
 3. Audit the red set copy plan before implementation
 4. Define the starter package in a dedicated doc
@@ -383,4 +387,5 @@ Do not prioritize yet:
 
 The right near-term question is:
 
-- does the Indigo starter package and early common environment make the hand-fuel class feel coherent
+- does the Terracotta starter package and early common environment make the hand-fuel class feel coherent
+

@@ -1,7 +1,7 @@
 package cardenergy.cards.starter;
 
 import cardenergy.CardEnergyMod;
-import cardenergy.cards.IndigoCardHelper;
+import cardenergy.cards.TerracottaCardHelper;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.red.Defend_Red;
 
@@ -10,7 +10,7 @@ public class ScroungeDefend extends Defend_Red {
 
     public ScroungeDefend() {
         super();
-        IndigoCardHelper.applyIdentity(this, ID);
+        TerracottaCardHelper.applyIdentity(this, ID);
         cost = 0;
         costForTurn = 0;
         upgradedCost = false;
@@ -24,3 +24,4 @@ public class ScroungeDefend extends Defend_Red {
         return new ScroungeDefend();
     }
 }
+

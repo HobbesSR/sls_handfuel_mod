@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class NeowRewardPatch {
     @SpirePostfixPatch
     public static void Postfix(NeowEvent __instance, boolean isDone) {
-        if (isDone || AbstractDungeon.player == null || AbstractDungeon.player.chosenClass != CardEnergyCharacterEnum.HAND_FUEL_INDIGO) {
+        if (isDone || AbstractDungeon.player == null || AbstractDungeon.player.chosenClass != CardEnergyCharacterEnum.HAND_FUEL_TERRACOTTA) {
             return;
         }
 
@@ -60,3 +60,4 @@ public class NeowRewardPatch {
         return reward;
     }
 }
+

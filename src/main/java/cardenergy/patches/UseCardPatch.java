@@ -1,8 +1,10 @@
 package cardenergy.patches;
 
 import cardenergy.util.HandFuelResourceAdapter;
+import cardenergy.util.CardKeywordHelper;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -42,4 +44,13 @@ public class UseCardPatch {
             }
         };
     }
+
+    @SpirePostfixPatch
+    public static void Postfix(AbstractPlayer __instance, AbstractCard c, AbstractMonster monster, int energyOnUse) {
+        if (HandFuelResourceAdapter.shouldInterceptCardUse(__instance, c)) {
+            return;
+        }
+        CardKeywordHelper.resetHoard(c);
+    }
 }
+

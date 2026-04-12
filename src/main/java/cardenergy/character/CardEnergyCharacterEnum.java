@@ -7,11 +7,11 @@ import com.megacrit.cardcrawl.helpers.CardLibrary;
 
 public class CardEnergyCharacterEnum {
     @SpireEnum
-    public static AbstractPlayer.PlayerClass HAND_FUEL_INDIGO;
+    public static AbstractPlayer.PlayerClass HAND_FUEL_TERRACOTTA;
 
-    @SpireEnum(name = "CARDENERGY_INDIGO")
-    public static AbstractCard.CardColor INDIGO;
+    @SpireEnum(name = "CARDENERGY_TERRACOTTA")
+    public static AbstractCard.CardColor TERRACOTTA;
 
-    @SpireEnum(name = "CARDENERGY_INDIGO")
-    public static CardLibrary.LibraryType LIBRARY_INDIGO;
+    @SpireEnum(name = "CARDENERGY_TERRACOTTA")
+    public static CardLibrary.LibraryType LIBRARY_TERRACOTTA;
 }

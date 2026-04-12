@@ -1,7 +1,7 @@
 package cardenergy.cards.common;
 
 import cardenergy.CardEnergyMod;
-import cardenergy.cards.IndigoCardHelper;
+import cardenergy.cards.TerracottaCardHelper;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.red.Cleave;
 
@@ -10,7 +10,7 @@ public class ScrapSpray extends Cleave {
 
     public ScrapSpray() {
         super();
-        IndigoCardHelper.applyIdentity(this, ID);
+        TerracottaCardHelper.applyIdentity(this, ID);
         cost = 1;
         costForTurn = 1;
         baseDamage = 7;
@@ -32,3 +32,4 @@ public class ScrapSpray extends Cleave {
         return new ScrapSpray();
     }
 }
+

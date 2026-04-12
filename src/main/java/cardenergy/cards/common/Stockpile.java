@@ -1,12 +1,10 @@
 package cardenergy.cards.common;
 
 import cardenergy.CardEnergyMod;
-import cardenergy.cards.IndigoCardHelper;
+import cardenergy.cards.TerracottaCardHelper;
+import cardenergy.util.CardKeywordHelper;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.red.IronWave;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class Stockpile extends IronWave {
     public static final String ID = CardEnergyMod.makeID("Stockpile");
@@ -16,30 +14,16 @@ public class Stockpile extends IronWave {
 
     public Stockpile() {
         super();
-        IndigoCardHelper.applyIdentity(this, ID);
+        TerracottaCardHelper.applyIdentity(this, ID);
         cost = 2;
         costForTurn = 2;
         baseDamage = BASE_DAMAGE_VALUE;
         baseBlock = BASE_BLOCK_VALUE;
         damage = baseDamage;
         block = baseBlock;
+        magicNumber = baseMagicNumber = HOARD_AMOUNT;
         rarity = CardRarity.COMMON;
-        IndigoCardHelper.addKeyword(this, "Hoard");
-    }
-
-    @Override
-    public void triggerOnEndOfPlayerTurn() {
-        if (AbstractDungeon.player != null && AbstractDungeon.player.hand.group.contains(this)) {
-            baseDamage += HOARD_AMOUNT;
-            baseBlock += HOARD_AMOUNT;
-            applyPowers();
-        }
-    }
-
-    @Override
-    public void use(AbstractPlayer p, AbstractMonster m) {
-        super.use(p, m);
-        resetHoard();
+        CardKeywordHelper.grantHoardToDamageAndBlock(this, HOARD_AMOUNT);
     }
 
     @Override
@@ -48,18 +32,9 @@ public class Stockpile extends IronWave {
             upgradeName();
             upgradeDamage(1);
             upgradeBlock(1);
-            resetHoard();
+            CardKeywordHelper.upgradeHoardToDamageAndBlock(this, 1);
             initializeDescription();
         }
-    }
-
-    private void resetHoard() {
-        baseDamage = upgraded ? BASE_DAMAGE_VALUE + 1 : BASE_DAMAGE_VALUE;
-        baseBlock = upgraded ? BASE_BLOCK_VALUE + 1 : BASE_BLOCK_VALUE;
-        damage = baseDamage;
-        block = baseBlock;
-        isDamageModified = false;
-        isBlockModified = false;
     }
 
     @Override
@@ -67,3 +42,4 @@ public class Stockpile extends IronWave {
         return new Stockpile();
     }
 }
+

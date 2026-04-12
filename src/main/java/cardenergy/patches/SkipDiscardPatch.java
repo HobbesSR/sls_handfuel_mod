@@ -1,6 +1,6 @@
 package cardenergy.patches;
 
-import cardenergy.cards.IndigoCardHelper;
+import cardenergy.util.CardKeywordHelper;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.cards.CardGroup;
 public class SkipDiscardPatch {
     @SpirePrefixPatch
     public static SpireReturn<Void> Prefix(CardGroup __instance, AbstractCard c) {
-        if (IndigoCardHelper.replacePendingDiscard(__instance, c)) {
+        if (CardKeywordHelper.replacePendingDiscard(__instance, c)) {
             return SpireReturn.Return(null);
         }
         return SpireReturn.Continue();

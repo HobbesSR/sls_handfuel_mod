@@ -23,7 +23,7 @@ public class HandFuelResourceAdapter {
     }
 
     public static boolean isActive(AbstractPlayer player) {
-        return player != null && player.chosenClass == CardEnergyCharacterEnum.HAND_FUEL_INDIGO;
+        return player != null && player.chosenClass == CardEnergyCharacterEnum.HAND_FUEL_TERRACOTTA;
     }
 
     public static boolean isActivePlayer() {
@@ -209,3 +209,4 @@ public class HandFuelResourceAdapter {
         return Integer.toString(getRequiredFuel(card));
     }
 }
+

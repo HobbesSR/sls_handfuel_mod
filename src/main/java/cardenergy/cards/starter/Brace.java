@@ -1,7 +1,7 @@
 package cardenergy.cards.starter;
 
 import cardenergy.CardEnergyMod;
-import cardenergy.cards.IndigoCardHelper;
+import cardenergy.cards.TerracottaCardHelper;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -15,7 +15,7 @@ public class Brace extends Defend_Red {
 
     public Brace() {
         super();
-        IndigoCardHelper.applyIdentity(this, ID);
+        TerracottaCardHelper.applyIdentity(this, ID);
         cost = 2;
         costForTurn = 2;
         baseBlock = 11;
@@ -47,3 +47,4 @@ public class Brace extends Defend_Red {
         return new Brace();
     }
 }
+

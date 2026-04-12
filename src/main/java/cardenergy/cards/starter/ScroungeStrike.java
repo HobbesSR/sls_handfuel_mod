@@ -1,7 +1,7 @@
 package cardenergy.cards.starter;
 
 import cardenergy.CardEnergyMod;
-import cardenergy.cards.IndigoCardHelper;
+import cardenergy.cards.TerracottaCardHelper;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.red.Strike_Red;
 
@@ -10,7 +10,7 @@ public class ScroungeStrike extends Strike_Red {
 
     public ScroungeStrike() {
         super();
-        IndigoCardHelper.applyIdentity(this, ID);
+        TerracottaCardHelper.applyIdentity(this, ID);
         cost = 0;
         costForTurn = 0;
         baseDamage = 4;
@@ -25,3 +25,4 @@ public class ScroungeStrike extends Strike_Red {
         return new ScroungeStrike();
     }
 }
+

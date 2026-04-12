@@ -2,7 +2,7 @@ package cardenergy.cards.common;
 
 import cardenergy.CardEnergyMod;
 import cardenergy.actions.SelectExhaustToDiscardAction;
-import cardenergy.cards.IndigoCardHelper;
+import cardenergy.cards.TerracottaCardHelper;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -16,7 +16,7 @@ public class Patchwork extends ShrugItOff {
 
     public Patchwork() {
         super();
-        IndigoCardHelper.applyIdentity(this, ID);
+        TerracottaCardHelper.applyIdentity(this, ID);
         cost = 1;
         costForTurn = 1;
         baseBlock = 5;
@@ -46,3 +46,4 @@ public class Patchwork extends ShrugItOff {
         return new Patchwork();
     }
 }
+

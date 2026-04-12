@@ -1,8 +1,8 @@
 {
   "modid": "cardenergy",
-  "name": "Scavenger",
+  "name": "Scavenger${build.channel.mod_name_suffix}",
   "author_list": ["Corey", "Codex"],
-  "description": "A work-in-progress Scavenger character for Slay the Spire. This character pays energy demands by discarding same-color cards from hand.",
+  "description": "A work-in-progress Scavenger character for Slay the Spire. This character pays energy demands by discarding same-color cards from hand. Build channel: ${build.channel.display}.",
   "version": "${project.version}",
   "sts_version": "${SlayTheSpire.version}",
   "mts_version": "${ModTheSpire.version}",

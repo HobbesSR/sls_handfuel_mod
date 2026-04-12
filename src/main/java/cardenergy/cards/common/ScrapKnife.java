@@ -1,7 +1,8 @@
 package cardenergy.cards.common;
 
 import cardenergy.CardEnergyMod;
-import cardenergy.cards.IndigoCardHelper;
+import cardenergy.cards.TerracottaCardHelper;
+import cardenergy.util.CardKeywordHelper;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.red.Strike_Red;
 
@@ -10,18 +11,13 @@ public class ScrapKnife extends Strike_Red {
 
     public ScrapKnife() {
         super();
-        IndigoCardHelper.applyIdentity(this, ID);
+        TerracottaCardHelper.applyIdentity(this, ID);
         cost = 1;
         costForTurn = 1;
         baseDamage = 6;
         damage = baseDamage;
         rarity = CardRarity.COMMON;
-        IndigoCardHelper.addKeyword(this, "Consume");
-    }
-
-    @Override
-    public void triggerOnManualDiscard() {
-        IndigoCardHelper.queueConsumeOnDiscard(this);
+        CardKeywordHelper.grantConsume(this);
     }
 
     @Override
@@ -38,3 +34,4 @@ public class ScrapKnife extends Strike_Red {
         return new ScrapKnife();
     }
 }
+

@@ -23,21 +23,21 @@ When this document and the mechanics doc differ, assume:
 
 ## Current Implementation Note
 
-The current codebase still uses a broad mirrored Ironclad pool as Indigo's temporary baseline set, but the first pass of Scavenger-specific starter and common cards now replaces part of that mirror scaffold.
+The current codebase still uses a broad mirrored Ironclad pool as Terracotta's temporary baseline set, but the first pass of Scavenger-specific starter and common cards now replaces part of that mirror scaffold.
 
 That is not the final content direction. It is the implementation scaffold.
 
 Current practical rule:
 
-- mirrored red cards still provide most of the Indigo reward pool
-- custom Indigo starter cards and first-pass custom commons now exercise the class grammar directly
-- final Indigo cards should be created by editing those mirrored red-derived cards into their new names, text, and mechanics over time
+- mirrored red cards still provide most of the Terracotta reward pool
+- custom Terracotta starter cards and first-pass custom commons now exercise the class grammar directly
+- final Terracotta cards should be created by editing those mirrored red-derived cards into their new names, text, and mechanics over time
 
 So the working plan is:
 
 - do not preserve old one-off prototype cards as long-term content
 - do not leave the pool undersized while commons are still being designed
-- replace mirrored red cards gradually with real Indigo cards as they are ready
+- replace mirrored red cards gradually with real Terracotta cards as they are ready
 
 This note is descriptive of the current repository scaffold, not a recommendation to keep that scaffold forever.
 
@@ -110,6 +110,8 @@ Notes:
 - Hoard should be present at common, but concentrated more heavily at uncommon and rare
 - most Hoard cards should be intrinsically useful even without full build-around support
 - current direction: Hoard charge should reset when the card is played, not merely when it is discarded
+- current direction: `Hoard` should imply staying in hand so it remains portable outside the base class context
+- current direction: Hoard's stored bonus should stay mechanically separate from the card's authored base stats even though it feeds the displayed and played values
 
 ### Rot
 
@@ -282,7 +284,7 @@ Practical design rule:
 Current implementation scaffold:
 
 - the mirrored Ironclad set temporarily supplies these rarity bands
-- custom Indigo cards should gradually replace those mirrored cards as real design work is completed
+- custom Terracotta cards should gradually replace those mirrored cards as real design work is completed
 
 ## 8. Recommended Build Order
 
@@ -309,3 +311,4 @@ If it would be discarded, or remains in hand at end of turn, it exhausts instead
 
 Junk:
 Shared family or tag that matters together, especially in Hoard shells.
+

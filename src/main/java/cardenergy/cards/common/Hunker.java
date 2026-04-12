@@ -1,7 +1,7 @@
 package cardenergy.cards.common;
 
 import cardenergy.CardEnergyMod;
-import cardenergy.cards.IndigoCardHelper;
+import cardenergy.cards.TerracottaCardHelper;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.red.Defend_Red;
 
@@ -10,7 +10,7 @@ public class Hunker extends Defend_Red {
 
     public Hunker() {
         super();
-        IndigoCardHelper.applyIdentity(this, ID);
+        TerracottaCardHelper.applyIdentity(this, ID);
         cost = 2;
         costForTurn = 2;
         baseBlock = 13;
@@ -32,3 +32,4 @@ public class Hunker extends Defend_Red {
         return new Hunker();
     }
 }
+

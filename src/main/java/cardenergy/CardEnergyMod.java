@@ -29,7 +29,7 @@ import cardenergy.cards.common.Stockpile;
 import cardenergy.cards.common.TurnAside;
 import cardenergy.character.CardEnergyCharacter;
 import cardenergy.character.CardEnergyCharacterEnum;
-import cardenergy.character.IndigoColorScheme;
+import cardenergy.character.TerracottaColorScheme;
 import cardenergy.cards.RedMirrorCards;
 import cardenergy.cards.starter.Brace;
 import cardenergy.cards.starter.RottingBlow;
@@ -60,7 +60,8 @@ public class CardEnergyMod implements EditCharactersSubscriber, EditCardsSubscri
     }
 
     public static void initialize() {
-        IndigoColorScheme.register();
+        TerracottaColorScheme.register();
+        logger.info("Initializing Scavenger build channel={} version={}", BuildInfo.getDisplay(), BuildInfo.getVersion());
         new CardEnergyMod();
     }
 
@@ -74,9 +75,9 @@ public class CardEnergyMod implements EditCharactersSubscriber, EditCardsSubscri
                 new CardEnergyCharacter(CardCrawlGame.playerName),
                 BUTTON_IMAGE,
                 PORTRAIT_IMAGE,
-                CardEnergyCharacterEnum.HAND_FUEL_INDIGO
+                CardEnergyCharacterEnum.HAND_FUEL_TERRACOTTA
         );
-        logger.info("Registered hand-fuel indigo test character");
+        logger.info("Registered hand-fuel terracotta scavenger");
     }
 
     @Override

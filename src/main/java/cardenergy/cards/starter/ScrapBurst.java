@@ -1,7 +1,8 @@
 package cardenergy.cards.starter;
 
 import cardenergy.CardEnergyMod;
-import cardenergy.cards.IndigoCardHelper;
+import cardenergy.cards.TerracottaCardHelper;
+import cardenergy.util.CardKeywordHelper;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.red.Cleave;
 
@@ -10,25 +11,20 @@ public class ScrapBurst extends Cleave {
 
     public ScrapBurst() {
         super();
-        IndigoCardHelper.applyIdentity(this, ID);
+        TerracottaCardHelper.applyIdentity(this, ID);
         cost = 1;
         costForTurn = 1;
-        baseDamage = 5;
+        baseDamage = 3;
         damage = baseDamage;
         rarity = CardRarity.BASIC;
-        IndigoCardHelper.addKeyword(this, "Consume");
-    }
-
-    @Override
-    public void triggerOnManualDiscard() {
-        IndigoCardHelper.queueConsumeOnDiscard(this);
+        CardKeywordHelper.grantConsume(this);
     }
 
     @Override
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeDamage(3);
+            upgradeDamage(2);
             initializeDescription();
         }
     }
@@ -38,3 +34,4 @@ public class ScrapBurst extends Cleave {
         return new ScrapBurst();
     }
 }
+

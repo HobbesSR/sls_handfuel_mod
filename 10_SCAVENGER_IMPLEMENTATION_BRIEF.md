@@ -187,6 +187,7 @@ Role:
 Role:
 
 - common Hoard signpost hybrid
+- current implementation direction: `Hoard` implies staying in hand and resets on play
 
 `Scrap Spray`
 
@@ -365,6 +366,13 @@ It should:
 - sometimes become a shoot-the-moon package if enough support is assembled
 - not require a fully isolated Hoard deck to justify any single Hoard common
 
+Current implementation direction:
+
+- `Hoard` is a generic keyword rather than a Terracotta-only helper
+- Hoard cards should be authored through a standard keyword path
+- `Hoard` implies intrinsic stay-in-hand behavior so the keyword remains functional off-class
+- the accumulated Hoard bonus should remain separable from authored base stats and reset cleanly on play
+
 Common Hoard cards should be:
 
 - playable at floor value
@@ -380,7 +388,7 @@ Common Hoard cards should be:
 5. Remove the old starter-only versions of `Recovery`, `Rotting Shelter`, `Stockpile`, and `Scrap Spray` from starter usage.
 6. Recreate those cards as commons using the designs above.
 7. Implement the rest of the listed common cards by replacing mirrored Ironclad-shell commons for now.
-8. Preserve existing Indigo / mirrored-Ironclad scaffold behavior where possible, but overwrite names, cost, text, and mechanics to match this brief.
+8. Preserve existing Terracotta / mirrored-Ironclad scaffold behavior where possible, but overwrite names, cost, text, and mechanics to match this brief.
 9. Test:
    - starter deck play feel
    - `Consume`
@@ -409,3 +417,4 @@ The commons should then carry the broader scaffolding:
 - Hoard vein
 - Rot tension
 - Consume grammar
+
