@@ -1,7 +1,6 @@
 package cardenergy.character;
 
 import basemod.BaseMod;
-import cardenergy.CardEnergyMod;
 import com.badlogic.gdx.graphics.Color;
 
 public final class TerracottaColorScheme {
@@ -12,16 +11,12 @@ public final class TerracottaColorScheme {
     private static final Color TERRACOTTA_OUTLINE = new Color(0.16F, 0.08F, 0.05F, 1.0F);
     private static final Color TERRACOTTA_DESC = new Color(0.45F, 0.25F, 0.17F, 1.0F);
     private static final Color TERRACOTTA_GLOW = new Color(0.95F, 0.75F, 0.58F, 1.0F);
-    private static final String BG_SHARED = CardEnergyMod.CARD_BACK_DIR + "/bg_skill.png";
-    private static final String ENERGY_ORB = CardEnergyMod.CARD_BACK_DIR + "/energy_orb.png";
-    private static final String BG_SHARED_P = CardEnergyMod.CARD_BACK_DIR + "/bg_skill_p.png";
-    private static final String ENERGY_ORB_P = CardEnergyMod.CARD_BACK_DIR + "/energy_orb_p.png";
-    private static final String SMALL_ORB = CardEnergyMod.CARD_BACK_DIR + "/small_orb.png";
 
     private TerracottaColorScheme() {
     }
 
     public static void register() {
+        TerracottaCardBackGenerator.GeneratedPaths paths = TerracottaCardBackGenerator.generate();
         BaseMod.addColor(
                 CardEnergyCharacterEnum.TERRACOTTA,
                 TERRACOTTA_BG,
@@ -31,15 +26,15 @@ public final class TerracottaColorScheme {
                 TERRACOTTA_DESC,
                 TERRACOTTA,
                 TERRACOTTA_GLOW,
-                BG_SHARED,
-                BG_SHARED,
-                BG_SHARED,
-                ENERGY_ORB,
-                BG_SHARED_P,
-                BG_SHARED_P,
-                BG_SHARED_P,
-                ENERGY_ORB_P,
-                SMALL_ORB
+                paths.attackBg,
+                paths.skillBg,
+                paths.powerBg,
+                paths.orb,
+                paths.attackBgPortrait,
+                paths.skillBgPortrait,
+                paths.powerBgPortrait,
+                paths.orbPortrait,
+                paths.smallOrb
         );
     }
 }

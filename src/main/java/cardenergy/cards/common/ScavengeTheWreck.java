@@ -1,30 +1,27 @@
 package cardenergy.cards.common;
 
 import cardenergy.CardEnergyMod;
+import cardenergy.cards.AbstractTerracottaCard;
 import cardenergy.cards.TerracottaCardHelper;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
-import com.megacrit.cardcrawl.cards.red.Defend_Red;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class ScavengeTheWreck extends Defend_Red {
+public class ScavengeTheWreck extends AbstractTerracottaCard {
     public static final String ID = CardEnergyMod.makeID("ScavengeTheWreck");
     private static final String SELECT_TEXT = "Exhaust 1 card.";
 
     public ScavengeTheWreck() {
-        super();
+        super(ID, CardType.SKILL, CardRarity.COMMON, CardTarget.SELF, 1);
         TerracottaCardHelper.applyIdentity(this, ID);
-        cost = 1;
-        costForTurn = 1;
         baseBlock = 0;
         block = baseBlock;
         magicNumber = baseMagicNumber = 2;
-        rarity = CardRarity.COMMON;
     }
 
     @Override

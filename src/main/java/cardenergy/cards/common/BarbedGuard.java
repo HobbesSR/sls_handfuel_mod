@@ -1,25 +1,22 @@
 package cardenergy.cards.common;
 
 import cardenergy.CardEnergyMod;
+import cardenergy.cards.AbstractTerracottaCard;
 import cardenergy.cards.TerracottaCardHelper;
 import cardenergy.combat.ScavengerCombatState;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.red.Defend_Red;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class BarbedGuard extends Defend_Red {
+public class BarbedGuard extends AbstractTerracottaCard {
     public static final String ID = CardEnergyMod.makeID("BarbedGuard");
 
     public BarbedGuard() {
-        super();
+        super(ID, CardType.SKILL, CardRarity.COMMON, CardTarget.SELF, 1);
         TerracottaCardHelper.applyIdentity(this, ID);
-        cost = 1;
-        costForTurn = 1;
         baseBlock = 7;
         block = baseBlock;
-        rarity = CardRarity.COMMON;
     }
 
     @Override

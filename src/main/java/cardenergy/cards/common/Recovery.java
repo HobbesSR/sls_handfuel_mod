@@ -2,26 +2,23 @@ package cardenergy.cards.common;
 
 import cardenergy.CardEnergyMod;
 import cardenergy.actions.SelectExhaustToDiscardAction;
+import cardenergy.cards.AbstractTerracottaCard;
 import cardenergy.cards.TerracottaCardHelper;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.red.ShrugItOff;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class Recovery extends ShrugItOff {
+public class Recovery extends AbstractTerracottaCard {
     public static final String ID = CardEnergyMod.makeID("Recovery");
     private static final String SELECT_TEXT = "Return up to 2 exhausted cards to your discard pile.";
 
     public Recovery() {
-        super();
+        super(ID, CardType.SKILL, CardRarity.COMMON, CardTarget.SELF, 0);
         TerracottaCardHelper.applyIdentity(this, ID);
-        cost = 0;
-        costForTurn = 0;
         baseBlock = 3;
         block = baseBlock;
         magicNumber = baseMagicNumber = 2;
-        rarity = CardRarity.COMMON;
     }
 
     @Override

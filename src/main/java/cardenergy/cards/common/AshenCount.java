@@ -1,27 +1,24 @@
 package cardenergy.cards.common;
 
 import cardenergy.CardEnergyMod;
+import cardenergy.cards.AbstractTerracottaCard;
 import cardenergy.cards.TerracottaCardHelper;
 import cardenergy.combat.ScavengerCombatState;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.cards.red.Strike_Red;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class AshenCount extends Strike_Red {
+public class AshenCount extends AbstractTerracottaCard {
     public static final String ID = CardEnergyMod.makeID("AshenCount");
 
     public AshenCount() {
-        super();
+        super(ID, CardType.ATTACK, CardRarity.COMMON, CardTarget.ENEMY, 1);
         TerracottaCardHelper.applyIdentity(this, ID);
-        cost = 1;
-        costForTurn = 1;
         baseDamage = 5;
         damage = baseDamage;
         magicNumber = baseMagicNumber = 5;
-        rarity = CardRarity.COMMON;
     }
 
     @Override

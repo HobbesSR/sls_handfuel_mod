@@ -1,21 +1,26 @@
 package cardenergy.cards.common;
 
 import cardenergy.CardEnergyMod;
+import cardenergy.cards.AbstractTerracottaCard;
 import cardenergy.cards.TerracottaCardHelper;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.red.Defend_Red;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class Hunker extends Defend_Red {
+public class Hunker extends AbstractTerracottaCard {
     public static final String ID = CardEnergyMod.makeID("Hunker");
 
     public Hunker() {
-        super();
+        super(ID, CardType.SKILL, CardRarity.COMMON, CardTarget.SELF, 2);
         TerracottaCardHelper.applyIdentity(this, ID);
-        cost = 2;
-        costForTurn = 2;
         baseBlock = 13;
         block = baseBlock;
-        rarity = CardRarity.COMMON;
+    }
+
+    @Override
+    public void use(AbstractPlayer p, AbstractMonster m) {
+        addToBot(new GainBlockAction(p, p, block));
     }
 
     @Override

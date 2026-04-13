@@ -1,5 +1,6 @@
 package cardenergy.cards;
 
+import basemod.abstracts.CustomCard;
 import cardenergy.CardEnergyMod;
 import cardenergy.character.CardEnergyCharacterEnum;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -39,10 +40,22 @@ public final class TerracottaCardHelper {
     public static void applyIdentityKeepBaseStrings(AbstractCard card, String id) {
         card.cardID = id;
         card.color = CardEnergyCharacterEnum.TERRACOTTA;
+        applyCustomOrSourceImage(card, id, null);
+        card.initializeDescription();
+    }
+
+    public static void applyIdentityKeepBaseStrings(AbstractCard card, String id, AbstractCard sourceCard) {
+        card.cardID = id;
+        card.color = CardEnergyCharacterEnum.TERRACOTTA;
+        applyCustomOrSourceImage(card, id, sourceCard);
         card.initializeDescription();
     }
 
     private static void applyCustomImage(AbstractCard card, String id) {
+        applyCustomOrSourceImage(card, id, null);
+    }
+
+    private static void applyCustomOrSourceImage(AbstractCard card, String id, AbstractCard sourceCard) {
         String shortId = getShortId(id);
         String rawPortraitPath = CardEnergyMod.CARD_IMG_DIR + "/raw/" + shortId + ".png";
         String imagePath = CardEnergyMod.CARD_IMG_DIR + "/" + shortId + ".png";
@@ -70,6 +83,12 @@ public final class TerracottaCardHelper {
 
         Texture smallTexture = loadTextureIfPresent(imagePath);
         if (smallTexture == null) {
+            if (sourceCard != null) {
+                Texture sourceTexture = loadSourceCardTexture(sourceCard);
+                if (sourceTexture != null) {
+                    applyLoadedTextures(card, imagePath, sourceTexture, sourceTexture);
+                }
+            }
             return;
         }
 
@@ -90,6 +109,10 @@ public final class TerracottaCardHelper {
                 smallTexture.getWidth(),
                 smallTexture.getHeight()
         );
+
+        if (card instanceof CustomCard) {
+            ((CustomCard) card).textureImg = null;
+        }
 
         if (portraitImgField != null) {
             try {
@@ -233,6 +256,19 @@ public final class TerracottaCardHelper {
         } catch (NoSuchFieldException e) {
             return null;
         }
+    }
+
+    private static Texture loadSourceCardTexture(AbstractCard sourceCard) {
+        if (sourceCard.assetUrl == null || sourceCard.assetUrl.isEmpty()) {
+            return null;
+        }
+        String normalized = sourceCard.assetUrl.endsWith(".png")
+                ? sourceCard.assetUrl
+                : sourceCard.assetUrl + ".png";
+        String fullPath = normalized.startsWith("images/")
+                ? normalized
+                : "images/cards/" + normalized;
+        return loadTextureIfPresent(fullPath);
     }
 }
 

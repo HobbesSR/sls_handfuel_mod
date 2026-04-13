@@ -1,26 +1,23 @@
 package cardenergy.cards.common;
 
 import cardenergy.CardEnergyMod;
+import cardenergy.cards.AbstractTerracottaCard;
 import cardenergy.cards.TerracottaCardHelper;
 import cardenergy.combat.ScavengerCombatState;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.red.Defend_Red;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class TurnAside extends Defend_Red {
+public class TurnAside extends AbstractTerracottaCard {
     public static final String ID = CardEnergyMod.makeID("TurnAside");
 
     public TurnAside() {
-        super();
+        super(ID, CardType.SKILL, CardRarity.COMMON, CardTarget.SELF, 1);
         TerracottaCardHelper.applyIdentity(this, ID);
-        cost = 1;
-        costForTurn = 1;
         baseBlock = 6;
         block = baseBlock;
         magicNumber = baseMagicNumber = 1;
-        rarity = CardRarity.COMMON;
     }
 
     @Override
