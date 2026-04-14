@@ -3,7 +3,7 @@ package cardenergy.cards.common;
 import cardenergy.CardEnergyMod;
 import cardenergy.cards.AbstractTerracottaCard;
 import cardenergy.cards.TerracottaCardHelper;
-import cardenergy.combat.ScavengerCombatState;
+import cardenergy.combat.SalvagerCombatState;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -22,7 +22,7 @@ public class BarbedGuard extends AbstractTerracottaCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new GainBlockAction(p, p, block));
-        ScavengerCombatState.addPendingBarbedGuard(p, 1);
+        SalvagerCombatState.addPendingBarbedGuard(p, 1);
     }
 
     @Override

@@ -17,7 +17,7 @@ It supersedes the older starter-heavy scaffold language in the other design note
 Public naming note:
 
 - the current public character name is `Salvager`
-- references to `Scavenger` in older planning language should be read as the same Terracotta Salvager class
+- this brief should now use `Salvager` consistently
 
 ## Document Role
 

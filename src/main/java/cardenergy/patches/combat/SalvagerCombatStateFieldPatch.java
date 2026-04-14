@@ -4,8 +4,8 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireField;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 
-public class ScavengerCombatStateFieldPatch {
-    private ScavengerCombatStateFieldPatch() {
+public class SalvagerCombatStateFieldPatch {
+    private SalvagerCombatStateFieldPatch() {
     }
 
     @SpirePatch(clz = AbstractPlayer.class, method = SpirePatch.CLASS)

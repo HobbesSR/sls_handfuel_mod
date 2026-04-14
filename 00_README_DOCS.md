@@ -25,5 +25,4 @@ Rules of thumb:
 Public naming note:
 
 - the public character name is now `Salvager`
-- some internal code identifiers still use `Scavenger` for continuity
-- when documentation uses both, read `Scavenger` as the older working label for the current Salvager/Terracotta character
+- internal code and docs should now use `Salvager` consistently
