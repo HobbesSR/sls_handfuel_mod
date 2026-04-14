@@ -22,6 +22,8 @@ public class SelectFuelPaymentAction extends AbstractGameAction {
 
     private static final String PROMPT_TEMPLATE =
             "discard.\nSelect %d cards to finish playing your card.\nSelect 0 to cancel playing your card.";
+    private static final String SINGLE_PROMPT_TEMPLATE =
+            "discard.\nSelect 1 card to finish playing your card.";
 
     private final AbstractPlayer player;
     private final AbstractCard card;
@@ -80,8 +82,8 @@ public class SelectFuelPaymentAction extends AbstractGameAction {
                 originalHandOrder,
                 getPromptText(),
                 requiredFuel,
-                true,
-                true
+                shouldAllowAnyNumberSelection(),
+                shouldAllowZeroSelection()
         );
         phase = Phase.WAITING_FOR_SELECTION;
     }
@@ -115,7 +117,18 @@ public class SelectFuelPaymentAction extends AbstractGameAction {
         HandFuelPaymentHelper.executePaymentPlan(player, card, monster, paymentPlan);
     }
 
+    private boolean shouldAllowAnyNumberSelection() {
+        return requiredFuel > 1;
+    }
+
+    private boolean shouldAllowZeroSelection() {
+        return requiredFuel > 1;
+    }
+
     private String getPromptText() {
+        if (requiredFuel == 1) {
+            return SINGLE_PROMPT_TEMPLATE;
+        }
         return String.format(PROMPT_TEMPLATE, requiredFuel, requiredFuel == 1 ? "" : "s");
     }
 }
