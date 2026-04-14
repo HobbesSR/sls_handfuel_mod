@@ -9,7 +9,7 @@ Files:
 - `preview/preview.jpg`
   Workshop preview image copied from the mod portrait art.
 - `item.vdf`
-  Steam Workshop descriptor configured for an initial friends-only upload.
+  Steam Workshop descriptor template for the current item.
 - `prepare_workshop.ps1`
   Syncs the current built jar and preview image into the upload folder.
 
@@ -22,7 +22,6 @@ Before upload:
 3. Inspect `workshop\\item.vdf` and update:
    - `title`
    - `description`
-   - `changenote`
    - `publishedfileid` after the first upload creates an item
 
 ## Visibility
@@ -55,4 +54,10 @@ Usage:
 powershell -ExecutionPolicy Bypass -File .\workshop\upload_workshop.ps1 -SteamUser <your_steam_login_name>
 ```
 
-That script launches SteamCMD and leaves password / Steam Guard entry to the local interactive prompt.
+Optional explicit changenote:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\workshop\upload_workshop.ps1 -SteamUser <your_steam_login_name> -ChangeNote "Short update note"
+```
+
+By default, the upload helper uses the latest git commit subject as the Workshop changenote. It launches SteamCMD and leaves password / Steam Guard entry to the local interactive prompt.

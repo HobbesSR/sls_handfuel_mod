@@ -7,5 +7,5 @@
 	"visibility"		"1"
 	"title"		"Salvager"
 	"description"		"A work-in-progress Salvager character for Slay the Spire. This character turns scrap into leverage, paying energy demands by discarding same-color cards from hand."
-	"changenote"		"Initial friends-only workshop upload."
+	"changenote"		"Managed by upload_workshop.ps1."
 }
