@@ -1,8 +1,8 @@
-# Hand-Fuel Character
+# Salvager Mechanics
 
 ## Current Implementation Brief
 
-Use [10_SCAVENGER_IMPLEMENTATION_BRIEF.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\10_SCAVENGER_IMPLEMENTATION_BRIEF.md) as the current implementation brief for starter/common card work.
+Use [10_SALVAGER_IMPLEMENTATION_BRIEF.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\10_SALVAGER_IMPLEMENTATION_BRIEF.md) as the current implementation brief for starter/common card work.
 
 This document remains the mechanic-state document.
 
@@ -24,7 +24,7 @@ When this document conflicts with the implementation brief, interpret it as:
 
 ## Current Scope
 
-This repository is a standalone Slay the Spire mod that adds a Terracotta test character whose real resource is cards in hand rather than stored energy.
+This repository is a standalone Slay the Spire mod that adds a Terracotta test character, the Salvager, whose real resource is cards in hand rather than stored energy.
 
 The mod depends on:
 
@@ -40,7 +40,7 @@ The implementation is character-gated. Vanilla characters still use normal energ
 The Terracotta set currently uses a two-layer content strategy:
 
 - most of the non-basic Ironclad set is still mirrored into Terracotta as a temporary scaffold
-- a first Scavenger-specific starter deck and first pass of Scavenger-specific commons now replace part of that mirror set
+- a first Salvager-specific starter deck and first pass of Salvager-specific commons now replace part of that mirror set
 
 This is intentional. The mirrored Ironclad cards are the scaffold the final Terracotta set will be built from. They provide:
 
@@ -167,9 +167,9 @@ Current character traits:
 
 ## Structural Template
 
-This section is kept only as a compressed design-reference bridge so the runtime doc remains navigable. The authoritative structural card-design writeup lives in [30_SCAVENGER_SET_DESIGN.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\30_SCAVENGER_SET_DESIGN.md).
+This section is kept only as a compressed design-reference bridge so the runtime doc remains navigable. The authoritative structural card-design writeup lives in [30_SALVAGER_SET_DESIGN.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\30_SALVAGER_SET_DESIGN.md).
 
-The useful design lens is not "which vanilla cards are we copying," but "which structural jobs does the early Scavenger pool need covered."
+The useful design lens is not "which vanilla cards are we copying," but "which structural jobs does the early Salvager pool need covered."
 
 Every Slay the Spire character needs early coverage for:
 
@@ -188,7 +188,7 @@ Across the vanilla cast, the recurring role template is:
 - smoother
 - hybrid card that covers two jobs at once
 
-For Scavenger, the intended early analogs are:
+For the Salvager, the intended early analogs are:
 
 - a basic attack
 - a basic defense
@@ -231,12 +231,12 @@ Current runtime starter values:
 Current reward-pool/runtime intent outside the starter deck:
 
 - normal rewards still come mostly from mirrored Ironclad cards in Terracotta color
-- the first Scavenger-specific common pass now replaces a chunk of the mirrored Ironclad commons
+- the first Salvager-specific common pass now replaces a chunk of the mirrored Ironclad commons
 - those mirrored cards are still meant to be edited into final Terracotta cards over time
 
 ## Current Art Pipeline
 
-Custom Scavenger card art now uses a two-step pipeline:
+Custom Salvager card art now uses a two-step pipeline:
 
 - raw cropped portrait art lives in:
   - [raw](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\src\main\resources\img\cardenergy\cards\raw)
@@ -333,7 +333,7 @@ Current item metadata:
 
 ## Known Intent
 
-This mod is currently a demonstration scaffold for the hand-fuel mechanic.
+This mod is currently a demonstration scaffold for the Salvager's hand-fuel mechanic.
 
 It is not balanced for production. The goals right now are:
 

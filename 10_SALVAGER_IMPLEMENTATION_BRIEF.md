@@ -1,6 +1,6 @@
-# Scavenger Implementation Brief
+# Salvager Implementation Brief
 
-This document is the current implementation brief for Scavenger card work.
+This document is the current implementation brief for Salvager card work.
 
 It is the authority for the current starter/common direction and the baseline to continue implementing against when the repository is still catching up in later passes.
 
@@ -14,19 +14,24 @@ It supersedes the older starter-heavy scaffold language in the other design note
   - reactive block
   - exhaust/value
 
+Public naming note:
+
+- the current public character name is `Salvager`
+- references to `Scavenger` in older planning language should be read as the same Terracotta Salvager class
+
 ## Document Role
 
 Use documents in this order:
 
-1. [10_SCAVENGER_IMPLEMENTATION_BRIEF.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\10_SCAVENGER_IMPLEMENTATION_BRIEF.md)
+1. [10_SALVAGER_IMPLEMENTATION_BRIEF.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\10_SALVAGER_IMPLEMENTATION_BRIEF.md)
    This is the authoritative starter/common implementation brief.
-2. [20_SCAVENGER_MECHANICS.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\20_SCAVENGER_MECHANICS.md)
+2. [20_SALVAGER_MECHANICS.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\20_SALVAGER_MECHANICS.md)
    This is the mechanic-state document.
-3. [30_SCAVENGER_SET_DESIGN.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\30_SCAVENGER_SET_DESIGN.md)
+3. [30_SALVAGER_SET_DESIGN.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\30_SALVAGER_SET_DESIGN.md)
    This is the broader set-design and role-template document.
-4. [40_SCAVENGER_IMPLEMENTATION_PLAN.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\40_SCAVENGER_IMPLEMENTATION_PLAN.md)
+4. [40_SALVAGER_IMPLEMENTATION_PLAN.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\40_SALVAGER_IMPLEMENTATION_PLAN.md)
    This is the staged roadmap.
-5. [50_SCAVENGER_RESOURCE_CHECKLIST.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\50_SCAVENGER_RESOURCE_CHECKLIST.md)
+5. [50_SALVAGER_RESOURCE_CHECKLIST.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\50_SALVAGER_RESOURCE_CHECKLIST.md)
    This is the planning and tracking checklist.
 
 Where those documents conflict on immediate starter/common implementation priorities, this brief wins.
@@ -53,7 +58,7 @@ Read the sections below as:
 - the priority content brief for continued implementation passes
 - the replacement plan for the older starter scaffold where any legacy code still remains
 
-Use [20_SCAVENGER_MECHANICS.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\20_SCAVENGER_MECHANICS.md) for what is actually true in the current codebase right now.
+Use [20_SALVAGER_MECHANICS.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\20_SALVAGER_MECHANICS.md) for what is actually true in the current codebase right now.
 
 ## Resource / Cost Rules
 
@@ -70,7 +75,7 @@ Player-facing rule:
 - available Energy is the number of cards of the character's color in hand
 - this character pays Energy by discarding those cards
 
-No native Scavenger X cards are planned right now.
+No native Salvager X cards are planned right now.
 
 ## Final Starter Deck
 

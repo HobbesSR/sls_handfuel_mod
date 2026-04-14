@@ -1,8 +1,8 @@
-# Scavenger Working Card Set Design Document
+# Salvager Working Card Set Design Document
 
 ## Current Implementation Brief
 
-Use [10_SCAVENGER_IMPLEMENTATION_BRIEF.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\10_SCAVENGER_IMPLEMENTATION_BRIEF.md) as the current implementation brief.
+Use [10_SALVAGER_IMPLEMENTATION_BRIEF.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\10_SALVAGER_IMPLEMENTATION_BRIEF.md) as the current implementation brief.
 
 Where this document conflicts with that brief on starter composition, common-pool targets, or immediate card implementation priorities, the brief wins.
 
@@ -23,7 +23,7 @@ When this document and the mechanics doc differ, assume:
 
 ## Current Implementation Note
 
-The current codebase still uses a broad mirrored Ironclad pool as Terracotta's temporary baseline set, but the first pass of Scavenger-specific starter and common cards now replaces part of that mirror scaffold.
+The current codebase still uses a broad mirrored Ironclad pool as Terracotta's temporary baseline set, but the first pass of Salvager-specific starter and common cards now replaces part of that mirror scaffold.
 
 That is not the final content direction. It is the implementation scaffold.
 
@@ -43,13 +43,26 @@ This note is descriptive of the current repository scaffold, not a recommendatio
 
 ## 1. Core Identity
 
-The class is now a Scavenger: a cloaked, grimy figure or golem-like scavenger carrying a basket, sack, or similar bundle of found items. The visual specifics are not locked. The important part is the mechanical fantasy:
+The class is now a Salvager: a resourceful drifter, junk sage, or alley alchemist carrying a basket, sack, or tagged bundle of found items. The visual specifics are not locked. The important part is the mechanical fantasy:
 
 - cards in hand are stuff you are carrying
 - you consume cards as fuel to act
 - some cards get better if you hoard them
 - some cards rot if you keep or discard them carelessly
 - some cards are just junk, and some decks can exploit Junk density
+
+Desired tone:
+
+- resourceful rather than filthy
+- practiced rather than feral
+- resonant with thrift, restraint, patience, and conversion
+- centered on making leverage and value from scraps rather than wallowing in grime
+
+The strongest thematic bridge is:
+
+- turning scraps into leverage
+- making something useful from what would otherwise be discarded
+- carrying, sorting, tagging, repairing, and converting limited resources
 
 This is a better thematic fit than the earlier electrical or singularity framing and avoids overlapping too much with existing electric characters.
 
@@ -188,7 +201,7 @@ Across Ironclad, Silent, Defect, and Watcher, the early pool consistently covers
 
 That is the template worth reusing.
 
-For Scavenger, the matching early roles should be:
+For the Salvager, the matching early roles should be:
 
 - basic attack
 - basic defense
@@ -209,7 +222,7 @@ That means the early set should include some deliberately plain cards. The trap 
 
 This section is design context for the old scaffold and the role map it exposed.
 
-For the current starter implementation target, use [10_SCAVENGER_IMPLEMENTATION_BRIEF.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\10_SCAVENGER_IMPLEMENTATION_BRIEF.md).
+For the current starter implementation target, use [10_SALVAGER_IMPLEMENTATION_BRIEF.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\10_SALVAGER_IMPLEMENTATION_BRIEF.md).
 
 Starter size is currently justified at 14 cards, because the class effectively draws 7 per turn at baseline and would otherwise become too compressed too quickly.
 

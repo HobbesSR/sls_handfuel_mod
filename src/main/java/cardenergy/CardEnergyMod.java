@@ -61,7 +61,7 @@ public class CardEnergyMod implements EditCharactersSubscriber, EditCardsSubscri
 
     public static void initialize() {
         TerracottaColorScheme.register();
-        logger.info("Initializing Scavenger build channel={} version={}", BuildInfo.getDisplay(), BuildInfo.getVersion());
+        logger.info("Initializing Salvager build channel={} version={}", BuildInfo.getDisplay(), BuildInfo.getVersion());
         new CardEnergyMod();
     }
 
@@ -77,7 +77,7 @@ public class CardEnergyMod implements EditCharactersSubscriber, EditCardsSubscri
                 PORTRAIT_IMAGE,
                 CardEnergyCharacterEnum.HAND_FUEL_TERRACOTTA
         );
-        logger.info("Registered hand-fuel terracotta scavenger");
+        logger.info("Registered hand-fuel terracotta salvager");
     }
 
     @Override

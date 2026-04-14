@@ -1,8 +1,8 @@
-# Terracotta Resource Checklist
+# Salvager Resource Checklist
 
 ## Purpose
 
-This document lists the documents, assets, code scaffolding, and content resources needed to move from the current hand-fuel prototype to a real Terracotta card set.
+This document lists the documents, assets, code scaffolding, and content resources needed to move from the current hand-fuel prototype to a real Terracotta Salvager card set.
 
 It is a planning and tracking document, not an implementation log.
 
@@ -12,17 +12,17 @@ It should not overrule the implementation brief or mechanics doc. It exists to t
 
 Use documents in this order:
 
-- [10_SCAVENGER_IMPLEMENTATION_BRIEF.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\10_SCAVENGER_IMPLEMENTATION_BRIEF.md)
-- [20_SCAVENGER_MECHANICS.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\20_SCAVENGER_MECHANICS.md)
-- [30_SCAVENGER_SET_DESIGN.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\30_SCAVENGER_SET_DESIGN.md)
-- [40_SCAVENGER_IMPLEMENTATION_PLAN.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\40_SCAVENGER_IMPLEMENTATION_PLAN.md)
+- [10_SALVAGER_IMPLEMENTATION_BRIEF.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\10_SALVAGER_IMPLEMENTATION_BRIEF.md)
+- [20_SALVAGER_MECHANICS.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\20_SALVAGER_MECHANICS.md)
+- [30_SALVAGER_SET_DESIGN.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\30_SALVAGER_SET_DESIGN.md)
+- [40_SALVAGER_IMPLEMENTATION_PLAN.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\40_SALVAGER_IMPLEMENTATION_PLAN.md)
 
 Notes:
 
-- `10_SCAVENGER_IMPLEMENTATION_BRIEF.md` is the current starter/common implementation brief
-- `20_SCAVENGER_MECHANICS.md` is the mechanic-state doc
-- `30_SCAVENGER_SET_DESIGN.md` is the broader set-design doc
-- `40_SCAVENGER_IMPLEMENTATION_PLAN.md` is the staged roadmap
+- `10_SALVAGER_IMPLEMENTATION_BRIEF.md` is the current starter/common implementation brief
+- `20_SALVAGER_MECHANICS.md` is the mechanic-state doc
+- `30_SALVAGER_SET_DESIGN.md` is the broader set-design doc
+- `40_SALVAGER_IMPLEMENTATION_PLAN.md` is the staged roadmap
 
 ## Planning Documents To Create
 
@@ -120,6 +120,13 @@ Need review or replacement for:
 Current state:
 
 - prototype uses existing images and test scaffolding
+
+Current thematic direction:
+
+- avoid filthy caricature framing
+- more resourceful drifter / salvage sage / alley alchemist
+- repaired gear, tagged bundles, baskets, trinkets, containers, and practiced reuse
+- visual language should support thrift, patience, and conversion
 
 Checklist:
 

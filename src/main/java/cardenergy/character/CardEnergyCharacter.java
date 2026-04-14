@@ -130,7 +130,7 @@ public class CardEnergyCharacter extends CustomPlayer {
 
     @Override
     public String getLocalizedCharacterName() {
-        return "The Scrounger";
+        return "The Salvager";
     }
 
     @Override
@@ -145,7 +145,7 @@ public class CardEnergyCharacter extends CustomPlayer {
 
     @Override
     public String getSpireHeartText() {
-        return "NL You tighten your grip on a fistful of scavenged tools.";
+        return "NL You tighten your grip on a bundle of repaired tools and tagged scrap.";
     }
 
     @Override
@@ -164,7 +164,7 @@ public class CardEnergyCharacter extends CustomPlayer {
 
     @Override
     public String getVampireText() {
-        return "NL You offer up scraps instead of blood.";
+        return "NL You offer up salvaged trinkets instead of blood.";
     }
 
     @Override
@@ -178,8 +178,8 @@ public class CardEnergyCharacter extends CustomPlayer {
     @Override
     public CharSelectInfo getLoadout() {
         return new CharSelectInfo(
-                "The Scrounger",
-                "A terracotta scavenger who spends cards in hand as fuel.",
+                "The Salvager",
+                "A terracotta drifter who turns scrap into leverage, spending cards in hand as fuel.",
                 80,
                 80,
                 0,
@@ -194,7 +194,7 @@ public class CardEnergyCharacter extends CustomPlayer {
 
     @Override
     public String getTitle(PlayerClass playerClass) {
-        return "the Scrounger";
+        return "the Salvager";
     }
 
     @Override

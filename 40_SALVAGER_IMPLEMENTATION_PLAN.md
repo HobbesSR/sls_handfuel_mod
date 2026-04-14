@@ -1,27 +1,27 @@
-# Terracotta Set Implementation Plan
+# Salvager Set Implementation Plan
 
 ## Purpose
 
-This document turns the current hand-fuel prototype and the broader set design ideas into a staged implementation plan.
+This document turns the current Salvager hand-fuel prototype and the broader set design ideas into a staged implementation plan.
 
 It is intentionally focused on sequencing, supporting documents, and practical content scaffolding. It is not a final set bible and it is not an implementation spec for every card.
 
-It is also not the authoritative source for the exact current starter/common target. That role now belongs to [10_SCAVENGER_IMPLEMENTATION_BRIEF.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\10_SCAVENGER_IMPLEMENTATION_BRIEF.md).
+It is also not the authoritative source for the exact current starter/common target. That role now belongs to [10_SALVAGER_IMPLEMENTATION_BRIEF.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\10_SALVAGER_IMPLEMENTATION_BRIEF.md).
 
 ## Design Inputs
 
 Current inputs:
 
-- [10_SCAVENGER_IMPLEMENTATION_BRIEF.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\10_SCAVENGER_IMPLEMENTATION_BRIEF.md)
+- [10_SALVAGER_IMPLEMENTATION_BRIEF.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\10_SALVAGER_IMPLEMENTATION_BRIEF.md)
 - the existing hand-fuel prototype and adapter behavior
-- [20_SCAVENGER_MECHANICS.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\20_SCAVENGER_MECHANICS.md)
-- [30_SCAVENGER_SET_DESIGN.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\30_SCAVENGER_SET_DESIGN.md)
+- [20_SALVAGER_MECHANICS.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\20_SALVAGER_MECHANICS.md)
+- [30_SALVAGER_SET_DESIGN.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\30_SALVAGER_SET_DESIGN.md)
 
 Important note:
 
-- `10_SCAVENGER_IMPLEMENTATION_BRIEF.md` is now the authoritative starter/common implementation brief
+- `10_SALVAGER_IMPLEMENTATION_BRIEF.md` is now the authoritative starter/common implementation brief
 - this roadmap should follow that brief for immediate content priorities
-- `30_SCAVENGER_SET_DESIGN.md` remains source material for broader class structure and long-term set reasoning
+- `30_SALVAGER_SET_DESIGN.md` remains source material for broader class structure and long-term set reasoning
 
 ## Project Direction
 
@@ -59,9 +59,15 @@ Deliverables:
 
 Open questions to settle early:
 
-- does the class keep the working fantasy and vocabulary from `30_SCAVENGER_SET_DESIGN.md` such as `Consume`, `Hoard`, `Rot`, and `Junk`
+- does the class keep the working fantasy and vocabulary from `30_SALVAGER_SET_DESIGN.md` such as `Consume`, `Hoard`, `Rot`, and `Junk`
 - is `Terracotta` only the gameplay color, or also the public visual/faction identity
 - how much of the copied red set is temporary scaffolding versus intended long-term base content
+
+Current public-facing answer:
+
+- the gameplay color remains `Terracotta`
+- the public character name is now `Salvager`
+- the thematic framing should emphasize thrift, patience, repair, and turning scraps into leverage
 
 ## Phase 1: Content Scaffolding Baseline
 
@@ -129,7 +135,7 @@ Success criteria:
 
 Goal:
 
-- implement the deliberate starter package defined in [10_SCAVENGER_IMPLEMENTATION_BRIEF.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\10_SCAVENGER_IMPLEMENTATION_BRIEF.md)
+- implement the deliberate starter package defined in [10_SALVAGER_IMPLEMENTATION_BRIEF.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\10_SALVAGER_IMPLEMENTATION_BRIEF.md)
 
 This is the first design-critical phase.
 
@@ -348,8 +354,8 @@ This phase is intentionally deferred.
 
 Core planning docs for the next stretch:
 
-- `40_SCAVENGER_IMPLEMENTATION_PLAN.md`
-- `50_SCAVENGER_RESOURCE_CHECKLIST.md`
+- `40_SALVAGER_IMPLEMENTATION_PLAN.md`
+- `50_SALVAGER_RESOURCE_CHECKLIST.md`
 - `TERRACOTTA_RED_SET_AUDIT.md`
 - `TERRACOTTA_STARTER_PACKAGE.md`
 - `TERRACOTTA_KEYWORD_RULES.md`
@@ -358,7 +364,7 @@ Core planning docs for the next stretch:
 
 Suggested order to author them:
 
-1. `50_SCAVENGER_RESOURCE_CHECKLIST.md`
+1. `50_SALVAGER_RESOURCE_CHECKLIST.md`
 2. `TERRACOTTA_RED_SET_AUDIT.md`
 3. `TERRACOTTA_STARTER_PACKAGE.md`
 4. `TERRACOTTA_KEYWORD_RULES.md`
