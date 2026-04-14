@@ -1,76 +1,76 @@
-red_slot,red_class,red_role_tags,mirrored_in_repo,slot_status,salvager_card_name,salvager_card_id,derived_from_red,role_tags,lane,design_doc_ref,custom_behavior_summary,notes
-Strike,Strike_Red,attack|damage|starter_attack|basic,false,implemented_target,Scrounge Strike,cardenergy:ScroungeStrike,Strike_Red,attack|damage|starter_attack|basic|filler,starter,10_SALVAGER_IMPLEMENTATION_BRIEF,,Plain starter attack replacing the normal strike slot.
-Defend,Defend_Red,skill|block|starter_block|basic,false,implemented_target,Scrounge Defend,cardenergy:ScroungeDefend,Defend_Red,skill|block|starter_block|basic|filler,starter,10_SALVAGER_IMPLEMENTATION_BRIEF,,Plain starter defense replacing the normal defend slot.
+red_slot,red_class,red_role_tags,mirrored_in_repo,slot_status,salvager_card_name,salvager_card_id,derived_from_red,replacement_relation,role_tags,lane,design_doc_ref,custom_behavior_summary,notes
+Strike,Strike_Red,attack|damage|starter_attack|basic,false,implemented_target,Scrounge Strike,cardenergy:ScroungeStrike,Strike_Red,direct,attack|damage|starter_attack|basic|filler,starter,10_SALVAGER_IMPLEMENTATION_BRIEF,,Plain starter attack replacing the normal strike slot.
+Defend,Defend_Red,skill|block|starter_block|basic,false,implemented_target,Scrounge Defend,cardenergy:ScroungeDefend,Defend_Red,direct,skill|block|starter_block|basic|filler,starter,10_SALVAGER_IMPLEMENTATION_BRIEF,,Plain starter defense replacing the normal defend slot.
 Anger,Anger,attack|damage|starter_attack|copy_generation,false,unmapped,,,,,,,, 
 Armaments,Armaments,skill|block|starter_upgrade|utility,false,unmapped,,,,,,,, 
 Barricade,Barricade,power|block_engine|retention,true,mirrored,,,,,,,, 
-Bash,Bash,attack|damage|starter_attack|vulnerable,false,implemented_target,Rotting Blow,cardenergy:RottingBlow,Bash,attack|damage|rot|starter_special|urgent_attack,rot,10_SALVAGER_IMPLEMENTATION_BRIEF,Rot exhausts if discarded or left in hand at end of turn.,Bash-equivalent starter special.
-Battle Trance,BattleTrance,skill|draw|hand_refill,false,implemented_target,Turn Aside,cardenergy:TurnAside,Warcry,skill|block|reactive_defense|next_turn_draw|smoother,reactive_defense,10_SALVAGER_IMPLEMENTATION_BRIEF,Draws next turn if all damage is blocked.,Smoother slot moved into reactive defense.
+Bash,Bash,attack|damage|starter_attack|vulnerable,false,implemented_target,Rotting Blow,cardenergy:RottingBlow,Bash,direct,attack|damage|rot|starter_special|urgent_attack,rot,10_SALVAGER_IMPLEMENTATION_BRIEF,Rot exhausts if discarded or left in hand at end of turn.,Bash-equivalent starter special.
+Battle Trance,BattleTrance,skill|draw|hand_refill,false,implemented_target,Turn Aside,cardenergy:TurnAside,Warcry,strategic_shift,skill|block|reactive_defense|next_turn_draw|smoother,reactive_defense,10_SALVAGER_IMPLEMENTATION_BRIEF,Draws next turn if all damage is blocked.,Smoother slot moved into reactive defense.
 Berserk,Berserk,power|energy_engine|self_vulnerable,true,mirrored,,,,,,,, 
 Blood for Blood,BloodForBlood,attack|damage|cost_scaler|self_damage_payoff,true,mirrored,,,,,,,, 
 Bloodletting,Bloodletting,skill|energy_engine|self_damage,true,mirrored,,,,,,,, 
 Bludgeon,Bludgeon,attack|damage|finisher|big_hit,true,mirrored,,,,,,,, 
 Body Slam,BodySlam,attack|block_payoff|finisher,false,unmapped,,,,,,,, 
 Brutality,Brutality,power|draw_engine|self_damage,true,mirrored,,,,,,,, 
-Burning Pact,BurningPact,skill|draw|exhaust_enabler,false,implemented_target,Patchwork,cardenergy:Patchwork,BurningPact,skill|block|draw|exhaust_recursion|glue,exhaust_value,10_SALVAGER_IMPLEMENTATION_BRIEF,Returns 1 exhausted card to discard and draws 1.,Hybrid glue card replacing the main exhaust-cantrip slot.
-Carnage,Carnage,attack|damage|finisher|ethereal,false,implemented_target,Rotting Slash,cardenergy:RottingSlash,Carnage,attack|damage|rot|common_attack,rot,10_SALVAGER_IMPLEMENTATION_BRIEF,Rot exhausts if discarded or left in hand at end of turn.,Carnage-like pressure slot rethemed as Rot.
+Burning Pact,BurningPact,skill|draw|exhaust_enabler,false,implemented_target,Patchwork,cardenergy:Patchwork,BurningPact,analogous,skill|block|draw|exhaust_recursion|glue,exhaust_value,10_SALVAGER_IMPLEMENTATION_BRIEF,Returns 1 exhausted card to discard and draws 1.,Hybrid glue card replacing the main exhaust-cantrip slot.
+Carnage,Carnage,attack|damage|finisher|ethereal,false,implemented_target,Rotting Slash,cardenergy:RottingSlash,Carnage,direct,attack|damage|rot|common_attack,rot,10_SALVAGER_IMPLEMENTATION_BRIEF,Rot exhausts if discarded or left in hand at end of turn.,Carnage-like pressure slot rethemed as Rot.
 Clash,Clash,attack|damage|conditional_play,false,unmapped,,,,,,,, 
-Cleave,Cleave,attack|aoe|common_attack,false,implemented_target,Scrap Burst,cardenergy:ScrapBurst,Cleave,attack|aoe|consume|starter_signature,consume,10_SALVAGER_IMPLEMENTATION_BRIEF,Consume autoplays on discard and exhausts.,Starter signature AoE consume card.
+Cleave,Cleave,attack|aoe|common_attack,false,implemented_target,Scrap Burst,cardenergy:ScrapBurst,Cleave,analogous,attack|aoe|consume|starter_signature,consume,10_SALVAGER_IMPLEMENTATION_BRIEF,Consume autoplays on discard and exhausts.,Starter signature AoE consume card.
 Clothesline,Clothesline,attack|damage|weak,false,unmapped,,,,,,,, 
 Combust,Combust,power|aoe|self_damage|damage_engine,true,mirrored,,,,,,,, 
 Corruption,Corruption,power|skill_engine|exhaust_engine|build_around,true,mirrored,,,,,,,, 
 Dark Embrace,DarkEmbrace,power|draw_engine|exhaust_payoff,true,mirrored,,,,,,,, 
 Demon Form,DemonForm,power|strength_engine|late_game,true,mirrored,,,,,,,, 
-Disarm,Disarm,skill|debuff|strength_reduction,false,implemented_target,Dug In,cardenergy:DugIn,Clothesline,skill|block|weak|common_defense,reactive_defense,10_SALVAGER_IMPLEMENTATION_BRIEF,Applies Weak while blocking.,Single-target defense-debuff slot.
+Disarm,Disarm,skill|debuff|strength_reduction,false,implemented_target,Dug In,cardenergy:DugIn,Clothesline,strategic_shift,skill|block|weak|common_defense,reactive_defense,10_SALVAGER_IMPLEMENTATION_BRIEF,Applies Weak while blocking.,Single-target defense-debuff slot.
 Double Tap,DoubleTap,skill|attack_combo|burst,true,mirrored,,,,,,,, 
-Dropkick,Dropkick,attack|damage|draw|energy_refund|vulnerable_payoff,false,implemented_target,Ashen Count,cardenergy:AshenCount,Dropkick,attack|damage|exhaust_payoff|conditional_bonus,exhaust_value,10_SALVAGER_IMPLEMENTATION_BRIEF,Deals bonus damage if a card was exhausted this turn.,Conditional payoff slot redirected to exhaust matters.
+Dropkick,Dropkick,attack|damage|draw|energy_refund|vulnerable_payoff,false,implemented_target,Ashen Count,cardenergy:AshenCount,Dropkick,analogous,attack|damage|exhaust_payoff|conditional_bonus,exhaust_value,10_SALVAGER_IMPLEMENTATION_BRIEF,Deals bonus damage if a card was exhausted this turn.,Conditional payoff slot redirected to exhaust matters.
 Dual Wield,DualWield,skill|copy_generation|combo,true,mirrored,,,,,,,, 
 Entrench,Entrench,skill|block_payoff|doubling,true,mirrored,,,,,,,, 
 Evolve,Evolve,power|status_payoff|draw_engine,true,mirrored,,,,,,,, 
-Exhume,Exhume,skill|exhaust_recursion|utility,false,implemented_target,Recovery,cardenergy:Recovery,Exhume,skill|block|exhaust_recursion|glue,exhaust_value,10_SALVAGER_IMPLEMENTATION_BRIEF,Returns up to 2 exhausted cards to discard.,Main exhaust-recursion glue slot.
+Exhume,Exhume,skill|exhaust_recursion|utility,false,implemented_target,Recovery,cardenergy:Recovery,Exhume,direct,skill|block|exhaust_recursion|glue,exhaust_value,10_SALVAGER_IMPLEMENTATION_BRIEF,Returns up to 2 exhausted cards to discard.,Main exhaust-recursion glue slot.
 Feed,Feed,attack|damage|growth|kill_reward,true,mirrored,,,,,,,, 
 Feel No Pain,FeelNoPain,power|exhaust_payoff|block_engine,true,mirrored,,,,,,,, 
 Fiend Fire,FiendFire,attack|exhaust_enabler|finisher|burst,true,mirrored,,,,,,,, 
 Fire Breathing,FireBreathing,power|status_payoff|aoe,true,mirrored,,,,,,,, 
-Flame Barrier,FlameBarrier,skill|block|thorns|reactive_defense,false,implemented_target,Barbed Guard,cardenergy:BarbedGuard,FlameBarrier,skill|block|reactive_defense|damage_return,reactive_defense,10_SALVAGER_IMPLEMENTATION_BRIEF,Deals damage back if the enemy attacks you this turn.,Reactive defense slot.
+Flame Barrier,FlameBarrier,skill|block|thorns|reactive_defense,false,implemented_target,Barbed Guard,cardenergy:BarbedGuard,FlameBarrier,direct,skill|block|reactive_defense|damage_return,reactive_defense,10_SALVAGER_IMPLEMENTATION_BRIEF,Deals damage back if the enemy attacks you this turn.,Reactive defense slot.
 Flex,Flex,skill|strength_burst|temporary_buff,false,unmapped,,,,,,,, 
-Ghostly Armor,GhostlyArmor,skill|block|ethereal|premium_defense,false,implemented_target,Rotting Shelter,cardenergy:RottingShelter,GhostlyArmor,skill|block|draw|rot|defensive_signpost,rot,10_SALVAGER_IMPLEMENTATION_BRIEF,Rot exhausts if discarded or left in hand at end of turn.,Defensive Rot signpost.
+Ghostly Armor,GhostlyArmor,skill|block|ethereal|premium_defense,false,implemented_target,Rotting Shelter,cardenergy:RottingShelter,GhostlyArmor,direct,skill|block|draw|rot|defensive_signpost,rot,10_SALVAGER_IMPLEMENTATION_BRIEF,Rot exhausts if discarded or left in hand at end of turn.,Defensive Rot signpost.
 Havoc,Havoc,skill|random_play|tempo,false,unmapped,,,,,,,, 
-Headbutt,Headbutt,attack|damage|recursion|topdeck,false,implemented_target,Salvage Swing,cardenergy:SalvageSwing,IronWave,attack|damage|block|exhaust_payoff|hybrid,exhaust_value,10_SALVAGER_IMPLEMENTATION_BRIEF,Gains block if a card was exhausted this turn.,Hybrid attack slot used for exhaust-value crossover.
-Heavy Blade,HeavyBlade,attack|strength_payoff|finisher,false,implemented_target,Pile Driver,cardenergy:PileDriver,HeavyBlade,attack|damage|finisher,attack,10_SALVAGER_IMPLEMENTATION_BRIEF,,Simple heavy-hitting common finisher slot.
+Headbutt,Headbutt,attack|damage|recursion|topdeck,false,implemented_target,Salvage Swing,cardenergy:SalvageSwing,IronWave,strategic_shift,attack|damage|block|exhaust_payoff|hybrid,exhaust_value,10_SALVAGER_IMPLEMENTATION_BRIEF,Gains block if a card was exhausted this turn.,Hybrid attack slot used for exhaust-value crossover.
+Heavy Blade,HeavyBlade,attack|strength_payoff|finisher,false,implemented_target,Pile Driver,cardenergy:PileDriver,HeavyBlade,analogous,attack|damage|finisher,attack,10_SALVAGER_IMPLEMENTATION_BRIEF,,Simple heavy-hitting common finisher slot.
 Hemokinesis,Hemokinesis,attack|damage|self_damage|rate,true,mirrored,,,,,,,, 
 Immolate,Immolate,attack|aoe|finisher|status_downside,true,mirrored,,,,,,,, 
 Impervious,Impervious,skill|block|premium_defense|exhaust,true,mirrored,,,,,,,, 
 Infernal Blade,InfernalBlade,skill|card_generation|attack_generation,true,mirrored,,,,,,,, 
 Inflame,Inflame,power|strength_engine|scaling,true,mirrored,,,,,,,, 
 Intimidate,Intimidate,skill|aoe_debuff|weak,true,mirrored,,,,,,,, 
-Iron Wave,IronWave,attack|damage|block|hybrid,false,implemented_target,Packed Swing,cardenergy:PackedSwing,IronWave,attack|damage|block|hybrid|glue,attack,10_SALVAGER_IMPLEMENTATION_BRIEF,,Plain hybrid glue replacing Iron Wave.
+Iron Wave,IronWave,attack|damage|block|hybrid,false,implemented_target,Packed Swing,cardenergy:PackedSwing,IronWave,direct,attack|damage|block|hybrid|glue,attack,10_SALVAGER_IMPLEMENTATION_BRIEF,,Plain hybrid glue replacing Iron Wave.
 Juggernaut,Juggernaut,power|block_payoff|damage_engine,true,mirrored,,,,,,,, 
 Limit Break,LimitBreak,skill|strength_payoff|doubling,true,mirrored,,,,,,,, 
-Metallicize,Metallicize,power|block_engine|passive_defense,false,implemented_target,Hidden Cache,cardenergy:HiddenCache,Metallicize,skill|block|hoard|signpost,hoard,10_SALVAGER_IMPLEMENTATION_BRIEF,Hoard grows while held and resets on play.,Defensive engine slot redirected into Hoard.
+Metallicize,Metallicize,power|block_engine|passive_defense,false,implemented_target,Hidden Cache,cardenergy:HiddenCache,Metallicize,strategic_shift,skill|block|hoard|signpost,hoard,10_SALVAGER_IMPLEMENTATION_BRIEF,Hoard grows while held and resets on play.,Defensive engine slot redirected into Hoard.
 Offering,Offering,skill|energy_engine|draw|self_damage|burst,true,mirrored,,,,,,,, 
 Perfected Strike,PerfectedStrike,attack|tribal_payoff|strike_payoff,false,unmapped,,,,,,,, 
 Pommel Strike,PommelStrike,attack|damage|draw|common_attack,false,unmapped,,,,,,,, 
-Power Through,PowerThrough,skill|block|status_downside|premium_defense,false,implemented_target,Hunker,cardenergy:Hunker,PowerThrough,skill|block|premium_defense,reactive_defense,10_SALVAGER_IMPLEMENTATION_BRIEF,,Big simple defense slot without the status downside.
+Power Through,PowerThrough,skill|block|status_downside|premium_defense,false,implemented_target,Hunker,cardenergy:Hunker,PowerThrough,analogous,skill|block|premium_defense,reactive_defense,10_SALVAGER_IMPLEMENTATION_BRIEF,,Big simple defense slot without the status downside.
 Pummel,Pummel,attack|multi_hit|strength_payoff,true,mirrored,,,,,,,, 
-Rage,Rage,skill|attack_payoff|block,false,implemented_target,Guard the Heap,cardenergy:GuardTheHeap,Rage,skill|block|reactive_defense|attacked_last_turn,reactive_defense,10_SALVAGER_IMPLEMENTATION_BRIEF,Gains extra block if you were attacked last turn.,Cheap reactive defense slot.
-Rampage,Rampage,attack|damage|self_scaling,false,implemented_target,Stockpile,cardenergy:Stockpile,IronWave,attack|block|hoard|hybrid|signpost,hoard,10_SALVAGER_IMPLEMENTATION_BRIEF,Hoard grows while held and resets on play.,Scaling attack slot redirected into Hoard hybrid.
+Rage,Rage,skill|attack_payoff|block,false,implemented_target,Guard the Heap,cardenergy:GuardTheHeap,Rage,analogous,skill|block|reactive_defense|attacked_last_turn,reactive_defense,10_SALVAGER_IMPLEMENTATION_BRIEF,Gains extra block if you were attacked last turn.,Cheap reactive defense slot.
+Rampage,Rampage,attack|damage|self_scaling,false,implemented_target,Stockpile,cardenergy:Stockpile,IronWave,strategic_shift,attack|block|hoard|hybrid|signpost,hoard,10_SALVAGER_IMPLEMENTATION_BRIEF,Hoard grows while held and resets on play.,Scaling attack slot redirected into Hoard hybrid.
 Reaper,Reaper,attack|aoe|heal|strength_payoff,true,mirrored,,,,,,,, 
 Reckless Charge,RecklessCharge,attack|damage|status_downside|tempo,true,mirrored,,,,,,,, 
 Rupture,Rupture,power|self_damage_payoff|strength_engine,true,mirrored,,,,,,,, 
 Searing Blow,SearingBlow,attack|single_card_scaler|upgrade_payoff,true,mirrored,,,,,,,, 
-Second Wind,SecondWind,skill|block|exhaust_enabler|status_cleanup,false,implemented_target,Scavenge the Wreck,cardenergy:ScavengeTheWreck,BurningPact,skill|draw|exhaust_enabler|glue,exhaust_value,10_SALVAGER_IMPLEMENTATION_BRIEF,Exhausts a card in hand to draw 2.,Main hand-exhaust enabler slot.
+Second Wind,SecondWind,skill|block|exhaust_enabler|status_cleanup,false,implemented_target,Scavenge the Wreck,cardenergy:ScavengeTheWreck,BurningPact,strategic_shift,skill|draw|exhaust_enabler|glue,exhaust_value,10_SALVAGER_IMPLEMENTATION_BRIEF,Exhausts a card in hand to draw 2.,Main hand-exhaust enabler slot.
 Seeing Red,SeeingRed,skill|energy_engine|exhaust|burst,true,mirrored,,,,,,,, 
-Sentinel,Sentinel,skill|block|exhaust_payoff|energy_refund,false,implemented_target,Burn Through,cardenergy:BurnThrough,Sentinel,skill|block|consume|exhaust_payoff,consume,10_SALVAGER_IMPLEMENTATION_BRIEF,Consume autoplays on discard and exhausts.,Consume block slot that still feeds exhaust-value play.
+Sentinel,Sentinel,skill|block|exhaust_payoff|energy_refund,false,implemented_target,Burn Through,cardenergy:BurnThrough,Sentinel,strategic_shift,skill|block|consume|exhaust_payoff,consume,10_SALVAGER_IMPLEMENTATION_BRIEF,Consume autoplays on discard and exhausts.,Consume block slot that still feeds exhaust-value play.
 Sever Soul,SeverSoul,attack|damage|exhaust_enabler|hand_cleanup,true,mirrored,,,,,,,, 
 Shockwave,Shockwave,skill|aoe_debuff|weak|vulnerable,true,mirrored,,,,,,,, 
-Shrug It Off,ShrugItOff,skill|block|draw|smoother,false,implemented_target,Brace,cardenergy:Brace,GhostlyArmor,skill|block|weak|starter_special|premium_defense,starter,10_SALVAGER_IMPLEMENTATION_BRIEF,Applies Weak while providing premium starter defense.,Starter defensive special occupying the main smooth defense slot.
+Shrug It Off,ShrugItOff,skill|block|draw|smoother,false,implemented_target,Brace,cardenergy:Brace,GhostlyArmor,analogous,skill|block|weak|starter_special|premium_defense,starter,10_SALVAGER_IMPLEMENTATION_BRIEF,Applies Weak while providing premium starter defense.,Starter defensive special occupying the main smooth defense slot.
 Spot Weakness,SpotWeakness,skill|strength_engine|conditional_buff,true,mirrored,,,,,,,, 
 Sword Boomerang,SwordBoomerang,attack|multi_hit|strength_payoff,false,unmapped,,,,,,,, 
-Thunderclap,ThunderClap,attack|aoe|vulnerable|common_attack,false,implemented_target,Scrap Spray,cardenergy:ScrapSpray,Cleave,attack|aoe|common_attack,attack,10_SALVAGER_IMPLEMENTATION_BRIEF,,Common AoE reward card descended from the starter signature AoE.
-True Grit,TrueGrit,skill|block|exhaust_enabler|utility,false,implemented_target,Brace for Impact,cardenergy:BraceForImpact,Defend_Red,skill|block|common_defense,reactive_defense,10_SALVAGER_IMPLEMENTATION_BRIEF,,Plain block common replacing the utilitarian defense slot.
+Thunderclap,ThunderClap,attack|aoe|vulnerable|common_attack,false,implemented_target,Scrap Spray,cardenergy:ScrapSpray,Cleave,analogous,attack|aoe|common_attack,attack,10_SALVAGER_IMPLEMENTATION_BRIEF,,Common AoE reward card descended from the starter signature AoE.
+True Grit,TrueGrit,skill|block|exhaust_enabler|utility,false,implemented_target,Brace for Impact,cardenergy:BraceForImpact,Defend_Red,strategic_shift,skill|block|common_defense,reactive_defense,10_SALVAGER_IMPLEMENTATION_BRIEF,,Plain block common replacing the utilitarian defense slot.
 Twin Strike,TwinStrike,attack|multi_hit|starter_attack,false,unmapped,,,,,,,, 
 Uppercut,Uppercut,attack|damage|weak|vulnerable,true,mirrored,,,,,,,, 
-Warcry,Warcry,skill|draw|topdeck|smoother,false,implemented_target,Loose Parts,cardenergy:LooseParts,Warcry,skill|draw|consume|hand_fixing,consume,10_SALVAGER_IMPLEMENTATION_BRIEF,Consume autoplays on discard and exhausts.,Cheap consume cantrip in the smoother slot.
+Warcry,Warcry,skill|draw|topdeck|smoother,false,implemented_target,Loose Parts,cardenergy:LooseParts,Warcry,analogous,skill|draw|consume|hand_fixing,consume,10_SALVAGER_IMPLEMENTATION_BRIEF,Consume autoplays on discard and exhausts.,Cheap consume cantrip in the smoother slot.
 Whirlwind,Whirlwind,attack|aoe|x_cost|finisher,true,mirrored,,,,,,,, 
-Wild Strike,WildStrike,attack|damage|status_downside,false,implemented_target,Scrap Knife,cardenergy:ScrapKnife,WildStrike,attack|damage|consume,consume,10_SALVAGER_IMPLEMENTATION_BRIEF,Consume autoplays on discard and exhausts.,Simple consume attack common.
+Wild Strike,WildStrike,attack|damage|status_downside,false,implemented_target,Scrap Knife,cardenergy:ScrapKnife,WildStrike,analogous,attack|damage|consume,consume,10_SALVAGER_IMPLEMENTATION_BRIEF,Consume autoplays on discard and exhausts.,Simple consume attack common.

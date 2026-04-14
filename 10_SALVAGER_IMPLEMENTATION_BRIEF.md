@@ -36,6 +36,27 @@ Use documents in this order:
 
 Where those documents conflict on immediate starter/common implementation priorities, this brief wins.
 
+## Skeleton Mapping Note
+
+Use [design/red_set_mapping.csv](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\design\red_set_mapping.csv) as the current scaffold map for replacing the temporary red baseline.
+
+Interpret that CSV as:
+
+- a loose structural template
+- a coverage sanity check
+- a record of which red slot we are anchoring against
+
+Do not interpret it as a requirement that every Salvager card preserve the exact original Ironclad role.
+
+The important fields are:
+
+- `red_slot`: the reference slot in the scaffold
+- `red_role_tags`: the apparent structural job of that reference slot
+- `derived_from_red`: the red implementation or concept we are borrowing from, if any
+- `replacement_relation`: whether the replacement is `direct`, `analogous`, or a deliberate `strategic_shift`
+
+The implementation target is still the Salvager set's own strategic identity. The red skeleton is there to keep pacing and role coverage legible while the set is being rewritten.
+
 ## High-Level Intent
 
 Keep the starter specials as `BASIC`.

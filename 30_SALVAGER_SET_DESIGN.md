@@ -201,6 +201,24 @@ Across Ironclad, Silent, Defect, and Watcher, the early pool consistently covers
 
 That is the template worth reusing.
 
+The current repository tracks that template in [design/red_set_mapping.csv](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\design\red_set_mapping.csv).
+
+That CSV should be read as:
+
+- a loose reference skeleton
+- a map of which red slot we are replacing
+- a way to compare the old slot's apparent job against the new Salvager card's intended job
+
+It should not be read as a one-to-one obligation to preserve every original Ironclad role exactly.
+
+Some replacements should be:
+
+- `direct`, where the Salvager card is intentionally covering nearly the same structural job
+- `analogous`, where the job is similar but translated into Salvager's own grammar
+- `strategic_shift`, where the slot is being reused for a different but still structurally useful Salvager purpose
+
+That is intentional. The skeleton is there to keep the set coherent while it evolves, not to prevent the set from becoming its own thing.
+
 For the Salvager, the matching early roles should be:
 
 - basic attack

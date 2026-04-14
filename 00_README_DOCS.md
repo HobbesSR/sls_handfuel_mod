@@ -14,12 +14,15 @@ Read the project documents in this order:
    Planning and tracking checklist.
 6. [workshop/README.md](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\workshop\README.md)
    Workshop staging and upload notes.
+7. [design/red_set_mapping.csv](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\design\red_set_mapping.csv)
+   Red-slot scaffold and Salvager replacement map.
 
 Rules of thumb:
 
 - If documents conflict on immediate starter/common card work, the implementation brief wins.
 - Use the mechanics doc for current runtime behavior, not future card intent.
 - Use the set-design doc for structural templates and role coverage, not exact starter contents.
+- Use `design/red_set_mapping.csv` as a loose slot map, not a strict requirement to preserve every Ironclad role one-for-one.
 - Use the Workshop readme only for packaging and upload flow, not gameplay or card-design truth.
 
 Public naming note:
