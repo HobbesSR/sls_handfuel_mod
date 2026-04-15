@@ -174,9 +174,11 @@ Not through constant tribal text on everything.
 
 The class has:
 
-- a reactive defense / thorns / punishment lane
-- a consume / exhaust-matters lane
-- a Hoard vein that runs through both and becomes a higher-ceiling package
+- a reactive defense / punishment package
+- an exhaust-value package
+- `Consume` as infrastructure supporting both
+- `Rot` as tension living mostly inside exhaust-value rather than as a third full lane
+- a Hoard vein that runs through the class as sparse optionality support
 - Junk as the family crossing all of the above
 
 This means the class should not feel like three separate archetypes stapled together. Instead:
@@ -185,6 +187,7 @@ This means the class should not feel like three separate archetypes stapled toge
 - consume / exhaust cards can be Junk
 - Hoard especially rewards Junk density
 - the best Hoard decks are moonshot decks enabled by the right uncommons and rares
+- most decks should touch `Consume`, but `Consume` itself should not be the main class endgame
 
 ## 5. Structural Template
 
@@ -316,6 +319,37 @@ Current implementation scaffold:
 
 - the mirrored Ironclad set temporarily supplies these rarity bands
 - custom Terracotta cards should gradually replace those mirrored cards as real design work is completed
+
+Recommended next-pass package from the handoff document:
+
+- commons should get cleaner conversion glue and simpler infrastructure:
+  - `Shoulder the Load`
+  - `Sort the Haul`
+  - `Scrap Toss`
+  - `Shore Up`
+  - `Pack Away`
+  - cleaner `Patchwork`
+- uncommons should carry the more volatile hand-reset and burst-conversion cards:
+  - `Upend the Pack`
+  - `Strip the Wreck`
+  - `Hidden Compartments`
+  - `Empty the Pack`
+  - `Scrapstorm`
+  - `Breakdown Rush`
+  - `Barbed Harness`
+- rares should continue to define late-game inevitability through exhaust engines, bridge powers, and a few compact finishers:
+  - `Close Appraisal`
+  - `Shelter from Scraps`
+  - `Jury-Rig Barrage`
+  - `Emergency Refit`
+
+Package guardrails:
+
+- do not treat this as a sealed discard lane
+- keep `Consume` at full value and balance it through density, awkwardness, and deck texture
+- keep Hoard sparse
+- if two cards occupy the same structural job, prefer the cleaner Salvager-native version and absorb the other role into notes or upgrades
+- late-game inevitability should still come mainly from exhaust payoffs, stable defense, and a few finishers rather than from `Consume` alone
 
 ## 8. Recommended Build Order
 

@@ -16,6 +16,8 @@ Read the project documents in this order:
    Workshop staging and upload notes.
 7. [design/red_set_mapping.csv](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\design\red_set_mapping.csv)
    Red-slot scaffold and Salvager replacement map.
+8. [design/archive/salvager_card_package_handoff.docx](c:\Users\Corey\Documents\Projects\sls_handfuel_mod\design\archive\salvager_card_package_handoff.docx)
+   Archived design handoff for the broader common/uncommon/rare package.
 
 Rules of thumb:
 
@@ -23,6 +25,7 @@ Rules of thumb:
 - Use the mechanics doc for current runtime behavior, not future card intent.
 - Use the set-design doc for structural templates and role coverage, not exact starter contents.
 - Use `design/red_set_mapping.csv` as a loose slot map, not a strict requirement to preserve every Ironclad role one-for-one.
+- Use archived handoff documents as package input and naming/design reference, not as the authoritative runtime-state document.
 - Use the Workshop readme only for packaging and upload flow, not gameplay or card-design truth.
 
 Public naming note:

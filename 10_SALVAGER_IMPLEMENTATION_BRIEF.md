@@ -57,6 +57,8 @@ The important fields are:
 
 The implementation target is still the Salvager set's own strategic identity. The red skeleton is there to keep pacing and role coverage legible while the set is being rewritten.
 
+Some next-pass designs also borrow obvious Silent precedent. In those cases, keep using the red slot as the scaffold anchor, and capture the non-red lineage in notes or the design documents rather than pretending the card is a literal red import.
+
 ## High-Level Intent
 
 Keep the starter specials as `BASIC`.
@@ -246,6 +248,11 @@ Overlap is expected.
 
 ### Attack commons
 
+`Scrap Toss`
+
+- Cost: 1
+- Deal 8 damage. Draw 1 card, then discard 1 card.
+
 `Scrap Spray`
 
 - Cost: 1
@@ -270,6 +277,11 @@ Overlap is expected.
 
 ### Defense commons
 
+`Shoulder the Load`
+
+- Cost: 1
+- Gain 8 Block. Discard 1 card.
+
 `Rotting Shelter`
 
 - Cost: 2
@@ -279,7 +291,7 @@ Overlap is expected.
 `Brace for Impact`
 
 - Cost: 1
-- Gain 8 Block
+- Gain 9 Block
 
 `Guard the Heap`
 
@@ -291,10 +303,10 @@ Overlap is expected.
 - Cost: 2
 - Gain 13 Block
 
-`Dug In`
+`Shore Up`
 
 - Cost: 1
-- Gain 6 Block. Apply 1 Weak.
+- Gain 7 Block. Exhaust 1 card from your hand.
 
 ### Consume / expendable-material commons
 
@@ -310,11 +322,10 @@ Overlap is expected.
 - Gain 6 Block
 - `Consume`
 
-`Loose Parts`
+`Sort the Haul`
 
 - Cost: 0
-- Draw 1 card
-- `Consume`
+- Draw 1 card. Discard 1 card. Exhaust.
 
 ### Exhaust/value commons
 
@@ -326,12 +337,12 @@ Overlap is expected.
 `Ashen Count`
 
 - Cost: 1
-- Deal 5 damage. If a card was Exhausted this turn, deal 5 additional damage.
+- Deal 8 damage. If a card was Exhausted this turn, deal 4 additional damage.
 
 `Patchwork`
 
 - Cost: 1
-- Gain 5 Block. Return 1 exhausted card to your discard pile. Draw 1 card.
+- Exhaust 1 card from your hand. Draw 2 cards.
 
 ### Reactive commons
 
@@ -340,10 +351,10 @@ Overlap is expected.
 - Cost: 1
 - Gain 7 Block. If an enemy attacks you this turn, deal 4 damage to it.
 
-`Turn Aside`
+`Pack Away`
 
-- Cost: 1
-- Gain 6 Block. If all damage is blocked this turn, draw 1 card next turn.
+- Cost: 0
+- Draw 1 card. Put 1 card from your hand on top of your draw pile.
 
 ### Hoard commons
 
@@ -370,6 +381,83 @@ Overlap is expected.
 
 - Cost: 1
 - Deal 6 damage. Gain 4 Block.
+
+Current design note:
+
+- `Dug In`, `Loose Parts`, and `Turn Aside` were useful first-pass cards, but the newer handoff package points toward cleaner common infrastructure in `Shoulder the Load`, `Sort the Haul`, and `Pack Away`
+- `Brace for Impact` still has a place as neutral defensive glue, but the common pool should lean more heavily on simple conversion cards and cleaner exhaust enablers than on bespoke placeholder effects
+
+## Recommended Next-Pass Uncommons
+
+These are the current recommended additions from the handoff package. They are target-state designs, not all immediate implementation requirements.
+
+`Barbed Harness`
+
+- Cost: 1
+- Type: Power
+- Whenever an enemy attacks you, deal 3 damage back.
+
+`Upend the Pack`
+
+- Cost: 0
+- Type: Skill
+- Discard your hand, then draw that many cards. Exhaust.
+
+`Strip the Wreck`
+
+- Cost: 0
+- Type: Skill
+- Exhaust up to 2 cards from your hand. Gain [E] for each card exhausted this way. Exhaust.
+
+`Hidden Compartments`
+
+- Cost: 1
+- Type: Power
+- At the start of your turn, draw 1 additional card, then discard 1 card.
+
+`Empty the Pack`
+
+- Cost: 1
+- Type: Attack
+- Deal 14 damage. Discard your hand.
+
+`Scrapstorm`
+
+- Cost: 1
+- Type: Attack
+- Deal 9 damage to ALL enemies. Discard 1 card at random.
+
+`Breakdown Rush`
+
+- Cost: 2
+- Type: Attack
+- Deal 14 damage. Costs 1 less this turn if a card was exhausted this turn.
+
+## Recommended Next-Pass Rares
+
+`Close Appraisal`
+
+- Cost: 2
+- Type: Power
+- Whenever a card is exhausted, draw 1 card.
+
+`Shelter from Scraps`
+
+- Cost: 1
+- Type: Power
+- Whenever a card is exhausted, gain 3 Block.
+
+`Jury-Rig Barrage`
+
+- Cost: 1
+- Type: Attack
+- Deal 2 damage 5 times. If a card was exhausted this turn, hit 2 additional times.
+
+`Emergency Refit`
+
+- Cost: 0
+- Type: Skill
+- Discard your hand. Draw that many cards. Gain [E] if you discarded 3 or more cards this way. Exhaust.
 
 ## Rot Philosophy
 
