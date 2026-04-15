@@ -60,8 +60,8 @@
     "DESCRIPTION": "Gain !B! Block."
   },
   "cardenergy:DugIn": {
-    "NAME": "Dug In",
-    "DESCRIPTION": "Gain !B! Block. Apply !M! Weak."
+    "NAME": "Shoulder the Load",
+    "DESCRIPTION": "Gain !B! Block. Discard 1 card."
   },
   "cardenergy:ScrapKnife": {
     "NAME": "Scrap Knife",
@@ -72,8 +72,8 @@
     "DESCRIPTION": "cardenergy:Consume. NL Gain !B! Block."
   },
   "cardenergy:LooseParts": {
-    "NAME": "Loose Parts",
-    "DESCRIPTION": "cardenergy:Consume. NL Draw 1 card."
+    "NAME": "Sort the Haul",
+    "DESCRIPTION": "Draw !M! cards. Discard 1 card. Exhaust."
   },
   "cardenergy:AshenCount": {
     "NAME": "Ashen Count",
@@ -81,15 +81,15 @@
   },
   "cardenergy:Patchwork": {
     "NAME": "Patchwork",
-    "DESCRIPTION": "Gain !B! Block. Return 1 exhausted card to your discard pile. Draw !M! card."
+    "DESCRIPTION": "Exhaust 1 card from your hand. Draw !M! cards."
   },
   "cardenergy:BarbedGuard": {
     "NAME": "Barbed Guard",
     "DESCRIPTION": "Gain !B! Block. If an enemy attacks you this turn, deal 4 damage to it."
   },
   "cardenergy:TurnAside": {
-    "NAME": "Turn Aside",
-    "DESCRIPTION": "Gain !B! Block. If all damage is blocked this turn, draw !M! card next turn."
+    "NAME": "Pack Away",
+    "DESCRIPTION": "Draw !M! card. Put 1 card from your hand on top of your draw pile."
   },
   "cardenergy:HiddenCache": {
     "NAME": "Hidden Cache",

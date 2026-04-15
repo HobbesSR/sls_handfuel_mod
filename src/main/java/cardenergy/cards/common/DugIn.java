@@ -1,40 +1,36 @@
 package cardenergy.cards.common;
 
 import cardenergy.CardEnergyMod;
+import cardenergy.actions.SelectHandDiscardAction;
 import cardenergy.cards.AbstractTerracottaCard;
 import cardenergy.cards.TerracottaCardHelper;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.WeakPower;
 
 public class DugIn extends AbstractTerracottaCard {
     public static final String ID = CardEnergyMod.makeID("DugIn");
+    private static final String SELECT_TEXT = "Discard 1 card.";
 
     public DugIn() {
-        super(ID, CardType.SKILL, CardRarity.COMMON, CardTarget.ENEMY, 1);
+        super(ID, CardType.SKILL, CardRarity.COMMON, CardTarget.SELF, 1);
         TerracottaCardHelper.applyIdentity(this, ID);
-        baseBlock = 6;
+        baseBlock = 8;
         block = baseBlock;
-        magicNumber = baseMagicNumber = 1;
-        target = CardTarget.ENEMY;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new GainBlockAction(p, p, block));
-        if (m != null) {
-            addToBot(new ApplyPowerAction(m, p, new WeakPower(m, magicNumber, false), magicNumber));
-        }
+        addToBot(new SelectHandDiscardAction(p, SELECT_TEXT));
     }
 
     @Override
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            upgradeBlock(2);
+            upgradeBlock(3);
             initializeDescription();
         }
     }

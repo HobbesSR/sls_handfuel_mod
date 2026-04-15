@@ -82,6 +82,7 @@ Non-fuel cards include:
 Current payment behavior:
 
 - `freeToPlayOnce` cards are free
+- cards merely set to `costForTurn = 0` are not treated as free unless `freeToPlayOnce` is also set
 - `0`-cost cards are not free; they cost 1 fuel
 - normal cards cost `costForTurn + 1` fuel
 - X-cost cards do not pay the extra +1 surcharge
@@ -105,6 +106,7 @@ When a payable hand card is played:
 
 - the play is intercepted
 - only valid fuel cards are shown in a hand-selection screen
+- if exactly 1 fuel is required, the selector now uses exact-one-card behavior so vanilla fast-confirm works normally
 - the chosen fuel cards are discarded as payment
 - discard replacements such as `Consume` and `Rot` may replace that discard instead of letting the card reach the discard pile
 - the original card is replayed with vanilla energy spending suppressed
@@ -126,6 +128,7 @@ The character currently has `EnergyManager(2)`, so start-of-turn recharge become
 Current energy-demand resolution shape:
 
 - fixed-cost cards build a payment plan from chosen Terracotta fuel cards
+- exact-1 fixed-cost payments use exact-one-card selection with no zero-card cancel path
 - X-cost cards build a payment plan automatically from the full eligible Terracotta fuel set in hand
 - prepaid replay state is stored on the card itself
 - pending discard replacement state for `Consume` / `Rot` is also stored on the card itself

@@ -14,7 +14,7 @@ public class BraceForImpact extends AbstractTerracottaCard {
     public BraceForImpact() {
         super(ID, CardType.SKILL, CardRarity.COMMON, CardTarget.SELF, 1);
         TerracottaCardHelper.applyIdentity(this, ID);
-        baseBlock = 8;
+        baseBlock = 9;
         block = baseBlock;
     }
 

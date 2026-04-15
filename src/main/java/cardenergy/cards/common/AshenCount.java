@@ -16,9 +16,9 @@ public class AshenCount extends AbstractTerracottaCard {
     public AshenCount() {
         super(ID, CardType.ATTACK, CardRarity.COMMON, CardTarget.ENEMY, 1);
         TerracottaCardHelper.applyIdentity(this, ID);
-        baseDamage = 5;
+        baseDamage = 8;
         damage = baseDamage;
-        magicNumber = baseMagicNumber = 5;
+        magicNumber = baseMagicNumber = 4;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class AshenCount extends AbstractTerracottaCard {
         if (!upgraded) {
             upgradeName();
             upgradeDamage(2);
-            upgradeMagicNumber(2);
+            upgradeMagicNumber(1);
             initializeDescription();
         }
     }

@@ -208,5 +208,6 @@ public class HandFuelResourceAdapter {
         }
         return Integer.toString(getRequiredFuel(card));
     }
+
 }
 

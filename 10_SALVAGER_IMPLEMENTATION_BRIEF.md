@@ -497,13 +497,15 @@ Common Hoard cards should be:
 
 1. Keep the current hand-paid Energy model and current non-X cost handling.
 2. Keep the current X rule: `X = ceil(Energy paid / 2)`.
-3. Replace the current starter deck with the new 14-card starter above.
-4. Mark the three starter specials as `BASIC`.
-5. Remove the old starter-only versions of `Recovery`, `Rotting Shelter`, `Stockpile`, and `Scrap Spray` from starter usage.
-6. Recreate those cards as commons using the designs above.
-7. Implement the rest of the listed common cards by replacing mirrored Ironclad-shell commons for now.
-8. Preserve existing Terracotta / mirrored-Ironclad scaffold behavior where possible, but overwrite names, cost, text, and mechanics to match this brief.
-9. Test:
+3. Only explicit `freeToPlayOnce` should bypass the Salvager surcharge. Temporary `costForTurn = 0` effects should still pay the normal class tax unless the game also marks the card free.
+4. Replace the current starter deck with the new 14-card starter above.
+5. Mark the three starter specials as `BASIC`.
+6. Remove the old starter-only versions of `Recovery`, `Rotting Shelter`, `Stockpile`, and `Scrap Spray` from starter usage.
+7. Recreate those cards as commons using the designs above.
+8. Implement the rest of the listed common cards by replacing mirrored Ironclad-shell commons for now.
+9. Preserve existing Terracotta / mirrored-Ironclad scaffold behavior where possible, but overwrite names, cost, text, and mechanics to match this brief.
+10. Keep single-fuel payment selection on the exact-one-card path so vanilla fast confirm works without auto-picking fuel for the player.
+11. Test:
    - starter deck play feel
    - `Consume`
    - `Rot` auto-exhaust
