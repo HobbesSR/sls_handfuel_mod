@@ -27,6 +27,7 @@ import cardenergy.cards.common.ScrapKnife;
 import cardenergy.cards.common.ScrapSpray;
 import cardenergy.cards.common.Stockpile;
 import cardenergy.cards.common.TurnAside;
+import cardenergy.cards.rare.PreciousBauble;
 import cardenergy.character.CardEnergyCharacter;
 import cardenergy.character.CardEnergyCharacterEnum;
 import cardenergy.character.TerracottaColorScheme;
@@ -40,6 +41,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
+import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -83,32 +85,38 @@ public class CardEnergyMod implements EditCharactersSubscriber, EditCardsSubscri
     @Override
     public void receiveEditCards() {
         RedMirrorCards.registerAll();
-        BaseMod.addCard(new ScroungeStrike());
-        BaseMod.addCard(new ScroungeDefend());
-        BaseMod.addCard(new Brace());
-        BaseMod.addCard(new ScrapBurst());
-        BaseMod.addCard(new RottingBlow());
-        BaseMod.addCard(new Recovery());
-        BaseMod.addCard(new RottingShelter());
-        BaseMod.addCard(new Stockpile());
-        BaseMod.addCard(new ScrapSpray());
-        BaseMod.addCard(new RottingSlash());
-        BaseMod.addCard(new SalvageSwing());
-        BaseMod.addCard(new PileDriver());
-        BaseMod.addCard(new BraceForImpact());
-        BaseMod.addCard(new GuardTheHeap());
-        BaseMod.addCard(new Hunker());
-        BaseMod.addCard(new DugIn());
-        BaseMod.addCard(new ScrapKnife());
-        BaseMod.addCard(new BurnThrough());
-        BaseMod.addCard(new LooseParts());
-        BaseMod.addCard(new AshenCount());
-        BaseMod.addCard(new Patchwork());
-        BaseMod.addCard(new BarbedGuard());
-        BaseMod.addCard(new TurnAside());
-        BaseMod.addCard(new HiddenCache());
-        BaseMod.addCard(new ScavengeTheWreck());
-        BaseMod.addCard(new PackedSwing());
+        addAndUnlock(new ScroungeStrike());
+        addAndUnlock(new ScroungeDefend());
+        addAndUnlock(new Brace());
+        addAndUnlock(new ScrapBurst());
+        addAndUnlock(new RottingBlow());
+        addAndUnlock(new Recovery());
+        addAndUnlock(new RottingShelter());
+        addAndUnlock(new Stockpile());
+        addAndUnlock(new ScrapSpray());
+        addAndUnlock(new RottingSlash());
+        addAndUnlock(new SalvageSwing());
+        addAndUnlock(new PileDriver());
+        addAndUnlock(new BraceForImpact());
+        addAndUnlock(new GuardTheHeap());
+        addAndUnlock(new Hunker());
+        addAndUnlock(new DugIn());
+        addAndUnlock(new ScrapKnife());
+        addAndUnlock(new BurnThrough());
+        addAndUnlock(new LooseParts());
+        addAndUnlock(new AshenCount());
+        addAndUnlock(new Patchwork());
+        addAndUnlock(new BarbedGuard());
+        addAndUnlock(new TurnAside());
+        addAndUnlock(new HiddenCache());
+        addAndUnlock(new ScavengeTheWreck());
+        addAndUnlock(new PackedSwing());
+        addAndUnlock(new PreciousBauble());
+    }
+
+    private static void addAndUnlock(com.megacrit.cardcrawl.cards.AbstractCard card) {
+        BaseMod.addCard(card);
+        UnlockTracker.unlockCard(card.cardID);
     }
 
     @Override

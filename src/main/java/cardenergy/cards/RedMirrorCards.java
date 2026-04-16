@@ -10,7 +10,6 @@ public final class RedMirrorCards {
     }
 
     public static void registerAll() {
-        BaseMod.addCard(new BarricadeCopy());
         BaseMod.addCard(new BerserkCopy());
         BaseMod.addCard(new BloodForBloodCopy());
         BaseMod.addCard(new BloodlettingCopy());

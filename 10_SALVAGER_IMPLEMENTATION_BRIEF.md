@@ -325,7 +325,7 @@ Overlap is expected.
 `Sort the Haul`
 
 - Cost: 0
-- Draw 1 card. Discard 1 card. Exhaust.
+- Draw 2 cards. Discard 1 card.
 
 ### Exhaust/value commons
 
@@ -367,8 +367,8 @@ Overlap is expected.
 `Hidden Cache`
 
 - Cost: 1
-- Gain 6 Block.
-- `Hoard 2`
+- Gain 8 Block. Discard 2 cards.
+- `Hoard 3`
 
 ### Extra glue / overlap commons
 
@@ -385,6 +385,9 @@ Overlap is expected.
 Current design note:
 
 - `Dug In`, `Loose Parts`, and `Turn Aside` were useful first-pass cards, but the newer handoff package points toward cleaner common infrastructure in `Shoulder the Load`, `Sort the Haul`, and `Pack Away`
+- `Sort the Haul` should function as the low-cost filter outlet for dumping off-color clutter, not as a throwaway exhaust cantrip
+- `Hidden Cache` should be the harsher Hoard support card: under-rate at first glance, but a real answer to retained junk, statuses, and curses once hand pressure matters
+- `Precious Bauble` should replace a dead mirrored rare with a real retained-hand moonshot rather than another generic red payoff the class barely exploits
 - `Brace for Impact` still has a place as neutral defensive glue, but the common pool should lean more heavily on simple conversion cards and cleaner exhaust enablers than on bespoke placeholder effects
 
 ## Recommended Next-Pass Uncommons
@@ -458,6 +461,14 @@ These are the current recommended additions from the handoff package. They are t
 - Cost: 0
 - Type: Skill
 - Discard your hand. Draw that many cards. Gain [E] if you discarded 3 or more cards this way. Exhaust.
+
+`Precious Bauble`
+
+- Cost: Unplayable
+- Type: Skill
+- Innate
+- At the start of your turn, if this is in your hand, gain 1 Intangible.
+- At the end of your turn, if this is in your hand, lose 1 Max HP.
 
 ## Rot Philosophy
 

@@ -1,6 +1,7 @@
 package cardenergy.cards.common;
 
 import cardenergy.CardEnergyMod;
+import cardenergy.actions.SelectHandDiscardAction;
 import cardenergy.cards.AbstractTerracottaCard;
 import cardenergy.cards.TerracottaCardHelper;
 import cardenergy.util.CardKeywordHelper;
@@ -11,8 +12,9 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class HiddenCache extends AbstractTerracottaCard {
     public static final String ID = CardEnergyMod.makeID("HiddenCache");
-    private static final int BASE_BLOCK_VALUE = 6;
-    private static final int HOARD_AMOUNT = 2;
+    private static final String SELECT_TEXT = "Discard 2 cards.";
+    private static final int BASE_BLOCK_VALUE = 8;
+    private static final int HOARD_AMOUNT = 3;
 
     public HiddenCache() {
         super(ID, CardType.SKILL, CardRarity.COMMON, CardTarget.SELF, 1);
@@ -26,6 +28,7 @@ public class HiddenCache extends AbstractTerracottaCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new GainBlockAction(p, p, block));
+        addToBot(new SelectHandDiscardAction(p, SELECT_TEXT, 2));
     }
 
     @Override

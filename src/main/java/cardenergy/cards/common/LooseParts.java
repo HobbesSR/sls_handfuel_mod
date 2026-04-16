@@ -18,8 +18,7 @@ public class LooseParts extends AbstractTerracottaCard {
         TerracottaCardHelper.applyIdentity(this, ID);
         baseBlock = 0;
         block = baseBlock;
-        magicNumber = baseMagicNumber = 1;
-        exhaust = true;
+        magicNumber = baseMagicNumber = 2;
     }
 
     @Override

@@ -122,6 +122,7 @@ Notes:
 
 - Hoard should be present at common, but concentrated more heavily at uncommon and rare
 - most Hoard cards should be intrinsically useful even without full build-around support
+- at least one Hoard card should turn retained-hand pressure into action by discarding multiple cards for payoff, so Hoard decks can cash in clogged hands instead of merely suffering them
 - current direction: Hoard charge should reset when the card is played, not merely when it is discarded
 - current direction: `Hoard` should imply staying in hand so it remains portable outside the base class context
 - current direction: Hoard's stored bonus should stay mechanically separate from the card's authored base stats even though it feeds the displayed and played values
@@ -342,11 +343,13 @@ Recommended next-pass package from the handoff document:
   - `Shelter from Scraps`
   - `Jury-Rig Barrage`
   - `Emergency Refit`
+  - `Precious Bauble`
 
 Package guardrails:
 
 - do not treat this as a sealed discard lane
 - keep `Consume` at full value and balance it through density, awkwardness, and deck texture
+- keep at least one low-cost common filter card that discards from hand without requiring on-color fuel, so off-color clutter and temporary junk can still be converted into useful selection
 - keep Hoard sparse
 - if two cards occupy the same structural job, prefer the cleaner Salvager-native version and absorb the other role into notes or upgrades
 - late-game inevitability should still come mainly from exhaust payoffs, stable defense, and a few finishers rather than from `Consume` alone

@@ -18,12 +18,18 @@ public class SelectHandDiscardAction extends AbstractGameAction {
 
     private final AbstractPlayer player;
     private final String prompt;
+    private final int amount;
     private final ArrayList<AbstractCard> originalHandOrder = new ArrayList<>();
     private Phase phase = Phase.OPENING_SELECTION;
 
     public SelectHandDiscardAction(AbstractPlayer player, String prompt) {
+        this(player, prompt, 1);
+    }
+
+    public SelectHandDiscardAction(AbstractPlayer player, String prompt, int amount) {
         this.player = player;
         this.prompt = prompt;
+        this.amount = Math.max(1, amount);
         this.actionType = ActionType.CARD_MANIPULATION;
         this.duration = Settings.ACTION_DUR_FAST;
     }
@@ -54,8 +60,11 @@ public class SelectHandDiscardAction extends AbstractGameAction {
             return;
         }
 
-        if (player.hand.size() == 1) {
-            discardSelectedCard(player.hand.getTopCard());
+        if (player.hand.size() <= amount) {
+            ArrayList<AbstractCard> cardsToDiscard = new ArrayList<>(player.hand.group);
+            for (AbstractCard card : cardsToDiscard) {
+                discardSelectedCard(card);
+            }
             isDone = true;
             return;
         }
@@ -65,7 +74,7 @@ public class SelectHandDiscardAction extends AbstractGameAction {
                 player.hand.group,
                 originalHandOrder,
                 prompt,
-                1,
+                amount,
                 false,
                 false
         );
@@ -81,7 +90,10 @@ public class SelectHandDiscardAction extends AbstractGameAction {
             return;
         }
 
-        discardSelectedCard(chosenCards.get(0));
+        int discardCount = Math.min(amount, chosenCards.size());
+        for (int i = 0; i < discardCount; i++) {
+            discardSelectedCard(chosenCards.get(i));
+        }
         player.hand.refreshHandLayout();
         player.hand.applyPowers();
     }

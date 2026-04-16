@@ -73,7 +73,7 @@
   },
   "cardenergy:LooseParts": {
     "NAME": "Sort the Haul",
-    "DESCRIPTION": "Draw !M! cards. Discard 1 card. Exhaust."
+    "DESCRIPTION": "Draw !M! cards. Discard 1 card."
   },
   "cardenergy:AshenCount": {
     "NAME": "Ashen Count",
@@ -93,7 +93,7 @@
   },
   "cardenergy:HiddenCache": {
     "NAME": "Hidden Cache",
-    "DESCRIPTION": "Gain !B! Block. NL NL cardenergy:Hoard 2."
+    "DESCRIPTION": "Gain !B! Block. Discard 2 cards. NL NL cardenergy:Hoard 3."
   },
   "cardenergy:ScavengeTheWreck": {
     "NAME": "Scavenge the Wreck",
@@ -102,5 +102,9 @@
   "cardenergy:PackedSwing": {
     "NAME": "Packed Swing",
     "DESCRIPTION": "Deal !D! damage. Gain !B! Block."
+  },
+  "cardenergy:PreciousBauble": {
+    "NAME": "Precious Bauble",
+    "DESCRIPTION": "Innate. Retain. Unplayable. NL While in hand: Gain 1 Intangible at the start of your turn and lose 1 Max HP at the end. You cannot play Attack cards."
   }
 }
