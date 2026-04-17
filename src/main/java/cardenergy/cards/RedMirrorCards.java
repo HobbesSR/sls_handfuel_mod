@@ -12,10 +12,8 @@ public final class RedMirrorCards {
     public static void registerAll() {
         BaseMod.addCard(new BerserkCopy());
         BaseMod.addCard(new BloodForBloodCopy());
-        BaseMod.addCard(new BloodlettingCopy());
         BaseMod.addCard(new BludgeonCopy());
         BaseMod.addCard(new BrutalityCopy());
-        BaseMod.addCard(new CombustCopy());
         BaseMod.addCard(new CorruptionCopy());
         BaseMod.addCard(new DarkEmbraceCopy());
         BaseMod.addCard(new DemonFormCopy());
@@ -25,7 +23,6 @@ public final class RedMirrorCards {
         BaseMod.addCard(new EvolveCopy());
         BaseMod.addCard(new FeedCopy());
         BaseMod.addCard(new FeelNoPainCopy());
-        BaseMod.addCard(new FiendFireCopy());
         BaseMod.addCard(new FireBreathingCopy());
         BaseMod.addCard(new HemokinesisCopy());
         BaseMod.addCard(new ImmolateCopy());
@@ -33,7 +30,6 @@ public final class RedMirrorCards {
         BaseMod.addCard(new InfernalBladeCopy());
         BaseMod.addCard(new InflameCopy());
         BaseMod.addCard(new IntimidateCopy());
-        BaseMod.addCard(new JuggernautCopy());
         BaseMod.addCard(new LimitBreakCopy());
         BaseMod.addCard(new OfferingCopy());
         BaseMod.addCard(new PummelCopy());

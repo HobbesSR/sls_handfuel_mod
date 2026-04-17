@@ -40,7 +40,7 @@ The implementation is character-gated. Vanilla characters still use normal energ
 The Terracotta set currently uses a two-layer content strategy:
 
 - most of the non-basic Ironclad set is still mirrored into Terracotta as a temporary scaffold
-- a first Salvager-specific starter deck and first pass of Salvager-specific commons now replace part of that mirror set
+- a first Salvager-specific starter deck, a first pass of Salvager-specific commons, and a partial first pass of Salvager-specific uncommons now replace part of that mirror set
 
 This is intentional. The mirrored Ironclad cards are the scaffold the final Terracotta set will be built from. They provide:
 
@@ -195,7 +195,7 @@ For the Salvager, the intended early analogs are:
 
 - a basic attack
 - a basic defense
-- a starter card that teaches fuel spending
+- a starter card that teaches the cost-by-discard resource model
 - a starter card that teaches discard as upside rather than pure cost
 - a low-rarity card that rewards holding cards
 - a low-rarity card that rewards discarding, consuming, or exhausting
@@ -235,6 +235,7 @@ Current reward-pool/runtime intent outside the starter deck:
 
 - normal rewards still come mostly from mirrored Ironclad cards in Terracotta color
 - the first Salvager-specific common pass now replaces a chunk of the mirrored Ironclad commons
+- a partial first pass of Salvager-specific uncommons now replaces the corresponding mirrored Ironclad uncommon slots (Bloodletting, Combust, Fiend Fire, Juggernaut)
 - those mirrored cards are still meant to be edited into final Terracotta cards over time
 
 ## Current Art Pipeline

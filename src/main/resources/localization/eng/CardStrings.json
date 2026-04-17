@@ -110,5 +110,22 @@
   "cardenergy:PreciousBauble": {
     "NAME": "Precious Bauble",
     "DESCRIPTION": "Innate. Retain. Unplayable. NL While in hand: Gain 1 Intangible at the start of your turn and lose 1 Max HP at the end. You cannot play Attack cards."
+  },
+  "cardenergy:BarbedHarness": {
+    "NAME": "Barbed Harness",
+    "DESCRIPTION": "Gain !M! Thorns."
+  },
+  "cardenergy:UpendThePack": {
+    "NAME": "Upend the Pack",
+    "DESCRIPTION": "Discard your hand, then draw that many cards. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Discard your hand, then draw that many cards."
+  },
+  "cardenergy:EmptyThePack": {
+    "NAME": "Empty the Pack",
+    "DESCRIPTION": "Deal !D! damage. Discard your hand."
+  },
+  "cardenergy:Scrapstorm": {
+    "NAME": "Scrapstorm",
+    "DESCRIPTION": "Deal !D! damage to ALL enemies. Discard !M! card at random."
   }
 }

@@ -23,14 +23,14 @@ When this document and the mechanics doc differ, assume:
 
 ## Current Implementation Note
 
-The current codebase still uses a broad mirrored Ironclad pool as Terracotta's temporary baseline set, but the first pass of Salvager-specific starter and common cards now replaces part of that mirror scaffold.
+The current codebase still uses a broad mirrored Ironclad pool as Terracotta's temporary baseline set, but the first pass of Salvager-specific starter and common cards, plus a partial first pass of Salvager-specific uncommons, now replaces part of that mirror scaffold.
 
 That is not the final content direction. It is the implementation scaffold.
 
 Current practical rule:
 
 - mirrored red cards still provide most of the Terracotta reward pool
-- custom Terracotta starter cards and first-pass custom commons now exercise the class grammar directly
+- custom Terracotta starter cards, first-pass custom commons, and the first landed uncommons now exercise the class grammar directly
 - final Terracotta cards should be created by editing those mirrored red-derived cards into their new names, text, and mechanics over time
 
 So the working plan is:
@@ -84,6 +84,17 @@ Working rule:
 - non-X cards cost 1 additional Energy
 - for X-cost cards, `X = ceil(Energy paid / 2)`
 
+**Important design principle: there is no "fuel" as a detectable resource or trigger.**
+
+The word "fuel" appears in docs and code as shorthand for "the cards discarded to satisfy a card's cost." Mechanically, the game does not distinguish a fuel-payment discard from any other discard. A card that says "Discard a card: do X" and a card that is paid for by discarding a card both resolve as an ordinary discard. This is deliberate:
+
+- Cards and relics **must not** trigger off "when you pay fuel", "when a card is spent as fuel", or "when you lose Energy via fuel." Those aren't observable events.
+- Cards and relics **may** trigger off the same unified events a vanilla character could: *when a card is discarded*, *when a card leaves your hand*, *when a card is played*, *when your hand is empty*, *when your hand size changes*. These cover the fuel-discard case automatically, without singling it out.
+- Gaining Energy in card text resolves as draw. Losing Energy resolves as discard of a character-color card if any exist.
+- The player experiences fuel as a consequence of playing cards, not as a tracked counter. Design cards and relics to match that experience.
+
+Anywhere in this document that says "fuel" in a trigger-shaped way, read it as shorthand — the actual implementation is always the vanilla discard/draw/hand-size event, not a fuel-specific hook.
+
 ## 3. Keywords and Family Language
 
 ### Consume
@@ -94,7 +105,7 @@ Working rules text:
 
 Purpose:
 
-- creates the play-versus-fuel tension
+- creates the play-versus-hold tension: if you discard a Consume card for any reason, it plays itself first, so keeping it unplayed in hand is a real decision
 - is the main behavior keyword on the current starter package
 - naturally feeds exhaust-matters cards
 
@@ -227,7 +238,7 @@ For the Salvager, the matching early roles should be:
 
 - basic attack
 - basic defense
-- starter card that teaches fuel spending
+- starter card that teaches the cost-by-discard resource model
 - starter card that teaches discard as upside rather than pure tax
 - common attack that rewards holding cards
 - common defense or utility card that rewards discarding, consuming, or exhausting
@@ -290,14 +301,14 @@ Mapped against the structural template, that scaffold covered:
 
 - `Scrounge Strike`: filler attack
 - `Scrounge Defend`: filler block
-- `Scrap Spray`: starter mechanic tutorial for `Consume` / fuel discard upside
+- `Scrap Spray`: starter mechanic tutorial for `Consume` / discard-as-upside
 - `Recovery`: smoother that turns prior exhaust into future consistency
 - `Rotting Blow` / `Rotting Shelter`: early discard/exhaust-payoff tension cards
 - `Stockpile`: early hold-value card showing the Hoard vein
 
 The useful retained lesson is not the exact old starter composition. The useful lesson is that future commons must cleanly extend these jobs:
 
-- simple fuel-spend cards
+- simple vanilla cards that just get played by discarding
 - simple discard-as-upside cards
 - simple Hoard cards
 - a few hybrids that advance two of those jobs at once
@@ -349,7 +360,7 @@ Package guardrails:
 
 - do not treat this as a sealed discard lane
 - keep `Consume` at full value and balance it through density, awkwardness, and deck texture
-- keep at least one low-cost common filter card that discards from hand without requiring on-color fuel, so off-color clutter and temporary junk can still be converted into useful selection
+- keep at least one low-cost common filter card whose discard effect can target off-color cards, so off-color clutter and temporary junk can still be converted into useful selection without spending the same color you are trying to clear
 - keep Hoard sparse
 - if two cards occupy the same structural job, prefer the cleaner Salvager-native version and absorb the other role into notes or upgrades
 - late-game inevitability should still come mainly from exhaust payoffs, stable defense, and a few finishers rather than from `Consume` alone
@@ -379,4 +390,182 @@ If it would be discarded, or remains in hand at end of turn, it exhausts instead
 
 Junk:
 Shared family or tag that matters together, especially in Hoard shells.
+
+## 10. Exhaust-Matters Power Design Space
+
+The class already has trigger-on-exhaust engines designed at rare (`Close Appraisal` at the Dark Embrace slot, `Shelter from Scraps` at the Feel No Pain slot). Those cover the *"exhausting a card pays off"* question.
+
+Three adjacent design veins are still open and distinctive to the class:
+
+### 10.1 Recurring exhume (recover from exhaust without spending a card)
+
+Vanilla has one-shot recovery (Exhume card, Medical Kit relic). No vanilla **power** recurs cards out of the exhaust pile. Treat this as a fresh design space the Salvager can own.
+
+Open variables to resolve before locking a card:
+
+- **How many per trigger** — one card, N cards, or variable?
+- **Trigger shape** — start of turn, end of turn, on empty hand, on N-cards-exhausted, or random chance per exhaust?
+- **Player control** — full choice, random pick, or filtered random (e.g., non-Attack only)?
+- **Destination** — hand, discard pile, or draw pile? Draw pile is softest, hand is strongest, discard is middle ground (re-enters rotation but costs a draw to see again).
+
+Starter sketches to stress-test:
+
+- **Passive drip**: *At the start of your turn, return a random card from your exhaust pile to your discard pile.* (Power, likely rare.)
+- **Reactive drip**: *Whenever your hand is empty, return a card from your exhaust pile to your hand. It costs 0 this combat.* (Power. Gates itself naturally in a hand-fuel deck.)
+- **Conditional choice**: *At the end of each turn, if 3 or more cards were exhausted this turn, choose a card from your exhaust pile to put into your discard pile.* (Skill, uncommon — gives the effect on demand with a real activation cost.)
+
+Likely rarity: one at rare (marquee), optionally a weaker version at uncommon.
+
+### 10.2 Exhaust pile size matters (scaling payoff)
+
+Vanilla has no player-side scaling power that reads *"cards in your exhaust pile"* as a stat. This is a naturally late-game axis and pairs well with the class's preference for exhaust density.
+
+Starter sketches:
+
+- **Offensive scaler**: *Gain 1 Strength for every 5 cards in your exhaust pile at the start of your turn.* (Power, rare.)
+- **Defensive scaler**: *At the end of your turn, gain Block equal to the number of cards in your exhaust pile, up to X.* (Power, uncommon with a cap; rare uncapped.)
+- **Attack rider**: *Attack. Deal X damage, plus 1 for each card in your exhaust pile.* (Attack card, uncommon or rare finisher — not a power. Worth noting because it occupies the same design space without needing a power slot.)
+
+Watch-out: uncapped scaling off exhaust pile is uniquely dangerous in Salvager because the class can exhaust very fast. Cap numbers tighter than you would for Ironclad.
+
+### 10.3 Trigger-on-exhaust alternatives (beyond draw and block)
+
+Dark Embrace = draw on exhaust. Feel No Pain = block on exhaust. The empty design corners are *strength*, *hand smoothing*, *card generation*, and *debuff spreading*:
+
+- **Strength on exhaust** — overlaps with Anger-style "strength when struck" if both exist. Pick one.
+- **Discard-to-hand on exhaust** — *Whenever a card is exhausted, you may move one card from your discard pile to your hand.* Because hand size *is* energy for this class (§2), adding cards to hand without a draw is a naturally strong effect — it inflates next turn's hand without cycling the deck. Very strong; probably rare. Note this triggers off the exhaust event, not off any discard or payment, so it stays inside the unified-event principle.
+- **Card generation on exhaust** — *Whenever a card is exhausted, add a copy of it to your discard pile.* A soft auto-Exhume, bounded by the existing exhaust rate. Potentially rare.
+- **Debuff spreader on exhaust** — *Whenever a card is exhausted, apply 1 Weak to a random enemy.* Cheap uncommon; distributes pressure without direct damage.
+
+Prefer one of **Discard-to-hand on exhaust** or **Card generation on exhaust** as the marquee uncommon power in this vein — both feed the hand in ways that interact with the resource model without needing a fuel-specific trigger.
+
+
+## 11. Junk and Scrap Status Cards
+
+This section extends §3's Junk family with a concrete **status-card** implementation. The tag from §3 still applies — a card or relic can be tagged Junk without being the Junk status card — but the status cards below give the family a grounded, iconic representative.
+
+### 11.1 Cards
+
+**Junk** (Status, **colorless — not fuel-valid**)
+
+- Cost: 0
+- Type: Status
+- Text: *Playable. If there are 3 or more Junk or Scrap cards in your hand, discard all Junk and Scrap in your hand and add a random Uncommon Salvager card to your hand. Exhaust.*
+- **Not fuel**: because Junk is colorless (status), it cannot be spent to pay fuel for Salvager cards. Holding it in hand genuinely costs a hand slot.
+
+**Scrap** (Status, **colorless — not fuel-valid**)
+
+- Cost: 0
+- Type: Status
+- Text: *Playable. If there are 2 or more Scrap cards in your hand, discard all Scrap in your hand and add a random Rare Salvager card to your hand. Exhaust.*
+- The stricter trigger condition (**Scrap only**, not Junk+Scrap) is what justifies the rarer reward.
+
+Because both are colorless status cards, they cannot pay fuel, cannot be targeted by Salvager-only affect-hand effects that require your color, and clog hand until either (a) the conversion threshold is met or (b) they are cleared by effects that target status cards.
+
+### 11.2 Design intent
+
+- Junk and Scrap are a **build-around tension**, not free value. They convert into powerful cards, but they also actively clog the hand while you wait for the threshold. A deck that takes Junk/Scrap sources is committing to draw volume, hand cycling, or status removal.
+- The deck-builder's question becomes: *"do I see Junk often enough, and do I cycle my hand hard enough, to convert reliably before combat ends?"* That gates the build-around behind deck shape, not card density alone.
+- Because conversion **exhausts the converted cards**, the clog is self-cleaning *if* you hit the threshold. Missed thresholds mean the Junk sits in hand or gets discarded at end of turn like any non-Retain status.
+- The granted card enters **hand**, not draw pile, so a successful conversion is felt immediately on the turn it triggers — that is the payoff for eating the clog tax.
+- This inverts the usual Salvager promise ("nothing in your hand is dead") deliberately: Junk/Scrap are the one deliberate exception, and that exception is what makes the build-around real.
+
+### 11.3 Sources
+
+Because Junk/Scrap cost you hand slots, *generation* is the build-around lever. Decks that skip generators should effectively never see these cards. Recommended density:
+
+- **Self-inflicted generators** are the primary lever. 2 to 3 cards across uncommon/rare that produce Junk as part of their cost.
+  - Sketch (uncommon): *"Draw 3 cards. Add a Junk to your discard pile."* — draw-plus-generator, pays for itself over 2 to 3 cycles.
+  - Sketch (uncommon): *"Deal X damage. Add 2 Junks to your discard pile."* — aggressive cost, aggressive payoff.
+  - Sketch (rare): *"Exhaust your hand. Add a Scrap to your discard pile for each card exhausted this way."* — high-commit moonshot.
+- **Relic-based generators** — §12 covers a Junk-per-combat starter relic and a Scrap-on-first-exhaust uncommon relic.
+- **Enemy-applied Junk** is discouraged as the primary source. If enemies add Junk broadly, every deck becomes a Junk deck whether it wanted to be or not, collapsing the build-around. Keep enemy Junk rare, flavor-driven, and narrow in density (one or two monster variants at most).
+
+### 11.4 Open design questions
+
+- Should Junk convert **all Junk and Scrap**, or only **all Junk**? Current proposal is Junk+Scrap so Scrap can ride Junk's lower threshold as a cheaper out. Alternative: Junk only eats Junk, so players must make a real decision between cashing early for Uncommons vs. holding for Scrap's Rare.
+- Should the granted card be **free this turn** or **cost normally**? Cost-normally is the lean — the clog was the cost, the random-rarity grant is the reward, and compounding a free-play on top over-centralizes conversion as the only thing worth doing on the trigger turn.
+- Should Junk/Scrap be **Ethereal**? No. Ethereal would solve the clog for free (they'd just exhaust at end of turn) and kill the build-around tension. They must occupy hand slots until played or the hand is cycled through them.
+- Should Junk/Scrap be **Retain-hostile** (e.g., auto-discard at end of turn)? Default end-of-turn behavior already discards them; no special handling needed. The "hold across turns" play pattern is: keep them in hand via low-draw turns, not via Retain.
+- Does Junk **count as Junk family** for tag-matters cards (§3)? Yes, explicitly. Scrap also counts. Keep the tag consistent so Hoard and Junk-matters cards key off both.
+- Can the player **remove Junk/Scrap from the deck at rest sites**? They aren't in the deck — they're generated into discard/hand during combat — so rest-site removal doesn't apply. Good.
+
+### 11.5 Anti-abuse and implementation guardrails
+
+- Junk and Scrap are **not added to the master deck**. They are inserted into discard pile (or directly into hand) by their generator cards and clear on combat end like any status. This also means they bypass card-rewards/shops entirely.
+- The **color** of the generated grant comes from the Salvager color pool at the appropriate rarity, *not* from `AbstractDungeon.srcUncommonCardPool` (which is shuffled per-floor and includes only cards already seen). Use a filtered snapshot of the Salvager pool at combat time.
+- Exclude curses, statuses, and any card with a `Soul` or `reward`-style flag from the random-grant pool.
+- Grants should not trigger card-played or on-draw effects that depend on the card entering hand from a draw. Inserting via `makeStatEquivalentCopy()` and `AbstractDungeon.player.hand.addToHand(...)` is the intended path; keep it plain.
+- Because Junk and Scrap are **not Salvager-colored**, the fuel-payment code already excludes them: `HandFuelResourceAdapter.isFuelCard(...)` requires `card.color == player.getCardColor()`, and colorless status cards fail that check. No additional filter code is needed for the status cards themselves.
+
+## 12. Character-Specific Relic Design Space
+
+Relics are a **secondary pool** that must not duplicate card effects. Where there is precedent for overlap (e.g., Busted Crown vs. energy cards, Velvet Choker vs. card-draw limits), the overlap should be *framing-level*, not *effect-level*.
+
+### 12.1 Starter relic
+
+Every STS character has one starter relic. Some (Burning Blood, Cracked Core) are flavor/tempo pieces; some (Ring of the Snake, Pure Water) hard-couple with the class's mechanic. Either model is valid.
+
+**Design constraint** (from §2): the starter relic cannot trigger off "paying fuel" — that isn't a detectable event. It can trigger off draws, discards, plays, hand-empty, or start/end of turn. Anything that sounds like "when you pay fuel, do X" must be rewritten as one of those unified events, or dropped.
+
+Additional constraint: because Junk and Scrap are **colorless clog** (§11), forcing Junk into hand every combat via the starter would punish every deck whether the player opted into the build-around or not. Junk-forcing belongs on an opt-in relic (see §12.4 boss swap), not the starter.
+
+Candidates:
+
+- **Draw boost (Ring of the Snake analog)**: *At the start of each combat, draw 2 additional cards.* Since hand = energy in this class, +2 draws directly translates to +2 starting energy. Teaches "hand size is what matters" by brute force. Safe, clean, no trigger gymnastics. **Recommended primary candidate.**
+- **Teach Consume**: *At the start of each combat, a random card in your starting hand gains Consume for this combat.* Consume is a real distinct keyword (§3) with observable behavior — it triggers on discard, not on fuel. The player sees Consume go off naturally as they play through their turn. Teaches one of the class's two identity mechanics. **Strong backup.**
+- **End-of-turn retain analog**: *At the end of your turn, if you have 2 or more cards in your hand, draw 1 card.* Rewards *not* emptying your hand to pay costs — shows the player that holding cards has value. Fires off a hand-size check, not a fuel-payment event. Decent.
+- ~~*The first time you would discard a card to pay fuel each turn, draw 1 card.*~~ **Rejected.** "Discard to pay fuel" is indistinguishable from any other discard, so this either fires on all discards (too generic, too strong) or requires a fuel-specific hook we explicitly don't want.
+- ~~*At the start of each combat, add 1 Junk to your hand.*~~ **Rejected.** Forces the Junk build-around every combat. Belongs on an opt-in relic, not the starter.
+
+Lean: **Draw boost** as the starter relic. It matches vanilla precedent (Ring of the Snake), teaches the class's core pressure (hand-as-energy) without a trigger, and leaves Consume/Junk/exhaust as discoverable through cards and later relics.
+
+### 12.2 Common relic slots
+
+Common relics should be low-power, high-clarity. Candidates (pick 3 to 4):
+
+- **Empty-hand smoother**: *Whenever you would be left with an empty hand during your turn, draw 1 card.* Protects against hand-dry-out regardless of cause (paying for a big card, playing out, discard effects). Triggers off hand-empty, not off any fuel hook.
+- **Exhaust-count relic**: *At the end of combat, if you exhausted 5 or more cards, heal 2 HP.* Rewards the exhaust lane without touching combat math.
+- **Block-leftover relic**: *If you end your turn with 15 or more Block, gain 1 Artifact next turn.* Reactive-defense-lane reward; light overlap with Brace for Impact's Artifact axis but triggered passively.
+- **Shop relic**: *Card removal cost is reduced by 25 gold.* Generic; safe common slot.
+
+### 12.3 Uncommon relic slots
+
+Uncommons deepen an axis without being build-defining.
+
+- **Scrap generator**: *The first time you exhaust a card in each combat, add a Scrap to your discard pile.* Creates a Scrap source without a card slot; pairs naturally with Rare-card chasing. Because this is one Scrap per combat (not per exhaust), it does not flood the hand with clog even in heavy exhaust decks.
+- **Junk-trigger smoother**: *Junk and Scrap trigger their conversion with one fewer card in hand (minimum 2 Junk or 1 Scrap).* Turns a found relic into a real commitment to the build-around — the player didn't plan on Junk, but now they can actually run it.
+- **Hoard amplifier**: *At end of turn, Hoard triggers twice on each card in your hand.* Narrow but build-defining when it lands.
+- **Cost-reduction relic**: *At the start of each combat, the first card you play has its cost reduced by 1 (minimum 0) for that play only.* A one-shot cost reduction on the first card played each combat. In this class, a cost reduction means one fewer color-card discarded to play the card — no fuel-specific hook, just ordinary cost modification that already exists in the engine.
+
+### 12.4 Rare / boss relic slots
+
+Rares define. Boss relics swap starter. Design space sketches:
+
+- **Rare "exhume" relic**: *At the start of each combat, return a random card from last combat's exhaust pile to your hand.* (Requires persisted last-combat exhaust — implementable but adds state.) Covers the §10.1 design vein without burning a card slot.
+- **Boss swap**: *Remove your starter relic. At the start of each combat, add 2 Junks and 1 Scrap to your hand.* Swings the class hard into status-card conversion.
+- **Rare Consume amplifier**: *Consume triggers gain +1 of their effect.* Narrow; only interesting if Consume has more numeric payloads by the time we get here.
+
+### 12.5 Overlap policy with the card pool
+
+Precedent exists for relic/card effect overlap (e.g., Runic Dome + Intangible cards, Pocketwatch + draw cards). The rule to apply:
+
+- **Do not duplicate** a *specific* card's function in a relic (e.g., a relic that exhumes one specific card is a card, not a relic).
+- **Do duplicate** *axes* — a relic that gives passive exhaust-payoff does not conflict with a card that does it actively, because the relic is always on and the card is a choice with a cost.
+- **When in doubt, shift the relic to a conditional or per-combat trigger** so its interaction with the card is additive rather than redundant.
+
+### 12.6 Relic slots to reserve vs. release
+
+Reserve these design slots for relics (do not burn them on cards):
+
+- a passive exhaust-pile scaler
+- a Scrap generator
+- a Junk generator that scales over the run
+- an empty-hand / low-hand draw relic (dead-hand protection via hand-size trigger, not a fuel trigger)
+
+Release these back to the card pool (do not design a relic here):
+
+- Consume triggering — belongs on cards
+- Hoard buildup — belongs on cards
+- Reactive defense triggers — belongs on cards, except the end-of-turn-Artifact relic above which is a passive *reward*, not a *trigger*
 

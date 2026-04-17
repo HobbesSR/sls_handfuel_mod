@@ -394,47 +394,55 @@ Current design note:
 
 These are the current recommended additions from the handoff package. They are target-state designs, not all immediate implementation requirements.
 
-`Barbed Harness`
+Status markers below reflect current repository state. `implemented` means the card ships as a real Salvager uncommon and its mirrored Ironclad counterpart has been removed from the reward pool. `deferred` means the design is still the target, but implementation is gated on an open decision captured inline.
+
+`Barbed Harness` — implemented
 
 - Cost: 1
 - Type: Power
 - Whenever an enemy attacks you, deal 3 damage back.
+- Runtime note: grants vanilla `ThornsPower` rather than a custom power so no new power-art pipeline is required yet.
 
-`Upend the Pack`
+`Upend the Pack` — implemented
 
 - Cost: 0
 - Type: Skill
 - Discard your hand, then draw that many cards. Exhaust.
+- Upgrade removes Exhaust.
 
-`Strip the Wreck`
+`Strip the Wreck` — deferred
 
 - Cost: 0
 - Type: Skill
 - Exhaust up to 2 cards from your hand. Gain [E] for each card exhausted this way. Exhaust.
+- Open design decision: how "Gain [E]" translates in the hand-paid model. Likely candidates include drawing 1 per card exhausted or granting a one-shot cost reduction on the next card this turn. Lock the translation before implementing.
 
-`Hidden Compartments`
+`Hidden Compartments` — deferred
 
 - Cost: 1
 - Type: Power
 - At the start of your turn, draw 1 additional card, then discard 1 card.
+- Open infrastructure: this would be the mod's first custom power. Needs a `HiddenCompartmentsPower` class, a new `PowerStrings.json` loader entry, and a power icon asset path. None of that exists yet.
 
-`Empty the Pack`
+`Empty the Pack` — implemented
 
 - Cost: 1
 - Type: Attack
 - Deal 14 damage. Discard your hand.
+- The discard routes through the unified manual-discard hook, so Consume and Rot cards in hand fire normally.
 
-`Scrapstorm`
+`Scrapstorm` — implemented
 
 - Cost: 1
 - Type: Attack
 - Deal 9 damage to ALL enemies. Discard 1 card at random.
 
-`Breakdown Rush`
+`Breakdown Rush` — deferred
 
 - Cost: 2
 - Type: Attack
 - Deal 14 damage. Costs 1 less this turn if a card was exhausted this turn.
+- Open implementation: requires a live cost-modifier hook that re-evaluates while the card is in hand when the exhausted-this-turn counter changes. The engine currently only exposes the counter as a read; wiring it into dynamic cost needs a new patch.
 
 ## Recommended Next-Pass Rares
 

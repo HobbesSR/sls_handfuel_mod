@@ -29,6 +29,10 @@ import cardenergy.cards.common.ScrapSpray;
 import cardenergy.cards.common.Stockpile;
 import cardenergy.cards.common.TurnAside;
 import cardenergy.cards.rare.PreciousBauble;
+import cardenergy.cards.uncommon.BarbedHarness;
+import cardenergy.cards.uncommon.EmptyThePack;
+import cardenergy.cards.uncommon.Scrapstorm;
+import cardenergy.cards.uncommon.UpendThePack;
 import cardenergy.character.CardEnergyCharacter;
 import cardenergy.character.CardEnergyCharacterEnum;
 import cardenergy.character.TerracottaColorScheme;
@@ -113,6 +117,10 @@ public class CardEnergyMod implements EditCharactersSubscriber, EditCardsSubscri
         addAndUnlock(new HiddenCache());
         addAndUnlock(new ScavengeTheWreck());
         addAndUnlock(new PackedSwing());
+        addAndUnlock(new BarbedHarness());
+        addAndUnlock(new UpendThePack());
+        addAndUnlock(new EmptyThePack());
+        addAndUnlock(new Scrapstorm());
         addAndUnlock(new PreciousBauble());
     }
 
