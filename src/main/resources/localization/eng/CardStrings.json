@@ -49,11 +49,15 @@
   },
   "cardenergy:BraceForImpact": {
     "NAME": "Brace for Impact",
-    "DESCRIPTION": "Gain !B! Block."
+    "DESCRIPTION": "Gain !B! Block. NL Gain !M! Artifact."
   },
   "cardenergy:GuardTheHeap": {
     "NAME": "Guard the Heap",
     "DESCRIPTION": "Gain !B! Block. If you were attacked last turn, gain !M! additional Block."
+  },
+  "cardenergy:HurlTheHeap": {
+    "NAME": "Hurl the Heap",
+    "DESCRIPTION": "Deal damage equal to your Block."
   },
   "cardenergy:Hunker": {
     "NAME": "Hunker",
@@ -97,7 +101,7 @@
   },
   "cardenergy:ScavengeTheWreck": {
     "NAME": "Scavenge the Wreck",
-    "DESCRIPTION": "Exhaust 1 card in your hand. Draw !M! cards."
+    "DESCRIPTION": "Exhaust 1 card from your discard pile. Draw !M! card(s)."
   },
   "cardenergy:PackedSwing": {
     "NAME": "Packed Swing",

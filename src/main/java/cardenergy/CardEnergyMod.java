@@ -12,6 +12,7 @@ import cardenergy.cards.common.BraceForImpact;
 import cardenergy.cards.common.BurnThrough;
 import cardenergy.cards.common.DugIn;
 import cardenergy.cards.common.GuardTheHeap;
+import cardenergy.cards.common.HurlTheHeap;
 import cardenergy.cards.common.HiddenCache;
 import cardenergy.cards.common.Hunker;
 import cardenergy.cards.common.LooseParts;
@@ -99,6 +100,7 @@ public class CardEnergyMod implements EditCharactersSubscriber, EditCardsSubscri
         addAndUnlock(new PileDriver());
         addAndUnlock(new BraceForImpact());
         addAndUnlock(new GuardTheHeap());
+        addAndUnlock(new HurlTheHeap());
         addAndUnlock(new Hunker());
         addAndUnlock(new DugIn());
         addAndUnlock(new ScrapKnife());

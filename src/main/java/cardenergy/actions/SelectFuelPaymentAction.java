@@ -76,6 +76,16 @@ public class SelectFuelPaymentAction extends AbstractGameAction {
             isDone = true;
             return;
         }
+        if (fuelCards.size() == requiredFuel) {
+            HandFuelPaymentHelper.executePaymentPlan(
+                    player,
+                    card,
+                    monster,
+                    HandFuelPaymentPlan.forFixedCost(fuelCards, energyOnUse)
+            );
+            isDone = true;
+            return;
+        }
         HandFuelSelectionHelper.openHandSelectionForCards(
                 player,
                 fuelCards,
