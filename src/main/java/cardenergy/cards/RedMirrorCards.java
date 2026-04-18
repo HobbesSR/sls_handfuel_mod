@@ -12,7 +12,6 @@ public final class RedMirrorCards {
     public static void registerAll() {
         BaseMod.addCard(new BerserkCopy());
         BaseMod.addCard(new BloodForBloodCopy());
-        BaseMod.addCard(new BludgeonCopy());
         BaseMod.addCard(new BrutalityCopy());
         BaseMod.addCard(new CorruptionCopy());
         BaseMod.addCard(new DarkEmbraceCopy());

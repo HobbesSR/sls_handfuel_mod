@@ -344,11 +344,11 @@ Recommended next-pass package from the handoff document:
 - uncommons should carry the more volatile hand-reset and burst-conversion cards:
   - `Upend the Pack`
   - `Strip the Wreck`
-  - `Hidden Compartments`
   - `Empty the Pack`
   - `Scrapstorm`
   - `Breakdown Rush`
   - `Barbed Harness`
+  - (parked) `Hidden Compartments` — draw-plus-discard power concept; pulled from the uncommon pool, may migrate to a relic slot (§12), and the name is likely to change. See "Parked designs" below.
 - rares should continue to define late-game inevitability through exhaust engines, bridge powers, and a few compact finishers:
   - `Close Appraisal`
   - `Shelter from Scraps`
@@ -569,3 +569,29 @@ Release these back to the card pool (do not design a relic here):
 - Hoard buildup — belongs on cards
 - Reactive defense triggers — belongs on cards, except the end-of-turn-Artifact relic above which is a passive *reward*, not a *trigger*
 
+
+## 13. Parked Designs
+
+Designs that were on the implementation short-list but have been pulled back for redesign. Kept here so the raw concept isn't lost and so future passes can revisit them with fresh framing.
+
+### 13.1 Hidden Compartments (parked)
+
+Original proposal:
+
+- Cost: 1
+- Type: Power
+- *At the start of your turn, draw 1 additional card, then discard 1 card.*
+- Mapped red slot: `Brutality` (power | draw-engine | self-damage).
+
+Why it's parked:
+
+- The name doesn't carry the class's salvage/breakdown flavor cleanly — it reads more Silent-coded than Salvager-coded.
+- The draw-then-discard loop may be a better fit as a relic passive (§12) than as a card, since the effect is cheaply-granted upside without a clear cost inside the card.
+- Implementing it as a power would require standing up the mod's first custom power (power class, `PowerStrings.json` loader entry, power icon asset). That infrastructure is worth building eventually, but not for a card whose design is itself in question.
+
+Revisit when:
+
+- a better-themed name lands, or
+- the effect is repitched as a relic candidate in §12, at which point the Brutality slot gets a different Salvager-native replacement.
+
+Until then, the Brutality red slot stays mirrored and is eligible for a new Salvager-native power design.

@@ -410,19 +410,13 @@ Status markers below reflect current repository state. `implemented` means the c
 - Discard your hand, then draw that many cards. Exhaust.
 - Upgrade removes Exhaust.
 
-`Strip the Wreck` — deferred
+`Strip the Wreck` — implemented
 
 - Cost: 0
 - Type: Skill
-- Exhaust up to 2 cards from your hand. Gain [E] for each card exhausted this way. Exhaust.
-- Open design decision: how "Gain [E]" translates in the hand-paid model. Likely candidates include drawing 1 per card exhausted or granting a one-shot cost reduction on the next card this turn. Lock the translation before implementing.
-
-`Hidden Compartments` — deferred
-
-- Cost: 1
-- Type: Power
-- At the start of your turn, draw 1 additional card, then discard 1 card.
-- Open infrastructure: this would be the mod's first custom power. Needs a `HiddenCompartmentsPower` class, a new `PowerStrings.json` loader entry, and a power icon asset path. None of that exists yet.
+- Exhaust up to 2 cards from your hand. Gain 2 Thorns for each card Exhausted this way. Exhaust.
+- Upgrade: +1 Thorns per card Exhausted (3 per).
+- Runtime note: the `Gain [E]` translation was dropped in favor of Thorns generation. This bridges the exhaust-value lane into reactive defense, stacks with Barbed Harness, and avoids introducing Strength generation (which the class is deliberately kept away from). Uses vanilla `ThornsPower`; no new power infrastructure required.
 
 `Empty the Pack` — implemented
 
@@ -437,12 +431,13 @@ Status markers below reflect current repository state. `implemented` means the c
 - Type: Attack
 - Deal 9 damage to ALL enemies. Discard 1 card at random.
 
-`Breakdown Rush` — deferred
+`Breakdown Rush` — implemented
 
 - Cost: 2
 - Type: Attack
-- Deal 14 damage. Costs 1 less this turn if a card was exhausted this turn.
-- Open implementation: requires a live cost-modifier hook that re-evaluates while the card is in hand when the exhausted-this-turn counter changes. The engine currently only exposes the counter as a read; wiring it into dynamic cost needs a new patch.
+- Deal 14 damage. Deals 6 additional damage for each card Exhausted this turn.
+- Upgrade: +2 additional damage per card Exhausted this turn (8 per).
+- Runtime note: reads `SalvagerCombatState.getExhaustedThisTurn(player)` during `applyPowers` and `calculateCardDamage`, rewriting `baseDamage` to `printed + (per-exhaust × count)` and flagging `isDamageModified` when the bonus is active. No new cost-modifier infrastructure required — this is a damage scaler, not a cost scaler.
 
 ## Recommended Next-Pass Rares
 

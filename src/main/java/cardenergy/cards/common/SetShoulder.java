@@ -9,10 +9,10 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class GuardTheHeap extends AbstractTerracottaCard {
-    public static final String ID = CardEnergyMod.makeID("GuardTheHeap");
+public class SetShoulder extends AbstractTerracottaCard {
+    public static final String ID = CardEnergyMod.makeID("SetShoulder");
 
-    public GuardTheHeap() {
+    public SetShoulder() {
         super(ID, CardType.SKILL, CardRarity.COMMON, CardTarget.SELF, 1);
         TerracottaCardHelper.applyIdentity(this, ID);
         baseBlock = 7;
@@ -40,7 +40,6 @@ public class GuardTheHeap extends AbstractTerracottaCard {
 
     @Override
     public AbstractCard makeCopy() {
-        return new GuardTheHeap();
+        return new SetShoulder();
     }
 }
-

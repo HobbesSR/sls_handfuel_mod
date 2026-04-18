@@ -10,9 +10,9 @@ import cardenergy.cards.common.AshenCount;
 import cardenergy.cards.common.BarbedGuard;
 import cardenergy.cards.common.BraceForImpact;
 import cardenergy.cards.common.BurnThrough;
+import cardenergy.cards.common.Counterthrow;
 import cardenergy.cards.common.DugIn;
-import cardenergy.cards.common.GuardTheHeap;
-import cardenergy.cards.common.HurlTheHeap;
+import cardenergy.cards.common.SetShoulder;
 import cardenergy.cards.common.HiddenCache;
 import cardenergy.cards.common.Hunker;
 import cardenergy.cards.common.LooseParts;
@@ -30,8 +30,11 @@ import cardenergy.cards.common.Stockpile;
 import cardenergy.cards.common.TurnAside;
 import cardenergy.cards.rare.PreciousBauble;
 import cardenergy.cards.uncommon.BarbedHarness;
+import cardenergy.cards.uncommon.BreakdownRush;
 import cardenergy.cards.uncommon.EmptyThePack;
+import cardenergy.cards.uncommon.HurlTheHeap;
 import cardenergy.cards.uncommon.Scrapstorm;
+import cardenergy.cards.uncommon.StripTheWreck;
 import cardenergy.cards.uncommon.UpendThePack;
 import cardenergy.character.CardEnergyCharacter;
 import cardenergy.character.CardEnergyCharacterEnum;
@@ -46,6 +49,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
+import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -103,8 +107,7 @@ public class CardEnergyMod implements EditCharactersSubscriber, EditCardsSubscri
         addAndUnlock(new SalvageSwing());
         addAndUnlock(new PileDriver());
         addAndUnlock(new BraceForImpact());
-        addAndUnlock(new GuardTheHeap());
-        addAndUnlock(new HurlTheHeap());
+        addAndUnlock(new SetShoulder());
         addAndUnlock(new Hunker());
         addAndUnlock(new DugIn());
         addAndUnlock(new ScrapKnife());
@@ -117,10 +120,14 @@ public class CardEnergyMod implements EditCharactersSubscriber, EditCardsSubscri
         addAndUnlock(new HiddenCache());
         addAndUnlock(new ScavengeTheWreck());
         addAndUnlock(new PackedSwing());
+        addAndUnlock(new Counterthrow());
         addAndUnlock(new BarbedHarness());
         addAndUnlock(new UpendThePack());
         addAndUnlock(new EmptyThePack());
         addAndUnlock(new Scrapstorm());
+        addAndUnlock(new StripTheWreck());
+        addAndUnlock(new BreakdownRush());
+        addAndUnlock(new HurlTheHeap());
         addAndUnlock(new PreciousBauble());
     }
 
@@ -132,6 +139,7 @@ public class CardEnergyMod implements EditCharactersSubscriber, EditCardsSubscri
     @Override
     public void receiveEditStrings() {
         BaseMod.loadCustomStringsFile(CardStrings.class, LOCALIZATION_DIR + "/CardStrings.json");
+        BaseMod.loadCustomStringsFile(PowerStrings.class, LOCALIZATION_DIR + "/PowerStrings.json");
     }
 
     @Override
@@ -144,6 +152,9 @@ public class CardEnergyMod implements EditCharactersSubscriber, EditCardsSubscri
                 makeKeywordColor());
         BaseMod.addKeyword(MOD_ID, "Rot", new String[] { "rot" },
                 "If this card would be discarded, or remains in your hand at end of turn, Exhaust it instead.",
+                makeKeywordColor());
+        BaseMod.addKeyword(MOD_ID, "Counterthrow", new String[] { "counterthrow" },
+                "When attacked, lose 1 stack and deal damage to the attacker equal to your remaining Block. Resets at the start of your turn.",
                 makeKeywordColor());
     }
 

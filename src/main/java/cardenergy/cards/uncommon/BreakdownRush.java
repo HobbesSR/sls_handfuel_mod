@@ -1,8 +1,9 @@
-package cardenergy.cards.common;
+package cardenergy.cards.uncommon;
 
 import cardenergy.CardEnergyMod;
 import cardenergy.cards.AbstractTerracottaCard;
 import cardenergy.cards.TerracottaCardHelper;
+import cardenergy.combat.SalvagerCombatState;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -11,14 +12,16 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class HurlTheHeap extends AbstractTerracottaCard {
-    public static final String ID = CardEnergyMod.makeID("HurlTheHeap");
+public class BreakdownRush extends AbstractTerracottaCard {
+    public static final String ID = CardEnergyMod.makeID("BreakdownRush");
+    private static final int PRINTED_DAMAGE = 14;
 
-    public HurlTheHeap() {
-        super(ID, CardType.ATTACK, CardRarity.COMMON, CardTarget.ENEMY, 1);
+    public BreakdownRush() {
+        super(ID, CardType.ATTACK, CardRarity.UNCOMMON, CardTarget.ENEMY, 2);
         TerracottaCardHelper.applyIdentity(this, ID);
-        baseDamage = 0;
+        baseDamage = PRINTED_DAMAGE;
         damage = baseDamage;
+        magicNumber = baseMagicNumber = 6;
     }
 
     @Override
@@ -28,31 +31,31 @@ public class HurlTheHeap extends AbstractTerracottaCard {
 
     @Override
     public void applyPowers() {
-        baseDamage = AbstractDungeon.player.currentBlock;
+        int bonus = magicNumber * SalvagerCombatState.getExhaustedThisTurn(AbstractDungeon.player);
+        baseDamage = PRINTED_DAMAGE + bonus;
         super.applyPowers();
-        isDamageModified = false;
+        isDamageModified = bonus > 0;
     }
 
     @Override
     public void calculateCardDamage(AbstractMonster mo) {
-        baseDamage = AbstractDungeon.player.currentBlock;
+        int bonus = magicNumber * SalvagerCombatState.getExhaustedThisTurn(AbstractDungeon.player);
+        baseDamage = PRINTED_DAMAGE + bonus;
         super.calculateCardDamage(mo);
-        isDamageModified = false;
+        isDamageModified = bonus > 0;
     }
 
     @Override
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            this.cost = 0;
-            this.costForTurn = 0;
-            this.upgradedCost = true;
+            upgradeMagicNumber(2);
             initializeDescription();
         }
     }
 
     @Override
     public AbstractCard makeCopy() {
-        return new HurlTheHeap();
+        return new BreakdownRush();
     }
 }

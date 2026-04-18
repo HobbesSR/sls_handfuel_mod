@@ -51,13 +51,13 @@
     "NAME": "Brace for Impact",
     "DESCRIPTION": "Gain !B! Block. NL Gain !M! Artifact."
   },
-  "cardenergy:GuardTheHeap": {
-    "NAME": "Guard the Heap",
+  "cardenergy:SetShoulder": {
+    "NAME": "Set Shoulder",
     "DESCRIPTION": "Gain !B! Block. If you were attacked last turn, gain !M! additional Block."
   },
   "cardenergy:HurlTheHeap": {
     "NAME": "Hurl the Heap",
-    "DESCRIPTION": "Deal damage equal to your Block."
+    "DESCRIPTION": "Deal !M! damage for each card in your exhaust pile."
   },
   "cardenergy:Hunker": {
     "NAME": "Hunker",
@@ -127,5 +127,20 @@
   "cardenergy:Scrapstorm": {
     "NAME": "Scrapstorm",
     "DESCRIPTION": "Deal !D! damage to ALL enemies. Discard !M! card at random."
+  },
+  "cardenergy:StripTheWreck": {
+    "NAME": "Strip the Wreck",
+    "DESCRIPTION": "Exhaust up to 2 cards from your hand. NL Gain !M! Thorns for each card Exhausted this way. NL Exhaust.",
+    "EXTENDED_DESCRIPTION": [
+      "Exhaust up to 2 cards."
+    ]
+  },
+  "cardenergy:BreakdownRush": {
+    "NAME": "Breakdown Rush",
+    "DESCRIPTION": "Deal !D! damage. NL Deals !M! additional damage for each card Exhausted this turn."
+  },
+  "cardenergy:Counterthrow": {
+    "NAME": "Counterthrow",
+    "DESCRIPTION": "Apply !M! Counterthrow."
   }
 }
