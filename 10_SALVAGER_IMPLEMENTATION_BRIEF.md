@@ -293,10 +293,11 @@ Overlap is expected.
 - Cost: 1
 - Gain 9 Block
 
-`Guard the Heap`
+`Set Shoulder`
 
 - Cost: 1
 - Gain 7 Block. If you were attacked last turn, gain 3 additional Block.
+- Renamed from `Guard the Heap` so the `Heap` theme can stay reserved for exhaust-pile interactions.
 
 `Hunker`
 
@@ -355,6 +356,14 @@ Overlap is expected.
 
 - Cost: 0
 - Draw 1 card. Put 1 card from your hand on top of your draw pile.
+
+`Counterthrow`
+
+- Cost: 2 (upgrades to 1)
+- Type: Skill
+- Apply 1 Counterthrow.
+- Keyword `Counterthrow` (custom power): when attacked, lose 1 stack and deal damage to the attacker equal to your remaining Block. Resets at the start of your turn.
+- Runtime note: first native Salvager power. Reads `owner.currentBlock` post-block-reduction inside `onAttacked`, so the retaliation is the Block the attack failed to chew through. Charge is consumed unconditionally on a qualifying hit (open decision: preserve charge on 0-block retaliation). Placeholder icon reuses vanilla `loadRegion("thorns")` until custom Counterthrow art lands.
 
 ### Hoard commons
 
@@ -438,6 +447,15 @@ Status markers below reflect current repository state. `implemented` means the c
 - Deal 14 damage. Deals 6 additional damage for each card Exhausted this turn.
 - Upgrade: +2 additional damage per card Exhausted this turn (8 per).
 - Runtime note: reads `SalvagerCombatState.getExhaustedThisTurn(player)` during `applyPowers` and `calculateCardDamage`, rewriting `baseDamage` to `printed + (per-exhaust × count)` and flagging `isDamageModified` when the bonus is active. No new cost-modifier infrastructure required — this is a damage scaler, not a cost scaler.
+
+`Hurl the Heap` — implemented (promoted from common)
+
+- Cost: 2 (upgrades to 1)
+- Type: Attack
+- Deal M damage for each card in your exhaust pile (M = 3, upgrades to 2).
+- Anchored on the `Bludgeon` mirrored slot. Rarity slip rare→uncommon is deliberate per the loose-guideline anchoring policy. `BludgeonCopy` removed from the mirror pool.
+- Upgrade trades raw damage for energy efficiency rather than cost-to-zero. Open decision: confirm this shape, or swap to "flat floor + pile_size" if that was the intent.
+- Runtime note: `baseDamage = magicNumber × exhaustPile.size()` is rewritten in `applyPowers` and `calculateCardDamage`; `isDamageModified` reset so the pile-driven value renders as printed damage. `DamageAction` is added unconditionally so `onAttacked`-style hooks (Thorns, Flame Barrier) fire even at empty pile; `damageAmount`-gated effects do not.
 
 ## Recommended Next-Pass Rares
 
@@ -548,3 +566,31 @@ The commons should then carry the broader scaffolding:
 - Rot tension
 - Consume grammar
 
+## Custom Powers
+
+The mod now carries its first native Salvager power, `CounterthrowPower`:
+
+- Source: `src/main/java/cardenergy/powers/CounterthrowPower.java`
+- Localization: `src/main/resources/localization/eng/PowerStrings.json` (loaded in `CardEnergyMod.receiveEditStrings`)
+- Keyword: `Counterthrow` registered in `CardEnergyMod.receiveEditKeywords` alongside `Consume`, `Hoard`, `Rot`
+- Icon: placeholder reuses the vanilla Thorns region via `loadRegion("thorns")` until bespoke art is authored
+- Behavior: `onAttacked` consumes one stack per qualifying incoming hit and retaliates with `DamageType.THORNS` equal to `owner.currentBlock` (read post-block-reduction). Cleared at `atStartOfTurn`.
+
+Use this class as the reference template for future native powers. The minimum surface a new power needs in this codebase is: concrete `AbstractPower` subclass, `PowerStrings.json` entry, `BaseMod.addKeyword` call, and (eventually) a custom icon region.
+
+## Handoff: Open Decisions
+
+The following decisions were surfaced during the uncommon pass 2 work and are deliberately unresolved so the next pass can choose. None of these block further card work; they are small-radius tuning choices on cards that already ship cleanly.
+
+- **Counterthrow whiff semantics.** `CounterthrowPower.onAttacked` currently consumes a charge on every qualifying incoming hit, including hits where `owner.currentBlock == 0` (retaliation is skipped but the charge is still spent). Confirm or flip to preserve the charge when the retaliation would be 0.
+- **Hurl the Heap upgrade shape.** Shipped as cost 2 / magic 3 base → cost 1 / magic 2 upgraded (per-exhaust-pile-card multiplier), trading raw damage for energy efficiency on upgrade. Confirm or swap to "flat floor + pile_size" if the intent was a flat-damage floor rather than a per-card multiplier.
+- **Brutality mirrored slot.** `BrutalityCopy` remains in the mirror pool because `Hidden Compartments` was parked (see §13.1 in `30_SALVAGER_SET_DESIGN.md`). That slot is open for a fresh Salvager-native power design.
+
+## Handoff: Next-Pass Direction
+
+Next-pass uncommons are explicitly the "boring" utility uncommons — cards that raise the general quality of any Salvager deck rather than anchor a new axis. The user has asked to reserve pool space for two specialized families during this pass:
+
+- **Exhaust-return cards.** Cards that move cards from the exhaust pile back into play, hand, or discard. `Recovery` already anchors this at common; a stronger uncommon version is wanted. See §10.1 in `30_SALVAGER_SET_DESIGN.md` for the recurring-exhume design space.
+- **Junk/Scrap producers and consumers.** Cards that generate Junk/Scrap status cards, and cards that care about having them in hand for scaling or consumption (e.g., exhaust a Scrap to upgrade a random card in hand). See §11 in `30_SALVAGER_SET_DESIGN.md` for the status-card design.
+
+Do not implement these as the whole uncommon pass — they are earmarks inside a broader utility-uncommon batch.

@@ -348,6 +348,7 @@ Recommended next-pass package from the handoff document:
   - `Scrapstorm`
   - `Breakdown Rush`
   - `Barbed Harness`
+  - `Hurl the Heap` — promoted from common onto the `Bludgeon` mirrored slot. Occupies the §10.2 "attack rider" vein as an exhaust-pile scaler. Rarity slip rare→uncommon is deliberate per the loose-guideline anchoring policy.
   - (parked) `Hidden Compartments` — draw-plus-discard power concept; pulled from the uncommon pool, may migrate to a relic slot (§12), and the name is likely to change. See "Parked designs" below.
 - rares should continue to define late-game inevitability through exhaust engines, bridge powers, and a few compact finishers:
   - `Close Appraisal`
@@ -595,3 +596,45 @@ Revisit when:
 - the effect is repitched as a relic candidate in §12, at which point the Brutality slot gets a different Salvager-native replacement.
 
 Until then, the Brutality red slot stays mirrored and is eligible for a new Salvager-native power design.
+
+## 14. Reactive Defense Axis and Native Powers
+
+The reactive-defense lane now has a concrete custom-power anchor beyond Thorns: `CounterthrowPower`.
+
+### 14.1 Counterthrow axis
+
+Working rules text:
+
+`Counterthrow X` — when attacked, lose 1 stack and deal damage to the attacker equal to your remaining Block. Resets at the start of your turn.
+
+Design role:
+
+- translates "Block matters" into an offensive payoff without depending on Strength
+- pairs naturally with the class's preference for reading block *after* the incoming attack (§10.2 uncapped scaling caveat does not apply here — the payoff is capped at remaining Block per hit)
+- bridges the reactive-defense lane into attack-shaped turns without shifting the class toward Strength-scaling
+
+Design notes:
+
+- Counterthrow reads `owner.currentBlock` **after** the incoming attack has chewed through the pre-reduction block, so a well-timed Set Shoulder or Hunker directly becomes the retaliation value
+- stacks are charges, not permanent — each qualifying incoming attack consumes one stack
+- multi-hit attacks only trigger the retaliation on the first hit that finds a stack; subsequent hits in the same sequence do not refund the charge
+- the power resets at `atStartOfTurn` so Counterthrow cannot accumulate across turns
+- multi-target applications are deliberately avoided at uncommon/rare — Counterthrow is a *per-card* grant, not a mass-apply
+
+Design adjacency:
+
+- **Barbed Harness** (uncommon Thorns power) stacks with Counterthrow without overlapping: Thorns fires as a flat retaliation, Counterthrow fires as a block-scaled retaliation. A deck that assembles both layers both the floor and the ceiling of reactive damage.
+- **Strip the Wreck** bridges Thorns into the reactive package from the exhaust-value lane. Counterthrow does the same bridge from the block side.
+- **Set Shoulder** is the cleanest common block-payoff target for Counterthrow: extra block after being attacked last turn translates directly into larger retaliation.
+
+### 14.2 Custom power infrastructure
+
+`CounterthrowPower` is the mod's first native power. The working pattern future powers should follow:
+
+- subclass `AbstractPower`, implement the relevant hook (`onAttacked`, `atStartOfTurn`, `atEndOfTurn`, etc.)
+- add a `POWER_ID` constant using `CardEnergyMod.makeID("PowerName")`
+- register localization in `src/main/resources/localization/eng/PowerStrings.json` (loaded via `BaseMod.loadCustomStringsFile(PowerStrings.class, ...)` in `CardEnergyMod.receiveEditStrings`)
+- register the keyword via `BaseMod.addKeyword(...)` in `CardEnergyMod.receiveEditKeywords`
+- placeholder icons can be borrowed from vanilla regions via `loadRegion(...)`; custom power art is a later pass
+
+The Brutality red slot remains available for the next native-power candidate (§13.1).

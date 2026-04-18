@@ -135,7 +135,7 @@ Current energy-demand resolution shape:
 
 ## Current Keyword Model
 
-`Consume`, `Rot`, and `Hoard` are now implemented as generic card behaviors rather than Terracotta-only card helpers.
+`Consume`, `Rot`, and `Hoard` are now implemented as generic card behaviors rather than Terracotta-only card helpers. `Counterthrow` is additionally registered as a keyword backed by a custom `AbstractPower` rather than a card-lifecycle behavior.
 
 Current runtime direction:
 
@@ -150,6 +150,7 @@ Current behavior precedence:
 - `Rot` owns the exhaust-on-manual-discard behavior when `Consume` is absent
 - `Rot` also owns the exhaust-at-end-of-turn behavior
 - `Hoard` implies staying in hand through intrinsic retain behavior
+- `Counterthrow` is a per-charge retaliation power: `onAttacked` consumes one stack and deals `owner.currentBlock` damage (post-block-reduction) as `DamageType.THORNS`; cleared at the start of the player's turn. See `cardenergy.powers.CounterthrowPower`.
 
 Current Hoard implementation notes:
 
@@ -235,7 +236,8 @@ Current reward-pool/runtime intent outside the starter deck:
 
 - normal rewards still come mostly from mirrored Ironclad cards in Terracotta color
 - the first Salvager-specific common pass now replaces a chunk of the mirrored Ironclad commons
-- a partial first pass of Salvager-specific uncommons now replaces the corresponding mirrored Ironclad uncommon slots (Bloodletting, Combust, Fiend Fire, Juggernaut)
+- a partial second pass of Salvager-specific uncommons now replaces the corresponding mirrored Ironclad slots (Bloodletting, Combust, Fiend Fire, Juggernaut, Bludgeon); Bludgeon specifically is a rare-to-uncommon rarity slip used as a structural anchor for `Hurl the Heap`
+- the Body Slam common slot is now `Counterthrow`, the Rage common slot is now `Set Shoulder` (renamed from `Guard the Heap`)
 - those mirrored cards are still meant to be edited into final Terracotta cards over time
 
 ## Current Art Pipeline
@@ -317,6 +319,12 @@ Keyword support patches:
 - `cardenergy.patches.CustomKeywordLifecyclePatch`
 - `cardenergy.patches.HoardStatPatch`
 - `cardenergy.patches.UseCardPatch`
+
+Native powers:
+
+- `cardenergy.powers.CounterthrowPower`
+- localization: `src/main/resources/localization/eng/PowerStrings.json`
+- loader call: `BaseMod.loadCustomStringsFile(PowerStrings.class, ...)` in `CardEnergyMod.receiveEditStrings`
 
 ## Workshop Packaging
 
