@@ -29,6 +29,12 @@ public final class TerracottaCardBackGenerator {
     private static final double ORB_CARD_SCALE = 0.57;
     private static final double ORB_CARD_BASE_ANGLE_DEGREES = 0.0;
     private static final double ORB_ANCHOR_Y_RATIO = 0.82;
+    private static final int ORB_SHADOW_OFFSET_X = 4;
+    private static final int ORB_SHADOW_OFFSET_Y = 4;
+    private static final int ORB_SHADOW_SOFT_OFFSET_X = 2;
+    private static final int ORB_SHADOW_SOFT_OFFSET_Y = 2;
+    private static final int ORB_SHADOW_ALPHA = 56;
+    private static final int ORB_SHADOW_SOFT_ALPHA = 28;
 
     private TerracottaCardBackGenerator() {
     }
@@ -45,16 +51,16 @@ public final class TerracottaCardBackGenerator {
             BufferedImage attackSource = readImage(baseModZip, BASEMOD_ATTACK);
             BufferedImage skillSource = readImage(baseModZip, BASEMOD_SKILL);
             BufferedImage powerSource = readImage(baseModZip, BASEMOD_POWER);
-            BufferedImage orbTemplate = readImage(baseModZip, BASEMOD_ORB);
+            BufferedImage orbLayoutTemplate = readImage(baseModZip, BASEMOD_ORB);
             File attack = generateFlat(outputDir, "bg_attack.png", attackSource, 0);
             File skill = generateFlat(outputDir, "bg_skill.png", skillSource, 0);
             File power = generateFlat(outputDir, "bg_power.png", powerSource, 0);
-            File orb = generateCompositeOrb(outputDir, "energy_orb.png", 512, attackSource, skillSource, powerSource, orbTemplate);
+            File orb = generateCompositeOrb(outputDir, "energy_orb.png", 512, attackSource, skillSource, powerSource, orbLayoutTemplate);
 
             File attackPortrait = generateScaled(outputDir, "bg_attack_p.png", attackSource, LARGE_CARD_DIMENSION);
             File skillPortrait = generateScaled(outputDir, "bg_skill_p.png", skillSource, LARGE_CARD_DIMENSION);
             File powerPortrait = generateScaled(outputDir, "bg_power_p.png", powerSource, LARGE_CARD_DIMENSION);
-            File orbPortrait = generateCompositeOrb(outputDir, "energy_orb_p.png", LARGE_ORB_DIMENSION, attackSource, skillSource, powerSource, null);
+            File orbPortrait = generateCompositeOrb(outputDir, "energy_orb_p.png", LARGE_ORB_DIMENSION, attackSource, skillSource, powerSource, orbLayoutTemplate);
             File smallOrb = generateSmallOrb(outputDir, gameZip);
 
             return new GeneratedPaths(
@@ -167,19 +173,27 @@ public final class TerracottaCardBackGenerator {
             BufferedImage attackSource,
             BufferedImage skillSource,
             BufferedImage powerSource,
-            BufferedImage orbTemplate
+            BufferedImage orbLayoutTemplate
     ) throws IOException {
-        BufferedImage composite = orbTemplate != null
-                ? new BufferedImage(orbTemplate.getWidth(), orbTemplate.getHeight(), BufferedImage.TYPE_INT_ARGB)
-                : new BufferedImage(targetSize, targetSize, BufferedImage.TYPE_INT_ARGB);
-        OrbLayout layout = orbTemplate != null
-                ? findOccupiedBounds(orbTemplate)
+        BufferedImage composite = new BufferedImage(targetSize, targetSize, BufferedImage.TYPE_INT_ARGB);
+        OrbLayout layout = orbLayoutTemplate != null
+                ? scaleLayout(findOccupiedBounds(orbLayoutTemplate), orbLayoutTemplate.getWidth(), orbLayoutTemplate.getHeight(), targetSize, targetSize)
                 : new OrbLayout(0, 0, targetSize, targetSize);
         int layoutSize = Math.min(layout.width, layout.height);
         BufferedImage[] transformedCards = new BufferedImage[] {
                 scaleImage(transformOrbMiniCardImage(attackSource), layoutSize),
                 scaleImage(transformOrbMiniCardImage(skillSource), layoutSize),
                 scaleImage(transformOrbMiniCardImage(powerSource), layoutSize)
+        };
+        BufferedImage[] hardShadows = new BufferedImage[] {
+                createCardShadowImage(transformedCards[0], ORB_SHADOW_ALPHA),
+                createCardShadowImage(transformedCards[1], ORB_SHADOW_ALPHA),
+                createCardShadowImage(transformedCards[2], ORB_SHADOW_ALPHA)
+        };
+        BufferedImage[] softShadows = new BufferedImage[] {
+                createCardShadowImage(transformedCards[0], ORB_SHADOW_SOFT_ALPHA),
+                createCardShadowImage(transformedCards[1], ORB_SHADOW_SOFT_ALPHA),
+                createCardShadowImage(transformedCards[2], ORB_SHADOW_SOFT_ALPHA)
         };
 
         Graphics2D graphics = composite.createGraphics();
@@ -189,16 +203,15 @@ public final class TerracottaCardBackGenerator {
             graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
             graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-            // Preserve the BaseMod orb frame/shadow layer so the cost orb keeps proper depth.
-            if (orbTemplate != null) {
-                graphics.drawImage(orbTemplate, 0, 0, null);
-            }
-
             double centerX = layout.centerX();
             double centerY = layout.centerY();
             for (int i = 0; i < 6; i++) {
                 BufferedImage card = transformedCards[i % transformedCards.length];
+                BufferedImage hardShadow = hardShadows[i % hardShadows.length];
+                BufferedImage softShadow = softShadows[i % softShadows.length];
                 double rotationDegrees = ORB_CARD_BASE_ANGLE_DEGREES + (60.0 * i);
+                drawAnchoredImage(graphics, hardShadow, centerX + ORB_SHADOW_OFFSET_X, centerY + ORB_SHADOW_OFFSET_Y, rotationDegrees);
+                drawAnchoredImage(graphics, softShadow, centerX + ORB_SHADOW_SOFT_OFFSET_X, centerY + ORB_SHADOW_SOFT_OFFSET_Y, rotationDegrees);
                 drawAnchoredCard(graphics, card, centerX, centerY, rotationDegrees);
             }
         } finally {
@@ -226,13 +239,34 @@ public final class TerracottaCardBackGenerator {
     }
 
     private static void drawAnchoredCard(Graphics2D graphics, BufferedImage card, double centerX, double centerY, double rotationDegrees) {
-        double anchorX = card.getWidth() / 2.0;
-        double anchorY = card.getHeight() * ORB_ANCHOR_Y_RATIO;
+        drawAnchoredImage(graphics, card, centerX, centerY, rotationDegrees);
+    }
+
+    private static void drawAnchoredImage(Graphics2D graphics, BufferedImage image, double centerX, double centerY, double rotationDegrees) {
+        double anchorX = image.getWidth() / 2.0;
+        double anchorY = image.getHeight() * ORB_ANCHOR_Y_RATIO;
         AffineTransform transform = new AffineTransform();
         transform.translate(centerX, centerY);
         transform.rotate(Math.toRadians(rotationDegrees));
         transform.translate(-anchorX, -anchorY);
-        graphics.drawImage(card, transform, null);
+        graphics.drawImage(image, transform, null);
+    }
+
+    private static BufferedImage createCardShadowImage(BufferedImage source, int shadowAlpha) {
+        BufferedImage shadow = new BufferedImage(source.getWidth(), source.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        int clampedAlpha = Math.max(0, Math.min(255, shadowAlpha));
+        for (int y = 0; y < source.getHeight(); y++) {
+            for (int x = 0; x < source.getWidth(); x++) {
+                int sourceArgb = source.getRGB(x, y);
+                int sourceAlpha = (sourceArgb >>> 24) & 0xff;
+                if (sourceAlpha == 0) {
+                    continue;
+                }
+                int pixelAlpha = (sourceAlpha * clampedAlpha) / 255;
+                shadow.setRGB(x, y, (pixelAlpha << 24));
+            }
+        }
+        return shadow;
     }
 
     private static File generateSmallOrb(File outputDir, ZipFile gameZip) throws IOException {
@@ -300,6 +334,18 @@ public final class TerracottaCardBackGenerator {
             return new OrbLayout(0, 0, source.getWidth(), source.getHeight());
         }
         return new OrbLayout(minX, minY, maxX - minX + 1, maxY - minY + 1);
+    }
+
+    private static OrbLayout scaleLayout(OrbLayout sourceLayout, int sourceWidth, int sourceHeight, int targetWidth, int targetHeight) {
+        double scaleX = sourceWidth <= 0 ? 1.0 : (double) targetWidth / sourceWidth;
+        double scaleY = sourceHeight <= 0 ? 1.0 : (double) targetHeight / sourceHeight;
+
+        int scaledX = (int) Math.round(sourceLayout.x * scaleX);
+        int scaledY = (int) Math.round(sourceLayout.y * scaleY);
+        int scaledWidth = Math.max(1, (int) Math.round(sourceLayout.width * scaleX));
+        int scaledHeight = Math.max(1, (int) Math.round(sourceLayout.height * scaleY));
+
+        return new OrbLayout(scaledX, scaledY, scaledWidth, scaledHeight);
     }
 
     private static int transformPixel(int argb, float saturationScale, float valueScale) {
