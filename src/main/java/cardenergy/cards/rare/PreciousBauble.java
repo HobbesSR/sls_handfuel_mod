@@ -42,20 +42,20 @@ public class PreciousBauble extends AbstractTerracottaCard {
         if (AbstractDungeon.player == null || !AbstractDungeon.player.hand.group.contains(this)) {
             return;
         }
+        AbstractDungeon.player.decreaseMaxHealth(MAX_HEALTH_LOSS);
+    }
+
+    @Override
+    public void onRetained() {
+        if (AbstractDungeon.player == null || !AbstractDungeon.player.hand.group.contains(this)) {
+            return;
+        }
         addToBot(new ApplyPowerAction(
                 AbstractDungeon.player,
                 AbstractDungeon.player,
                 new IntangiblePlayerPower(AbstractDungeon.player, 1),
                 1
         ));
-    }
-
-    @Override
-    public void onRetained() {
-        if (AbstractDungeon.player == null) {
-            return;
-        }
-        AbstractDungeon.player.decreaseMaxHealth(MAX_HEALTH_LOSS);
     }
 
     @Override

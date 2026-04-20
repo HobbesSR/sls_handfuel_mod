@@ -28,6 +28,8 @@ import cardenergy.cards.common.ScrapKnife;
 import cardenergy.cards.common.ScrapSpray;
 import cardenergy.cards.common.Stockpile;
 import cardenergy.cards.common.TurnAside;
+import cardenergy.cards.status.Junk;
+import cardenergy.cards.status.Scrap;
 import cardenergy.cards.rare.PreciousBauble;
 import cardenergy.cards.uncommon.BarbedHarness;
 import cardenergy.cards.uncommon.BreakdownRush;
@@ -94,6 +96,8 @@ public class CardEnergyMod implements EditCharactersSubscriber, EditCardsSubscri
     @Override
     public void receiveEditCards() {
         RedMirrorCards.registerAll();
+        addStatus(new Junk());
+        addStatus(new Scrap());
         addAndUnlock(new ScroungeStrike());
         addAndUnlock(new ScroungeDefend());
         addAndUnlock(new Brace());
@@ -136,6 +140,10 @@ public class CardEnergyMod implements EditCharactersSubscriber, EditCardsSubscri
         UnlockTracker.unlockCard(card.cardID);
     }
 
+    private static void addStatus(com.megacrit.cardcrawl.cards.AbstractCard card) {
+        BaseMod.addCard(card);
+    }
+
     @Override
     public void receiveEditStrings() {
         BaseMod.loadCustomStringsFile(CardStrings.class, LOCALIZATION_DIR + "/CardStrings.json");
@@ -155,6 +163,9 @@ public class CardEnergyMod implements EditCharactersSubscriber, EditCardsSubscri
                 makeKeywordColor());
         BaseMod.addKeyword(MOD_ID, "Counterthrow", new String[] { "counterthrow" },
                 "When attacked, lose 1 stack and deal damage to the attacker equal to your remaining Block. Resets at the start of your turn.",
+                makeKeywordColor());
+        BaseMod.addKeyword(MOD_ID, "Junk", new String[] { "junk", "scrap" },
+                "Junk and Scrap are colorless status cards that can convert into random Salvager rewards when their hand-size conditions are met.",
                 makeKeywordColor());
     }
 

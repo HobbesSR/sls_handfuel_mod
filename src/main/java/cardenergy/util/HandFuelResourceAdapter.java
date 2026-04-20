@@ -3,6 +3,8 @@ package cardenergy.util;
 import cardenergy.CardEnergyMod;
 import cardenergy.actions.SelectEnergyLossPaymentAction;
 import cardenergy.actions.SelectFuelPaymentAction;
+import cardenergy.cards.status.Junk;
+import cardenergy.cards.status.Scrap;
 import cardenergy.character.CardEnergyCharacterEnum;
 import cardenergy.patches.PrepaidReplayFieldPatch;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
@@ -63,6 +65,9 @@ public class HandFuelResourceAdapter {
         if (!isActive(player) || card == null) {
             return false;
         }
+        if (isAlwaysFreeStatus(card)) {
+            return true;
+        }
         if (!usesFuelPaymentModel(card)) {
             return false;
         }
@@ -77,6 +82,9 @@ public class HandFuelResourceAdapter {
 
     public static boolean shouldInterceptCardUse(AbstractPlayer player, AbstractCard card) {
         if (!isActive(player) || card == null) {
+            return false;
+        }
+        if (isAlwaysFreeStatus(card)) {
             return false;
         }
         if (!usesFuelPaymentModel(card)) {
@@ -153,6 +161,9 @@ public class HandFuelResourceAdapter {
         if (card == null || card.freeToPlayOnce) {
             return 0;
         }
+        if (isAlwaysFreeStatus(card)) {
+            return 0;
+        }
         if (card.costForTurn == -1) {
             return 0;
         }
@@ -194,6 +205,9 @@ public class HandFuelResourceAdapter {
         if (card == null) {
             return null;
         }
+        if (isAlwaysFreeStatus(card)) {
+            return "0";
+        }
         if (!usesFuelPaymentModel(card)) {
             return null;
         }
@@ -207,6 +221,10 @@ public class HandFuelResourceAdapter {
             return "X";
         }
         return Integer.toString(getRequiredFuel(card));
+    }
+
+    private static boolean isAlwaysFreeStatus(AbstractCard card) {
+        return Junk.ID.equals(card.cardID) || Scrap.ID.equals(card.cardID);
     }
 
 }

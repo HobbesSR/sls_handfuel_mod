@@ -222,13 +222,12 @@ Role:
 - Rarity: `COMMON`
 - Type: Attack
 - Cost: `1`
-- Effect: Deal 7 damage to ALL enemies
-- No keyword
+- Effect: Deal 10 damage to ALL enemies. Add 1 Junk to your discard pile.
 
 Role:
 
-- reward-pool AoE common
-- descendant of the starter signature AoE without duplicating `Consume`
+- reward-pool AoE pressure common
+- explicit Junk producer with no upside rider beyond above-rate base damage
 
 ## Common Pool Scaffold
 
@@ -256,18 +255,18 @@ Overlap is expected.
 `Scrap Spray`
 
 - Cost: 1
-- Deal 7 damage to ALL enemies
-- No keyword
+- Deal 10 damage to ALL enemies.
+- Add 1 Junk to your discard pile.
 
 `Rotting Slash`
 
 - Cost: 1
-- Deal 8 damage
+- Deal 10 damage
 - `Rot`
 
 `Salvage Swing`
 
-- Cost: 1
+- Cost: 0
 - Deal 7 damage. If a card was Exhausted this turn, gain 3 Block.
 
 `Pile Driver`
@@ -280,7 +279,8 @@ Overlap is expected.
 `Shoulder the Load`
 
 - Cost: 1
-- Gain 8 Block. Discard 1 card.
+- Gain 10 Block.
+- Add 1 Junk to your discard pile.
 
 `Rotting Shelter`
 
@@ -326,7 +326,8 @@ Overlap is expected.
 `Sort the Haul`
 
 - Cost: 0
-- Draw 2 cards. Discard 1 card.
+- Draw 3 cards.
+- Add 1 Junk to your discard pile.
 
 ### Exhaust/value commons
 
@@ -343,7 +344,8 @@ Overlap is expected.
 `Patchwork`
 
 - Cost: 1
-- Exhaust 1 card from your hand. Draw 2 cards.
+- Exhaust 1 card from your hand. Draw 3 cards.
+- Add 1 Junk to your discard pile.
 
 ### Reactive commons
 
@@ -383,8 +385,8 @@ Overlap is expected.
 
 `Scavenge the Wreck`
 
-- Cost: 1
-- Exhaust 1 card in your hand. Draw 2 cards.
+- Cost: 0
+- Exhaust 1 card from your discard pile. Draw 1 card.
 
 `Packed Swing`
 
@@ -393,8 +395,8 @@ Overlap is expected.
 
 Current design note:
 
-- `Dug In`, `Loose Parts`, and `Turn Aside` were useful first-pass cards, but the newer handoff package points toward cleaner common infrastructure in `Shoulder the Load`, `Sort the Haul`, and `Pack Away`
-- `Sort the Haul` should function as the low-cost filter outlet for dumping off-color clutter, not as a throwaway exhaust cantrip
+- `Dug In`, `Loose Parts`, and `Turn Aside` were useful first-pass cards, but the newer pass now repurposes the first two into explicit Junk-production commons while preserving `Pack Away` as hand-shaping glue
+- common Junk producers should stay slightly above rate with no upside rider text beyond their base effect; the built-in downside is adding Junk to your discard pile
 - `Hidden Cache` should be the harsher Hoard support card: under-rate at first glance, but a real answer to retained junk, statuses, and curses once hand pressure matters
 - `Precious Bauble` should replace a dead mirrored rare with a real retained-hand moonshot rather than another generic red payoff the class barely exploits
 - `Brace for Impact` still has a place as neutral defensive glue, but the common pool should lean more heavily on simple conversion cards and cleaner exhaust enablers than on bespoke placeholder effects
@@ -405,21 +407,21 @@ These are the current recommended additions from the handoff package. They are t
 
 Status markers below reflect current repository state. `implemented` means the card ships as a real Salvager uncommon and its mirrored Ironclad counterpart has been removed from the reward pool. `deferred` means the design is still the target, but implementation is gated on an open decision captured inline.
 
-`Barbed Harness` — implemented
+`Barbed Harness` - implemented
 
 - Cost: 1
 - Type: Power
 - Whenever an enemy attacks you, deal 3 damage back.
 - Runtime note: grants vanilla `ThornsPower` rather than a custom power so no new power-art pipeline is required yet.
 
-`Upend the Pack` — implemented
+`Upend the Pack` - implemented
 
 - Cost: 0
 - Type: Skill
 - Discard your hand, then draw that many cards. Exhaust.
 - Upgrade removes Exhaust.
 
-`Strip the Wreck` — implemented
+`Strip the Wreck` - implemented
 
 - Cost: 0
 - Type: Skill
@@ -427,35 +429,36 @@ Status markers below reflect current repository state. `implemented` means the c
 - Upgrade: +1 Thorns per card Exhausted (3 per).
 - Runtime note: the `Gain [E]` translation was dropped in favor of Thorns generation. This bridges the exhaust-value lane into reactive defense, stacks with Barbed Harness, and avoids introducing Strength generation (which the class is deliberately kept away from). Uses vanilla `ThornsPower`; no new power infrastructure required.
 
-`Empty the Pack` — implemented
+`Empty the Pack` - implemented
 
 - Cost: 1
 - Type: Attack
 - Deal 14 damage. Discard your hand.
 - The discard routes through the unified manual-discard hook, so Consume and Rot cards in hand fire normally.
 
-`Scrapstorm` — implemented
+`Scrapstorm` - implemented
 
 - Cost: 1
 - Type: Attack
-- Deal 9 damage to ALL enemies. Discard 1 card at random.
+- Deal 12 damage to ALL enemies.
+- Add 1 Scrap to your discard pile.
 
-`Breakdown Rush` — implemented
+`Breakdown Rush` - implemented
 
 - Cost: 2
 - Type: Attack
 - Deal 14 damage. Deals 6 additional damage for each card Exhausted this turn.
 - Upgrade: +2 additional damage per card Exhausted this turn (8 per).
-- Runtime note: reads `SalvagerCombatState.getExhaustedThisTurn(player)` during `applyPowers` and `calculateCardDamage`, rewriting `baseDamage` to `printed + (per-exhaust × count)` and flagging `isDamageModified` when the bonus is active. No new cost-modifier infrastructure required — this is a damage scaler, not a cost scaler.
+- Runtime note: reads `SalvagerCombatState.getExhaustedThisTurn(player)` during `applyPowers` and `calculateCardDamage`, rewriting `baseDamage` to `printed + (per-exhaust x count)` and using the standard dynamic-damage idiom (`isDamageModified = damage != baseDamage`) so Strength/Weak modifiers remain visible. No new cost-modifier infrastructure is required - this is a damage scaler, not a cost scaler.
 
-`Hurl the Heap` — implemented (promoted from common)
+`Hurl the Heap` - implemented (promoted from common)
 
 - Cost: 2 (upgrades to 1)
 - Type: Attack
 - Deal M damage for each card in your exhaust pile (M = 3, upgrades to 2).
-- Anchored on the `Bludgeon` mirrored slot. Rarity slip rare→uncommon is deliberate per the loose-guideline anchoring policy. `BludgeonCopy` removed from the mirror pool.
+- Anchored on the `Bludgeon` mirrored slot. Rarity slip rare->uncommon is deliberate per the loose-guideline anchoring policy. `BludgeonCopy` removed from the mirror pool.
 - Upgrade trades raw damage for energy efficiency rather than cost-to-zero. Open decision: confirm this shape, or swap to "flat floor + pile_size" if that was the intent.
-- Runtime note: `baseDamage = magicNumber × exhaustPile.size()` is rewritten in `applyPowers` and `calculateCardDamage`; `isDamageModified` reset so the pile-driven value renders as printed damage. `DamageAction` is added unconditionally so `onAttacked`-style hooks (Thorns, Flame Barrier) fire even at empty pile; `damageAmount`-gated effects do not.
+- Runtime note: `baseDamage = magicNumber x exhaustPile.size()` is rewritten in `applyPowers` and `calculateCardDamage` with null-safe player guards for non-combat rendering. Uses the standard dynamic-damage idiom (`isDamageModified = damage != baseDamage`) so normal damage modifiers remain visible. `DamageAction` is added unconditionally so `onAttacked`-style hooks (Thorns, Flame Barrier) fire even at empty pile; `damageAmount`-gated effects do not.
 
 ## Recommended Next-Pass Rares
 
@@ -488,8 +491,8 @@ Status markers below reflect current repository state. `implemented` means the c
 - Cost: Unplayable
 - Type: Skill
 - Innate
-- At the start of your turn, if this is in your hand, gain 1 Intangible.
-- At the end of your turn, if this is in your hand, lose 1 Max HP.
+- After discard (before enemies act), if this is in your hand, gain 1 Intangible.
+- At the start of your turn, if this is in your hand, lose 1 Max HP.
 
 ## Rot Philosophy
 
@@ -583,14 +586,15 @@ Use this class as the reference template for future native powers. The minimum s
 The following decisions were surfaced during the uncommon pass 2 work and are deliberately unresolved so the next pass can choose. None of these block further card work; they are small-radius tuning choices on cards that already ship cleanly.
 
 - **Counterthrow whiff semantics.** `CounterthrowPower.onAttacked` currently consumes a charge on every qualifying incoming hit, including hits where `owner.currentBlock == 0` (retaliation is skipped but the charge is still spent). Confirm or flip to preserve the charge when the retaliation would be 0.
-- **Hurl the Heap upgrade shape.** Shipped as cost 2 / magic 3 base → cost 1 / magic 2 upgraded (per-exhaust-pile-card multiplier), trading raw damage for energy efficiency on upgrade. Confirm or swap to "flat floor + pile_size" if the intent was a flat-damage floor rather than a per-card multiplier.
-- **Brutality mirrored slot.** `BrutalityCopy` remains in the mirror pool because `Hidden Compartments` was parked (see §13.1 in `30_SALVAGER_SET_DESIGN.md`). That slot is open for a fresh Salvager-native power design.
+- **Hurl the Heap upgrade shape.** Shipped as cost 2 / magic 3 base -> cost 1 / magic 2 upgraded (per-exhaust-pile-card multiplier), trading raw damage for energy efficiency on upgrade. Confirm or swap to "flat floor + pile_size" if the intent was a flat-damage floor rather than a per-card multiplier.
+- **Brutality mirrored slot.** `BrutalityCopy` remains in the mirror pool because `Hidden Compartments` was parked (see section 13.1 in `30_SALVAGER_SET_DESIGN.md`). That slot is open for a fresh Salvager-native power design.
 
 ## Handoff: Next-Pass Direction
 
-Next-pass uncommons are explicitly the "boring" utility uncommons — cards that raise the general quality of any Salvager deck rather than anchor a new axis. The user has asked to reserve pool space for two specialized families during this pass:
+Next-pass uncommons are explicitly the "boring" utility uncommons - cards that raise the general quality of any Salvager deck rather than anchor a new axis. The user has asked to reserve pool space for two specialized families during this pass:
 
-- **Exhaust-return cards.** Cards that move cards from the exhaust pile back into play, hand, or discard. `Recovery` already anchors this at common; a stronger uncommon version is wanted. See §10.1 in `30_SALVAGER_SET_DESIGN.md` for the recurring-exhume design space.
-- **Junk/Scrap producers and consumers.** Cards that generate Junk/Scrap status cards, and cards that care about having them in hand for scaling or consumption (e.g., exhaust a Scrap to upgrade a random card in hand). See §11 in `30_SALVAGER_SET_DESIGN.md` for the status-card design.
+- **Exhaust-return cards.** Cards that move cards from the exhaust pile back into play, hand, or discard. `Recovery` already anchors this at common; a stronger uncommon version is wanted. See section 10.1 in `30_SALVAGER_SET_DESIGN.md` for the recurring-exhume design space.
+- **Junk/Scrap producers and consumers.** Cards that generate Junk/Scrap status cards, and cards that care about having them in hand for scaling or consumption (e.g., exhaust a Scrap to upgrade a random card in hand). See section 11 in `30_SALVAGER_SET_DESIGN.md` for the status-card design.
 
-Do not implement these as the whole uncommon pass — they are earmarks inside a broader utility-uncommon batch.
+Do not implement these as the whole uncommon pass - they are earmarks inside a broader utility-uncommon batch.
+

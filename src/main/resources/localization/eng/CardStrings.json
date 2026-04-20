@@ -33,7 +33,7 @@
   },
   "cardenergy:ScrapSpray": {
     "NAME": "Scrap Spray",
-    "DESCRIPTION": "Deal !D! damage to ALL enemies."
+    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL Add 1 Junk to your discard pile."
   },
   "cardenergy:RottingSlash": {
     "NAME": "Rotting Slash",
@@ -65,7 +65,7 @@
   },
   "cardenergy:DugIn": {
     "NAME": "Shoulder the Load",
-    "DESCRIPTION": "Gain !B! Block. Discard 1 card."
+    "DESCRIPTION": "Gain !B! Block. NL Add 1 Junk to your discard pile."
   },
   "cardenergy:ScrapKnife": {
     "NAME": "Scrap Knife",
@@ -77,7 +77,7 @@
   },
   "cardenergy:LooseParts": {
     "NAME": "Sort the Haul",
-    "DESCRIPTION": "Draw !M! cards. Discard 1 card."
+    "DESCRIPTION": "Draw !M! cards. NL Add 1 Junk to your discard pile."
   },
   "cardenergy:AshenCount": {
     "NAME": "Ashen Count",
@@ -85,7 +85,7 @@
   },
   "cardenergy:Patchwork": {
     "NAME": "Patchwork",
-    "DESCRIPTION": "Exhaust 1 card from your hand. Draw !M! cards."
+    "DESCRIPTION": "Exhaust 1 card from your hand. Draw !M! cards. NL Add 1 Junk to your discard pile."
   },
   "cardenergy:BarbedGuard": {
     "NAME": "Barbed Guard",
@@ -109,7 +109,7 @@
   },
   "cardenergy:PreciousBauble": {
     "NAME": "Precious Bauble",
-    "DESCRIPTION": "Innate. Retain. Unplayable. NL While in hand: Gain 1 Intangible at the start of your turn and lose 1 Max HP at the end. You cannot play Attack cards."
+    "DESCRIPTION": "Innate. Retain. Unplayable. NL While in hand: After discard (before enemies act), gain 1 Intangible. At the start of your turn, lose 1 Max HP. You cannot play Attack cards."
   },
   "cardenergy:BarbedHarness": {
     "NAME": "Barbed Harness",
@@ -126,7 +126,7 @@
   },
   "cardenergy:Scrapstorm": {
     "NAME": "Scrapstorm",
-    "DESCRIPTION": "Deal !D! damage to ALL enemies. Discard !M! card at random."
+    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL Add 1 Scrap to your discard pile."
   },
   "cardenergy:StripTheWreck": {
     "NAME": "Strip the Wreck",
@@ -142,5 +142,13 @@
   "cardenergy:Counterthrow": {
     "NAME": "Counterthrow",
     "DESCRIPTION": "Apply !M! Counterthrow."
+  },
+  "cardenergy:Junk": {
+    "NAME": "Junk",
+    "DESCRIPTION": "Playable only if you have at least 2 other Junk or Scrap cards in your hand. NL Exhaust all Junk and Scrap in your hand. Add a random Uncommon Terracotta card to your hand. NL Exhaust."
+  },
+  "cardenergy:Scrap": {
+    "NAME": "Scrap",
+    "DESCRIPTION": "Playable only if you have at least 1 other Scrap card in your hand. NL Exhaust all Scrap in your hand. Add a random Rare Terracotta card to your hand. NL Exhaust."
   }
 }

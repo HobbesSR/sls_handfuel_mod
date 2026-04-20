@@ -29,16 +29,20 @@ public class HurlTheHeap extends AbstractTerracottaCard {
 
     @Override
     public void applyPowers() {
-        baseDamage = magicNumber * AbstractDungeon.player.exhaustPile.size();
+        int realBaseDamage = baseDamage;
+        baseDamage = magicNumber * getExhaustPileSizeSafe();
         super.applyPowers();
-        isDamageModified = false;
+        isDamageModified = damage != baseDamage;
+        baseDamage = realBaseDamage;
     }
 
     @Override
     public void calculateCardDamage(AbstractMonster mo) {
-        baseDamage = magicNumber * AbstractDungeon.player.exhaustPile.size();
+        int realBaseDamage = baseDamage;
+        baseDamage = magicNumber * getExhaustPileSizeSafe();
         super.calculateCardDamage(mo);
-        isDamageModified = false;
+        isDamageModified = damage != baseDamage;
+        baseDamage = realBaseDamage;
     }
 
     @Override
@@ -56,5 +60,12 @@ public class HurlTheHeap extends AbstractTerracottaCard {
     @Override
     public AbstractCard makeCopy() {
         return new HurlTheHeap();
+    }
+
+    private int getExhaustPileSizeSafe() {
+        if (AbstractDungeon.player == null || AbstractDungeon.player.exhaustPile == null) {
+            return 0;
+        }
+        return AbstractDungeon.player.exhaustPile.size();
     }
 }

@@ -4,8 +4,10 @@ import cardenergy.CardEnergyMod;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import cardenergy.cards.AbstractTerracottaCard;
 import cardenergy.cards.TerracottaCardHelper;
+import cardenergy.cards.status.Junk;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInDiscardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -21,7 +23,7 @@ public class Patchwork extends AbstractTerracottaCard {
         TerracottaCardHelper.applyIdentity(this, ID);
         baseBlock = 0;
         block = baseBlock;
-        magicNumber = baseMagicNumber = 2;
+        magicNumber = baseMagicNumber = 3;
     }
 
     @Override
@@ -33,6 +35,7 @@ public class Patchwork extends AbstractTerracottaCard {
             public void update() {
                 if (!openedSelection) {
                     if (p.hand.isEmpty()) {
+                        addToTop(new MakeTempCardInDiscardAction(new Junk(), 1));
                         addToTop(new DrawCardAction(p, magicNumber));
                         isDone = true;
                         return;
@@ -49,6 +52,7 @@ public class Patchwork extends AbstractTerracottaCard {
                         p.hand.addToTop(card);
                         selected.clear();
                         p.hand.refreshHandLayout();
+                        addToTop(new MakeTempCardInDiscardAction(new Junk(), 1));
                         addToTop(new DrawCardAction(p, magicNumber));
                         addToTop(new ExhaustSpecificCardAction(card, p.hand));
                     }

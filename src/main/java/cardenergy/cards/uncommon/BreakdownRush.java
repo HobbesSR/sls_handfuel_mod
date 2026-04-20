@@ -31,18 +31,20 @@ public class BreakdownRush extends AbstractTerracottaCard {
 
     @Override
     public void applyPowers() {
-        int bonus = magicNumber * SalvagerCombatState.getExhaustedThisTurn(AbstractDungeon.player);
-        baseDamage = PRINTED_DAMAGE + bonus;
+        int realBaseDamage = baseDamage;
+        baseDamage = PRINTED_DAMAGE + (magicNumber * getExhaustedThisTurnSafe());
         super.applyPowers();
-        isDamageModified = bonus > 0;
+        isDamageModified = damage != baseDamage;
+        baseDamage = realBaseDamage;
     }
 
     @Override
     public void calculateCardDamage(AbstractMonster mo) {
-        int bonus = magicNumber * SalvagerCombatState.getExhaustedThisTurn(AbstractDungeon.player);
-        baseDamage = PRINTED_DAMAGE + bonus;
+        int realBaseDamage = baseDamage;
+        baseDamage = PRINTED_DAMAGE + (magicNumber * getExhaustedThisTurnSafe());
         super.calculateCardDamage(mo);
-        isDamageModified = bonus > 0;
+        isDamageModified = damage != baseDamage;
+        baseDamage = realBaseDamage;
     }
 
     @Override
@@ -57,5 +59,12 @@ public class BreakdownRush extends AbstractTerracottaCard {
     @Override
     public AbstractCard makeCopy() {
         return new BreakdownRush();
+    }
+
+    private int getExhaustedThisTurnSafe() {
+        if (AbstractDungeon.player == null) {
+            return 0;
+        }
+        return SalvagerCombatState.getExhaustedThisTurn(AbstractDungeon.player);
     }
 }

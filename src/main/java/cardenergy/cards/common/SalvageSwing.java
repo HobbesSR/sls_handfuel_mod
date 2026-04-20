@@ -15,7 +15,7 @@ public class SalvageSwing extends AbstractTerracottaCard {
     public static final String ID = CardEnergyMod.makeID("SalvageSwing");
 
     public SalvageSwing() {
-        super(ID, CardType.ATTACK, CardRarity.COMMON, CardTarget.ENEMY, 1);
+        super(ID, CardType.ATTACK, CardRarity.COMMON, CardTarget.ENEMY, 0);
         TerracottaCardHelper.applyIdentity(this, ID);
         baseDamage = 7;
         damage = baseDamage;

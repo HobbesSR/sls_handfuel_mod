@@ -160,6 +160,21 @@ Current Hoard implementation notes:
 - that stored bonus is injected into the card's effective damage and block calculation before vanilla scaling
 - Hoard still resets on actual play, not merely on discard
 
+## Dynamic Damage Card Idiom
+
+Cards that derive damage from mutable combat state (for example exhaust counts) should follow the standard Slay the Spire dynamic-damage pattern:
+
+- compute a temporary derived `baseDamage` in `applyPowers` / `calculateCardDamage`
+- call `super`
+- set `isDamageModified = (damage != baseDamage)` so normal Strength/Weak effects are preserved in UI
+- restore the original `baseDamage` afterward to avoid stale state
+- guard reads of `AbstractDungeon.player` for non-combat rendering contexts (library, rewards, previews)
+
+Current cards using this pattern:
+
+- `cardenergy.cards.uncommon.BreakdownRush`
+- `cardenergy.cards.uncommon.HurlTheHeap`
+
 ## Character Setup
 
 Current character traits:
@@ -356,4 +371,3 @@ It is not balanced for production. The goals right now are:
 - prove energy-to-draw replacement
 - keep the Terracotta reward pool complete while final cards are built by editing mirrored red cards
 - keep iteration fast on Windows with local Maven packaging
-

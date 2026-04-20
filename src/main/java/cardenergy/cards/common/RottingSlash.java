@@ -16,7 +16,7 @@ public class RottingSlash extends AbstractTerracottaCard {
     public RottingSlash() {
         super(ID, CardType.ATTACK, CardRarity.COMMON, CardTarget.ENEMY, 1);
         TerracottaCardHelper.applyIdentity(this, ID);
-        baseDamage = 8;
+        baseDamage = 10;
         damage = baseDamage;
         CardKeywordHelper.grantRot(this);
     }

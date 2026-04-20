@@ -189,6 +189,11 @@ public final class TerracottaCardBackGenerator {
             graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
             graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+            // Preserve the BaseMod orb frame/shadow layer so the cost orb keeps proper depth.
+            if (orbTemplate != null) {
+                graphics.drawImage(orbTemplate, 0, 0, null);
+            }
+
             double centerX = layout.centerX();
             double centerY = layout.centerY();
             for (int i = 0; i < 6; i++) {

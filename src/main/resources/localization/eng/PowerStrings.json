@@ -2,7 +2,8 @@
   "cardenergy:Counterthrow": {
     "NAME": "Counterthrow",
     "DESCRIPTIONS": [
-      "When attacked, lose 1 stack and deal damage to the attacker equal to your remaining Block. NL Resets at the start of your turn."
+      "When attacked, lose 1 stack and deal damage to the attacker equal to your remaining Block. NL Resets at the start of your turn. NL Charges left: ",
+      "."
     ]
   }
 }
